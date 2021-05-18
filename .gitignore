@@ -1,0 +1,45 @@
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# java class file
+*.class
+
+# Package Files #
+*.war
+*.ear
+/target
+/.settings
+/.classpath
+/.project
+/.idea
+/.vscode
+/.gradle
+
+# ignore Maven generated target folders
+target
+out
+app/build
+
+
+# ignore eclipse files
+.project
+.classpath
+.settings
+.factorypath
+.metadata
+.idea
+.gradle
+*.iml
+
+# ignore log files
+*.log
+Transdata.dat
+
+# Ignore Ohters
+*.mp3
+*.bin
+*.lock
