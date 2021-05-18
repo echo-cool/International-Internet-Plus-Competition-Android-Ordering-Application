@@ -17,11 +17,13 @@ Desktop.ini
 /.project
 /.idea
 /.vscode
+/.gradle
 
 # ignore Maven generated target folders
 target
 out
 app/build
+
 
 # ignore eclipse files
 .project
