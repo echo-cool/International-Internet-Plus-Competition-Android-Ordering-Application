@@ -4,6 +4,9 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven {
+            url "https://oss.sonatype.org/content/groups/public/"
+        }
         
     }
     dependencies {
@@ -18,7 +21,9 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+        maven {
+            url "https://oss.sonatype.org/content/groups/public/"
+        }
     }
 }
 
