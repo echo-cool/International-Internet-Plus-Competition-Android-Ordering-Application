@@ -21,6 +21,7 @@ Desktop.ini
 # ignore Maven generated target folders
 target
 out
+app/build
 
 # ignore eclipse files
 .project
@@ -29,6 +30,7 @@ out
 .factorypath
 .metadata
 .idea
+.gradle
 *.iml
 
 # ignore log files
@@ -37,3 +39,5 @@ Transdata.dat
 
 # Ignore Ohters
 *.mp3
+*.bin
+*.lock
