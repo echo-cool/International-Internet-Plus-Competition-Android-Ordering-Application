@@ -31,8 +31,6 @@ build:
 
 merge-request-only-build:
   stage: merge-request-only-build
-  tags:
-  - maven
   script:
   - echo "============================== Merge Build =============================="
   - gradle --build-cache assemble
