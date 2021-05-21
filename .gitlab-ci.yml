@@ -9,6 +9,7 @@ stages:
 
 
 
+
 # Disable the Gradle daemon for Continuous Integration servers as correctness
 # is usually a priority over speed in CI environments. Using a fresh
 # runtime for each build is more reliable since the runtime is completely
@@ -28,6 +29,26 @@ build:
     paths:
       - build
       - .gradle
+
+merge-train-only-test:
+  stage: merge-train-only-test
+  tags:
+  - maven
+  script:
+  - echo "============================== Merge Build =============================="
+  - gradle --build-cache assemble
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - build
+      - .gradle
+  only:
+    refs:
+    - merge_requests
+    variables:
+    - $CI_MERGE_REQUEST_EVENT_TYPE == "merge_train"
+
 
 merge-request-only-build:
   stage: merge-request-only-build
