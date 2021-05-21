@@ -33,8 +33,6 @@ build:
 
 merge-train-only-build:
   stage: merge-train-only-build
-  tags:
-  - maven
   script:
   - echo "============================== Merge Build =============================="
   - gradle --build-cache assemble
