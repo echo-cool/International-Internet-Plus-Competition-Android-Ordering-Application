@@ -6,6 +6,7 @@ image: gradle:alpine
 stages:
 - build
 - merge-request-only-build
+- merge-train-only-build
 
 
 
@@ -30,8 +31,8 @@ build:
       - build
       - .gradle
 
-merge-train-only-test:
-  stage: merge-train-only-test
+merge-train-only-build:
+  stage: merge-train-only-build
   tags:
   - maven
   script:
