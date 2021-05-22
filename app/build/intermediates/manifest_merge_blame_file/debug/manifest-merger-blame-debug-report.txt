@@ -1,0 +1,57 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.myapplication"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+8-->D:\Project\NCSS-A-S-C\2\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="28" />
+9-->D:\Project\NCSS-A-S-C\2\app\src\main\AndroidManifest.xml
+10
+11    <application
+11-->D:\Project\NCSS-A-S-C\2\app\src\main\AndroidManifest.xml:5:5-19:19
+12        android:allowBackup="true"
+12-->D:\Project\NCSS-A-S-C\2\app\src\main\AndroidManifest.xml:6:9-35
+13        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+13-->[androidx.core:core:1.1.0-beta01] C:\Users\emmmm\.gradle\caches\transforms-2\files-2.1\b6517abebadac66696cded35908ae4ad\core-1.1.0-beta01\AndroidManifest.xml:22:18-86
+14        android:debuggable="true"
+15        android:icon="@mipmap/ic_launcher"
+15-->D:\Project\NCSS-A-S-C\2\app\src\main\AndroidManifest.xml:7:9-43
+16        android:label="@string/app_name"
+16-->D:\Project\NCSS-A-S-C\2\app\src\main\AndroidManifest.xml:8:9-41
+17        android:roundIcon="@mipmap/ic_launcher_round"
+17-->D:\Project\NCSS-A-S-C\2\app\src\main\AndroidManifest.xml:9:9-54
+18        android:supportsRtl="true"
+18-->D:\Project\NCSS-A-S-C\2\app\src\main\AndroidManifest.xml:10:9-35
+19        android:theme="@style/AppTheme" >
+19-->D:\Project\NCSS-A-S-C\2\app\src\main\AndroidManifest.xml:11:9-40
+20        <activity android:name="com.example.myapplication.MainActivity" >
+20-->D:\Project\NCSS-A-S-C\2\app\src\main\AndroidManifest.xml:12:9-18:20
+20-->D:\Project\NCSS-A-S-C\2\app\src\main\AndroidManifest.xml:12:19-47
+21            <intent-filter>
+21-->D:\Project\NCSS-A-S-C\2\app\src\main\AndroidManifest.xml:13:13-17:29
+22                <action android:name="android.intent.action.MAIN" />
+22-->D:\Project\NCSS-A-S-C\2\app\src\main\AndroidManifest.xml:14:17-69
+22-->D:\Project\NCSS-A-S-C\2\app\src\main\AndroidManifest.xml:14:25-66
+23
+24                <category android:name="android.intent.category.LAUNCHER" />
+24-->D:\Project\NCSS-A-S-C\2\app\src\main\AndroidManifest.xml:16:17-77
+24-->D:\Project\NCSS-A-S-C\2\app\src\main\AndroidManifest.xml:16:27-74
+25            </intent-filter>
+26        </activity>
+27
+28        <provider
+28-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\emmmm\.gradle\caches\transforms-2\files-2.1\b3c088406576b03c69a90621925ddf75\lifecycle-process-2.0.0\AndroidManifest.xml:23:9-27:43
+29            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+29-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\emmmm\.gradle\caches\transforms-2\files-2.1\b3c088406576b03c69a90621925ddf75\lifecycle-process-2.0.0\AndroidManifest.xml:24:13-79
+30            android:authorities="com.example.myapplication.lifecycle-process"
+30-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\emmmm\.gradle\caches\transforms-2\files-2.1\b3c088406576b03c69a90621925ddf75\lifecycle-process-2.0.0\AndroidManifest.xml:25:13-69
+31            android:exported="false"
+31-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\emmmm\.gradle\caches\transforms-2\files-2.1\b3c088406576b03c69a90621925ddf75\lifecycle-process-2.0.0\AndroidManifest.xml:26:13-37
+32            android:multiprocess="true" />
+32-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\emmmm\.gradle\caches\transforms-2\files-2.1\b3c088406576b03c69a90621925ddf75\lifecycle-process-2.0.0\AndroidManifest.xml:27:13-40
+33    </application>
+34
+35</manifest>
