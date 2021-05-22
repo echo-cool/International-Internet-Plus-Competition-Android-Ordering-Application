@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AddWidget">
+        <attr name="circle_anim" format="boolean"/>
+        <attr name="sub_anim" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="Notification">
+        <attr name="notification_image" format="reference"/>
+        <attr name="notification_title" format="string"/>
+        <attr name="notification_content" format="string"/>
+        <attr name="notification_time" format="string"/>
+    </declare-styleable>
+</resources>
