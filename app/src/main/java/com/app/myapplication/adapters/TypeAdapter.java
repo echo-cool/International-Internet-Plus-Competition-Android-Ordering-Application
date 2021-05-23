@@ -1,4 +1,4 @@
-package com.example.myapplication.adapters;
+package com.app.myapplication.adapters;
 
 
 import android.graphics.Color;
@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.example.beans.TypeBean;
-import com.example.myapplication.R;
+import com.app.beans.TypeBean;
+import com.app.myapplication.R;
 
 
 import java.util.HashMap;

@@ -30,7 +30,7 @@
         android:textColor="@color/black"
         android:textSize="16sp" />
 
-    <com.example.myapplication.views.AddButton
+    <com.app.myapplication.views.AddButton
         android:id="@+id/addbutton"
         android:layout_gravity="right"
         android:layout_width="@dimen/add_width"

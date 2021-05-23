@@ -1,12 +1,7 @@
-package com.example.myapplication;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.app.myapplication;
 
 import android.app.Activity;
 import android.os.Bundle;
-
-import cn.leancloud.AVLogger;
-import cn.leancloud.AVOSCloud;
 
 public class MainActivity extends Activity {
 

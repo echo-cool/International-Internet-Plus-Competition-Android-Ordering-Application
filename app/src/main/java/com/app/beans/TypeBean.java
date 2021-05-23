@@ -1,4 +1,4 @@
-package com.example.beans;
+package com.app.beans;
 
 
 public class TypeBean {

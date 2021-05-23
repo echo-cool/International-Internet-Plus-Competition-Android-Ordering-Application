@@ -1,4 +1,4 @@
-package com.example.myapplication.views;
+package com.app.myapplication.views;
 
 
 import android.content.Context;
@@ -15,8 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 
-import com.example.myapplication.R;
-import com.example.utils.ViewUtils;
+import com.app.myapplication.R;
+import com.app.utils.ViewUtils;
 import com.github.florent37.viewanimator.AnimationListener;
 import com.github.florent37.viewanimator.ViewAnimator;
 

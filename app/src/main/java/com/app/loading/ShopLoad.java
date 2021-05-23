@@ -1,11 +1,10 @@
-package com.example.loading;
+package com.app.loading;
 
 import android.content.Context;
 
-import com.example.beans.FoodBean;
-import com.example.beans.TypeBean;
+import com.app.beans.FoodBean;
+import com.app.beans.TypeBean;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 

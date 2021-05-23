@@ -1,9 +1,7 @@
-package com.example.myapplication.views;
+package com.app.myapplication.views;
 
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,13 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.example.myapplication.R;
-import com.example.myapplication.adapters.FoodAdapter;
-import com.example.myapplication.adapters.TypeAdapter;
-import com.example.beans.FoodBean;
+import com.app.myapplication.R;
+import com.app.myapplication.adapters.FoodAdapter;
+import com.app.myapplication.adapters.TypeAdapter;
+import com.app.beans.FoodBean;
 //import com.example.myapplication.detail.DetailActivity;
 //import com.example.myapplication.utils.BaseUtils;
-import com.example.utils.ViewUtils;
+import com.app.utils.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.List;

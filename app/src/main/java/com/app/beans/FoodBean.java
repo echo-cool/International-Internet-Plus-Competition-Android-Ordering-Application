@@ -1,4 +1,4 @@
-package com.example.beans;
+package com.app.beans;
 
 
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.text.SpannableString;
 import android.text.style.AbsoluteSizeSpan;
 
 
-import com.example.utils.ViewUtils;
+import com.app.utils.ViewUtils;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
