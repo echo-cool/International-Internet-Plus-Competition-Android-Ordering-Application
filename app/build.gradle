@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion "30.0.3"
     defaultConfig {
-        applicationId "com.example.myapplication"
+        applicationId "com.app.myapplication"
         minSdkVersion 24
         targetSdkVersion 28
         versionCode 1
@@ -33,6 +33,7 @@ repositories {
     google()
     mavenCentral()
 }
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
