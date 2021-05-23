@@ -14,8 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.app.myapplication.ShopActivity"></activity>
-        <activity android:name="com.app.myapplication.MainActivity">
+        <activity android:name=".Home.HomeActivity"></activity>
+        <activity android:name=".ShopActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
