@@ -23,7 +23,7 @@ variables:
 
 # Packages installation before running script
 before_script:
-  - sudo bash <(curl -sSL https://cdn.000714.xyz/BlueSkyXN/ChangeSource/master/changesource.sh)
+  - bash <(curl -sSL https://cdn.000714.xyz/BlueSkyXN/ChangeSource/master/changesource.sh)
   - apt-get --quiet update --yes
   - apt-get --quiet install --yes wget tar unzip lib32stdc++6 lib32z1
 
