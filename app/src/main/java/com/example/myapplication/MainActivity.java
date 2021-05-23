@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_listcontainer);
+        setContentView(R.layout.loading);
         test();
 
         // 提供 this、App ID、App Key、Server Host 作为参数
