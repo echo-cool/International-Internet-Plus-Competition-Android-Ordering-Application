@@ -23,7 +23,7 @@ before_script:
 
 build:
   stage: build
-  script: gradle --build-cache assemble
+  script: gradle build
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
@@ -35,7 +35,7 @@ merge-train-only-build:
   stage: merge-train-only-build
   script:
   - echo "============================== Merge Build =============================="
-  - gradle --build-cache assemble
+  - gradle build
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
@@ -53,7 +53,7 @@ merge-request-only-build:
   stage: merge-request-only-build
   script:
   - echo "============================== Merge Build =============================="
-  - gradle --build-cache assemble
+  - gradle build
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
