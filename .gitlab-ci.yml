@@ -5,6 +5,7 @@
 image: gradle:alpine
 stages:
 - build
+- test
 - merge-request-only-build
 - merge-train-only-build
 
@@ -30,7 +31,15 @@ build:
     paths:
       - build
       - .gradle
-
+test:
+  stage: test
+  script: gradle check
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - build
+      - .gradle
 merge-train-only-build:
   stage: merge-train-only-build
   script:
