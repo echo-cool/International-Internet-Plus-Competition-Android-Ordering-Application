@@ -45,7 +45,7 @@ before_script:
 
   # Nothing fancy here, just checking sdkManager version
   - sdkmanager --version
-  - sdkmanager --proxy_host=mirrors.neusoft.edu.cn --proxy_port=80
+  - sdkmanager --proxy=http --proxy_host=mirrors.neusoft.edu.cn --proxy_port=80
 
   # use yes to accept all licenses
   - yes | sdkmanager --sdk_root=${ANDROID_HOME} --licenses || true
