@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion "30.0.3"
     defaultConfig {
-        applicationId "com.example.myapplication"
+        applicationId "com.app.myapplication"
         minSdkVersion 24
         targetSdkVersion 28
         versionCode 1
@@ -14,8 +14,13 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 
     compileOptions {
@@ -28,6 +33,7 @@ repositories {
     google()
     mavenCentral()
 }
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
