@@ -76,7 +76,7 @@ assembleDebug:
       - app/build/outputs/
   
 merge-train-only-build:
-  stage: merge-train-only-build
+  stage: build
   script:
   - echo "============================== Merge Build =============================="
   - ./gradlew assembleDebug
@@ -94,7 +94,7 @@ merge-train-only-build:
 
 
 merge-request-only-build:
-  stage: merge-request-only-build
+  stage: build
   script:
   - echo "============================== Merge Build =============================="
   - ./gradlew assembleDebug
