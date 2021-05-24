@@ -67,15 +67,55 @@ lintDebug:
 assembleDebug:
   interruptible: true
   stage: build
+  only:
+    - master
   script:
     - ./gradlew assembleDebug
   artifacts:
     paths:
       - app/build/outputs/
+  
+merge-train-only-build:
+  stage: merge-train-only-build
+  script:
+  - echo "============================== Merge Build =============================="
+  - ./gradlew assembleDebug
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - build
+      - .gradle
+  only:
+    refs:
+    - merge_requests
+    variables:
+    - $CI_MERGE_REQUEST_EVENT_TYPE == "merge_train"
+
+
+merge-request-only-build:
+  stage: merge-request-only-build
+  script:
+  - echo "============================== Merge Build =============================="
+  - ./gradlew assembleDebug
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - build
+      - .gradle
+  only:
+    refs:
+    - merge_requests
+    variables:
+    - $CI_MERGE_REQUEST_EVENT_TYPE == "merged_result"
+
 
 # Run all tests, if any fails, interrupt the pipeline(fail it)
 debugTests:
   interruptible: true
   stage: test
+  only:
+    - master
   script:
     - ./gradlew -Pci --console=plain :app:testDebug
