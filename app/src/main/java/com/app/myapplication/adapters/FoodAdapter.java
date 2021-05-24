@@ -1,4 +1,4 @@
-package com.example.myapplication.adapters;
+package com.app.myapplication.adapters;
 
 
 import android.text.TextUtils;
@@ -8,9 +8,9 @@ import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.example.beans.FoodBean;
-import com.example.myapplication.R;
-import com.example.myapplication.views.AddWidget;
+import com.app.beans.FoodBean;
+import com.app.myapplication.R;
+import com.app.myapplication.views.AddWidget;
 
 import java.util.List;
 

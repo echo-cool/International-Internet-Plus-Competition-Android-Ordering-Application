@@ -1,4 +1,4 @@
-package com.example.myapplication.views;
+package com.app.myapplication.views;
 
 
 import android.content.Context;
@@ -10,7 +10,7 @@ import android.view.View;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.R;
+import com.app.myapplication.R;
 
 
 public class SimpleDividerDecoration extends RecyclerView.ItemDecoration {

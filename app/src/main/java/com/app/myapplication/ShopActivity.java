@@ -1,10 +1,10 @@
-package com.example.myapplication;
+package com.app.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.myapplication.R;
+import com.app.myapplication.R;
 
 public class ShopActivity extends AppCompatActivity {
 

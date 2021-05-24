@@ -1,22 +1,9 @@
-package com.example.utils;
+package com.app.utils;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.Path;
-import android.graphics.Typeface;
 import android.net.Uri;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.content.ContextCompat;
-
-import com.example.myapplication.R;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
 import com.facebook.drawee.controller.AbstractDraweeController;
@@ -24,8 +11,6 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
-import com.github.florent37.viewanimator.AnimationListener;
-import com.github.florent37.viewanimator.ViewAnimator;
 
 import jp.wasabeef.fresco.processors.BlurPostprocessor;
 

@@ -1,4 +1,4 @@
-package com.example.myapplication.views;
+package com.app.myapplication.views;
 
 
 import android.content.Context;
@@ -14,8 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 
-import com.example.beans.FoodBean;
-import com.example.myapplication.R;
+import com.app.beans.FoodBean;
+import com.app.myapplication.R;
 import com.github.florent37.viewanimator.AnimationListener;
 import com.github.florent37.viewanimator.ViewAnimator;
 
