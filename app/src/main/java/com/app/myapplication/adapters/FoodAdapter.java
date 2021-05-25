@@ -57,4 +57,5 @@ public class FoodAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
         helper.getConvertView().setContentDescription(item.getType());
     }
 
+
 }

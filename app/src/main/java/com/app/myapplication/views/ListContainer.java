@@ -1,7 +1,9 @@
 package com.app.myapplication.views;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,6 +15,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+//import com.app.myapplication.DetailActivity;
+import com.app.utils.BaseUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.app.myapplication.R;
@@ -50,7 +54,7 @@ public class ListContainer extends LinearLayout {
 		inflate(mContext, R.layout.view_listcontainer, this);
 		RecyclerView recyclerView1 = findViewById(R.id.recycler1);
 		recyclerView1.setLayoutManager(new LinearLayoutManager(mContext));
-		//typeAdapter = new TypeAdapter(BaseUtils.getTypes());
+		typeAdapter = new TypeAdapter(BaseUtils.getTypes());
 		View view = new View(mContext);
 		view.setMinimumHeight(ViewUtils.dip2px(mContext, 50));
 		typeAdapter.addFooterView(view);
@@ -79,8 +83,8 @@ public class ListContainer extends LinearLayout {
 		linearLayoutManager = new LinearLayoutManager(mContext);
 		recyclerView2.setLayoutManager(linearLayoutManager);
 		((DefaultItemAnimator) recyclerView2.getItemAnimator()).setSupportsChangeAnimations(false);
-		//foodBeanList = BaseUtils.getDatas(mContext);
-		//commandList = BaseUtils.getDetails(foodBeanList);
+		foodBeanList = BaseUtils.getDatas(mContext);
+		commandList = BaseUtils.getDetails(foodBeanList);
 		recyclerView2.addOnItemTouchListener(new OnItemClickListener() {
 			@Override
 			public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -99,6 +103,17 @@ public class ListContainer extends LinearLayout {
 
 			}
 		});
+
+
+
+		foodAdapter = new FoodAdapter(foodBeanList,null);
+		View view2 = new View(mContext);
+		view2.setMinimumHeight(ViewUtils.dip2px(mContext, 50));
+		foodAdapter.addFooterView(view2);
+		foodAdapter.bindToRecyclerView(recyclerView2);
+		stickView = findViewById(R.id.stick_header);
+		tvStickyHeaderView = findViewById(R.id.tv_header);
+		tvStickyHeaderView.setText("Class0");
 	}
 
 	private void moveToPosition(int n) {
@@ -131,13 +146,13 @@ public class ListContainer extends LinearLayout {
 		stickView = findViewById(R.id.stick_header);
 		tvStickyHeaderView = findViewById(R.id.tv_header);
 		tvStickyHeaderView.setText("Class0");
-        recyclerView2.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                typeAdapter.fromClick = false;
-                return false;
-            }
-        });
+		recyclerView2.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				typeAdapter.fromClick = false;
+				return false;
+			}
+		});
 		recyclerView2.addOnScrollListener(new RecyclerView.OnScrollListener() {
 			@Override
 			public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
