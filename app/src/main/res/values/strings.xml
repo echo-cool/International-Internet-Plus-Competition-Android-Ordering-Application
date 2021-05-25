@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">杏会</string>
     <string name="temp1">测试</string>
     <string name="title_add">add</string>
+    <string name="title_order">点餐</string>
+    <string name="title_comments">评论</string>
 </resources>
