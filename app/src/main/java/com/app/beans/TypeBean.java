@@ -2,8 +2,8 @@ package com.app.beans;
 
 
 public class TypeBean {
-	private String name;
-
+	public String name;
+	public int count;
 	public String getName() {
 		return name;
 	}

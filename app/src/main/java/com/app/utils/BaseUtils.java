@@ -35,13 +35,12 @@ public class BaseUtils {
 		String[] classes=new String[]{"Staple food","Snack"} ;
 		for (int i = 0; i < 8; i++) {
 			FoodBean foodBean = new FoodBean();
-			foodBean.setId(i);
-			foodBean.setName(foods[i]);
-			foodBean.setPrice(BigDecimal.valueOf(prices[i]).setScale(1, BigDecimal.ROUND_HALF_DOWN));
-			foodBean.setSale("Days sales:" + sales[i]);
-			foodBean.setType(classes[i/ 4] );
+			foodBean.id=i;
+			foodBean.foodName=(foods[i]);
+			foodBean.foodPrice=prices[i];
+			foodBean.foodSale=10;
+			foodBean.foodType=(classes[i/ 4] );
 			int resID =R.drawable.shop_image_loading;
-			foodBean.setIcon(resID);
 			fList.add(foodBean);
 		}
 		return fList;

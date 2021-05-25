@@ -82,7 +82,7 @@ public class AddWidget extends FrameLayout {
 				}
 				count++;
 				tv_count.setText(count + "");
-				foodBean.setSelectCount(count);
+//				foodBean.setSelectCount(count);
 				if (onAddClick != null) {
 					onAddClick.onAddClick(addbutton, foodBean);
 				}
@@ -99,7 +99,7 @@ public class AddWidget extends FrameLayout {
 				}
 				count--;
 				tv_count.setText(count == 0 ? "1" : count + "");
-				foodBean.setSelectCount(count);
+		//		foodBean.setSelectCount(count);
 				if (onAddClick != null) {
 					onAddClick.onSubClick(foodBean);
 				}
@@ -135,7 +135,7 @@ public class AddWidget extends FrameLayout {
 	public void setData(OnAddClick onAddClick, FoodBean foodBean) {
 		this.foodBean = foodBean;
 		this.onAddClick = onAddClick;
-		count = foodBean.getSelectCount();
+	//	count = foodBean.getSelectCount();
 		if (count == 0) {
 			sub.setAlpha(0);
 			tv_count.setAlpha(0);
