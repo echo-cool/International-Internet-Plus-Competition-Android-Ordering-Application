@@ -127,9 +127,9 @@
 
         <include
             android:id="@+id/input_layout"
+            layout="@layout/input_layout"
             android:layout_width="match_parent"
-            android:layout_height="130dip"
-            layout="@layout/input_layout" />
+            android:layout_height="200dip" />
 
         <include
             android:id="@+id/layout_progress"

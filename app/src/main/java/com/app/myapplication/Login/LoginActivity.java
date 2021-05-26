@@ -35,18 +35,15 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
 
-        initView();
-    }
-
-    private void initView() {
         mBtnLogin = (TextView) findViewById(R.id.main_btn_login);
         progress = findViewById(R.id.layout_progress);
         mInputLayout = findViewById(R.id.input_layout);
         mName = (LinearLayout) findViewById(R.id.input_layout_name);
         mPsw = (LinearLayout) findViewById(R.id.input_layout_psw);
 
-        //mBtnLogin.setOnClickListener(this);
+        mBtnLogin.setOnClickListener(this);
     }
+
 
     @Override
     public void onClick(View v) {
