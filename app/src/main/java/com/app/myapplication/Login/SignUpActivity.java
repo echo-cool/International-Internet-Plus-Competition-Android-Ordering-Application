@@ -8,51 +8,41 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.myapplication.R;
+import com.yuyh.library.BubblePopupWindow;
 
-public class LoginActivity extends Activity implements View.OnClickListener {
-
-    private TextView mBtnLogin;
-    private View progress;
+public class SignUpActivity extends Activity implements View.OnClickListener {
     private View mInputLayout;
+    private LinearLayout mName, mPsw, mPswRep;
+    private TextView mBtnSignUp;
     private float mWidth, mHeight;
-    private LinearLayout mName, mPsw;
-
+    private BubblePopupWindow leftBottomWindow;
+    private View progress;
+    private EditText pswText;
+    LayoutInflater inflater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_login);
-
-        mBtnLogin = (TextView) findViewById(R.id.main_btn_login);
-        progress = findViewById(R.id.layout_progress);
-        mInputLayout = findViewById(R.id.input_layout);
-        mName = (LinearLayout) findViewById(R.id.input_layout_name);
-        mPsw = (LinearLayout) findViewById(R.id.input_layout_pas);
-
-        mBtnLogin.setOnClickListener(this);
-    }
-
-
-    @Override
-    public void onClick(View v) {
-
-        mWidth = mBtnLogin.getMeasuredWidth();
-        mHeight = mBtnLogin.getMeasuredHeight();
-
-        mName.setVisibility(View.INVISIBLE);
-        mPsw.setVisibility(View.INVISIBLE);
-
-        inputAnimator(mInputLayout, mWidth, mHeight);
-
+        setContentView(R.layout.activity_sign_up);
+        mInputLayout = findViewById(R.id.input_sign);
+        mName = findViewById(R.id.input_layout_name_sign);
+        mPsw= findViewById(R.id.input_layout_psw_sign);
+        mBtnSignUp = findViewById(R.id.main_btn_sign);
+        mPswRep = findViewById(R.id.input_layout_pasRep);
+        progress = findViewById(R.id.layout_progress_sign);
+        pswText = findViewById(R.id.psw_sign);
+        leftBottomWindow = new BubblePopupWindow(this);
+        mBtnSignUp.setOnClickListener(this);
+        inflater = LayoutInflater.from(this);
     }
 
     private void inputAnimator(final View view, float w, float h) {
@@ -129,6 +119,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         mInputLayout.setVisibility(View.VISIBLE);
         mName.setVisibility(View.VISIBLE);
         mPsw.setVisibility(View.VISIBLE);
+        mPswRep.setVisibility(View.VISIBLE);
 
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mInputLayout.getLayoutParams();
         params.leftMargin = 0;
@@ -141,4 +132,28 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         animator2.setInterpolator(new AccelerateDecelerateInterpolator());
         animator2.start();
     }
+
+    @Override
+    public void onClick(View v) {
+        if(!matchFormat(pswText.getText().toString())){
+
+        }else{
+        mWidth = mBtnSignUp.getMeasuredWidth();
+        mHeight = mBtnSignUp.getMeasuredHeight();
+        mName.setVisibility(View.INVISIBLE);
+        mPsw.setVisibility(View.INVISIBLE);
+        mPswRep.setVisibility(View.INVISIBLE);
+        inputAnimator(mInputLayout, mWidth, mHeight);
+        }
+    }
+
+    private boolean matchFormat(String psw){
+        final String PW_PATTERN = "^(?![A-Za-z0-9]+$)(?![a-z0-9\\W]+$)(?![A-Za-z\\W]+$)(?![A-Z0-9\\W]+$)[a-zA-Z0-9\\W]{8,}$";
+        if(psw.matches(PW_PATTERN)){
+            return true;
+        }else
+            return false;
+    }
+
+
 }
