@@ -25,6 +25,7 @@ public class BaseUtils {
 		for (int i = 0; i < 2; i++) {
 			TypeBean typeBean = new TypeBean();
 			typeBean.setName(classes[i]);
+
 			tList.add(typeBean);
 		}
 		return tList;
@@ -39,7 +40,11 @@ public class BaseUtils {
 			foodBean.foodName=(foods[i]);
 			foodBean.foodPrice=prices[i];
 			foodBean.foodSale=10;
-			foodBean.foodType=(classes[i/ 4] );
+			foodBean.selectCount=0;
+			if(i<1)
+				foodBean.foodType=(classes[0] );
+			else
+				foodBean.foodType=(classes[1] );
 			int resID =R.drawable.shop_image_loading;
 			fList.add(foodBean);
 		}

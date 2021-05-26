@@ -2,8 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item_main"
     android:layout_width="match_parent"
-    android:layout_height="55dp"
-    android:background="@color/lightgray"
+    android:layout_height="45dp"
+    android:background="@color/type_gray"
     android:clickable="true"
     android:orientation="vertical">
 
@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
+        android:textAlignment="textStart"
         android:textColor="@color/type_normal"
         android:textSize="12sp" />
 
@@ -20,6 +21,8 @@
         android:id="@+id/item_badge"
         style="@style/badge_style"
         android:layout_gravity="right"
-        android:layout_margin="2dp" />
+        android:layout_margin="2dp"
+        android:background="@drawable/red_circle"
+        android:visibility="invisible" />
 
 </FrameLayout>

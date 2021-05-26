@@ -47,6 +47,8 @@ import com.app.myapplication.fragments.TestShopOrderFragment;
 //import com.app.myapplication.views.ShopCarView;
 import com.app.myapplication.views.AddWidget;
 //import com.app.myapplication.views.ShopCarView;
+import com.app.myapplication.views.ListContainer;
+import com.app.utils.BaseUtils;
 import com.github.florent37.viewanimator.ViewAnimator;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.tabs.TabLayout;
@@ -378,6 +380,9 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
         setViewPager();
+//        setContentView(R.layout.shop_order_fragment);
+//        ((ListContainer)findViewById(R.id.listcontainer)).load(BaseUtils.getDatas(this),BaseUtils.getTypes());
+
     }
 
 

@@ -2,12 +2,9 @@ package com.app.myapplication.views;
 
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,26 +13,13 @@ import androidx.annotation.Nullable;
 
 import com.app.beans.FoodBean;
 import com.app.myapplication.R;
-import com.github.florent37.viewanimator.AnimationListener;
-import com.github.florent37.viewanimator.ViewAnimator;
 
-public class AddWidget extends FrameLayout {
+public class AddWidget extends LinearLayout {
 
-	private View sub;
-	private TextView tv_count;
-	private long count;
-	private AddButton addbutton;
-	private boolean sub_anim, circle_anim;
-	private FoodBean foodBean;
+	OnAddWidgetClick onAddWidgetClick;
+	private int clickCount=0;
+	FoodBean foodBean;
 
-	public interface OnAddClick {
-
-		void onAddClick(View view, FoodBean fb);
-
-		void onSubClick(FoodBean fb);
-	}
-
-	private OnAddClick onAddClick;
 
 	public AddWidget(@NonNull Context context) {
 		super(context);
@@ -43,118 +27,62 @@ public class AddWidget extends FrameLayout {
 
 	public AddWidget(@NonNull Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);
-		inflate(context, R.layout.view_addwidget, this);
-		addbutton = findViewById(R.id.addbutton);
-		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AddWidget);
-		for (int i = 0; i < a.getIndexCount(); i++) {
-			int attr = a.getIndex(i);
-			switch (attr) {
-				case R.styleable.AddWidget_circle_anim:
-					circle_anim = a.getBoolean(R.styleable.AddWidget_circle_anim, false);
-					break;
-				case R.styleable.AddWidget_sub_anim:
-					sub_anim = a.getBoolean(R.styleable.AddWidget_sub_anim, false);
-					break;
+		AddWidget self=this;
+		inflate(context,R.layout.view_addwidget,this);
+		this.findViewById(R.id.imageView_add).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				foodBean.changeSelectCount(1);
+				try {
+
+					onAddWidgetClick.onClick();
+				}catch (NullPointerException ignore){}
 			}
 
-		}
-		a.recycle();
-		sub = findViewById(R.id.iv_sub);
-		tv_count = findViewById(R.id.tv_count);
-		addbutton.setAnimListner(new AddButton.AnimListner() {
-			@Override
-			public void onStop() {
-				if (count == 0) {
-					ViewAnimator.animate(sub)
-							.translationX(addbutton.getLeft() - sub.getLeft(), 0)
-							.rotation(360)
-							.alpha(0, 255)
-							.duration(300)
-							.interpolator(new DecelerateInterpolator())
-							.andAnimate(tv_count)
-							.translationX(addbutton.getLeft() - tv_count.getLeft(), 0)
-							.rotation(360)
-							.alpha(0, 255)
-							.interpolator(new DecelerateInterpolator())
-							.duration(300)
-							.start()
-					;
-				}
-				count++;
-				tv_count.setText(count + "");
-//				foodBean.setSelectCount(count);
-				if (onAddClick != null) {
-					onAddClick.onAddClick(addbutton, foodBean);
-				}
-			}
 		});
-		sub.setOnClickListener(new OnClickListener() {
+		this.findViewById(R.id.imageView_remove).setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View v) {
-				if (count == 0) {
-					return;
-				}
-				if (count == 1 && sub_anim) {
-					subAnim();
-				}
-				count--;
-				tv_count.setText(count == 0 ? "1" : count + "");
-		//		foodBean.setSelectCount(count);
-				if (onAddClick != null) {
-					onAddClick.onSubClick(foodBean);
-				}
+			public void onClick(View view) {
+
+				foodBean.changeSelectCount(-1);
+				try {
+					onAddWidgetClick.onClick();
+				}catch (NullPointerException ignore){}
 			}
 		});
 	}
 
-	private void subAnim(){
-		ViewAnimator.animate(sub)
-				.translationX(0, addbutton.getLeft() - sub.getLeft())
-				.rotation(-360)
-				.alpha(255, 0)
-				.duration(300)
-				.interpolator(new AccelerateInterpolator())
-				.andAnimate(tv_count)
-				.onStop(new AnimationListener.Stop() {
-					@Override
-					public void onStop() {
-						if (circle_anim) {
-							addbutton.expendAnim();
-						}
-					}
-				})
-				.translationX(0, addbutton.getLeft() - tv_count.getLeft())
-				.rotation(-360)
-				.alpha(255, 0)
-				.interpolator(new AccelerateInterpolator())
-				.duration(300)
-				.start()
-		;
+	public int getClickCount(){
+		int c=clickCount;
+		clickCount=0;
+		return c;
 	}
 
-	public void setData(OnAddClick onAddClick, FoodBean foodBean) {
-		this.foodBean = foodBean;
-		this.onAddClick = onAddClick;
-	//	count = foodBean.getSelectCount();
-		if (count == 0) {
-			sub.setAlpha(0);
-			tv_count.setAlpha(0);
-		} else {
-			sub.setAlpha(1f);
-			tv_count.setAlpha(1f);
-			tv_count.setText(count + "");
+	public void bindFoodBean(FoodBean foodBean){
+		this.foodBean=foodBean;
+	}
+
+
+
+	public void setOnAddWidgetClick(OnAddWidgetClick onAddWidgetClick){
+		this.onAddWidgetClick=onAddWidgetClick;
+	}
+
+	public interface OnAddWidgetClick{
+		void onClick();
+	}
+
+
+	public void setCount(int count){
+		TextView textView=findViewById(R.id.textView_count);
+		if(count==0) {
+			findViewById(R.id.imageView_remove).setVisibility(INVISIBLE);
+			textView.setVisibility(INVISIBLE);
+		}else{
+			textView.setVisibility(VISIBLE);
+			findViewById(R.id.imageView_remove).setVisibility(VISIBLE);
+			textView.setText(""+count);
 		}
-	}
 
-	public void setState(long count) {
-		addbutton.setState(count > 0);
-	}
-
-	public void expendAdd(long count) {
-		this.count = count;
-		tv_count.setText(count == 0 ? "1" : count + "");
-		if (count == 0) {
-			subAnim();
-		}
 	}
 }

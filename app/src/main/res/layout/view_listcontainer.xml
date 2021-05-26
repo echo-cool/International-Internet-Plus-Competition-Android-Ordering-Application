@@ -4,22 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:splitMotionEvents="false">
+    android:splitMotionEvents="true">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler1"
         android:layout_width="70dp"
-        android:layout_height="match_parent"
-        android:background="@color/lightgray"
+        android:layout_height="wrap_content"
+        android:background="@color/type_gray"
         android:overScrollMode="never"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler2"
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:overScrollMode="never"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </FrameLayout>
 
 </LinearLayout>

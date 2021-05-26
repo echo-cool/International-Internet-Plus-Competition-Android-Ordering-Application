@@ -41,14 +41,62 @@ public class TypeAdapter extends BaseQuickAdapter<TypeBean, BaseViewHolder> {
 		if(item.equals(list.get(position))){
 			helper.setBackgroundColor(R.id.item_main,ContextCompat.getColor(mContext,R.color.white));
 		}else {
-			helper.setBackgroundColor(R.id.item_main,ContextCompat.getColor(mContext,R.color.lightgray));
+			helper.setBackgroundColor(R.id.item_main,ContextCompat.getColor(mContext,R.color.type_gray));
+		}
+		if(item.count!=0){
+			helper.setText(R.id.item_badge,""+item.count);
+			helper.setVisible(R.id.item_badge,true);
+
+		}else{
+			helper.setVisible(R.id.item_badge,false);
+		}
+	}
+
+	public void setPosition(int position){
+		if(position!=this.position){
+			this.position=position;
+			notifyDataSetChanged();
 		}
 	}
 
 
+	public void moveToType(String type){
+		int old=position;
+		for(int i=0;i<list.size();i++){
+			if(list.get(i).name.equals(type)){
+				position=i;
+				break;
+			}
+		}
 
-	private void moveToPosition(int i) {
+		if(old!=position){
 
+			notifyDataSetChanged();
+		}
+	}
+
+
+	public int getTypePosition(String type){
+		int old=position;
+		for(int i=0;i<list.size();i++){
+			if(list.get(i).name.equals(type)){
+				position=i;
+				break;
+			}
+		}
+
+		return position;
+	}
+
+	@Nullable
+	@org.jetbrains.annotations.Nullable
+	@Override
+	public TypeBean getItem(int position) {
+		return super.getItem(position);
+	}
+
+	public List<TypeBean> getList() {
+		return list;
 	}
 
 }

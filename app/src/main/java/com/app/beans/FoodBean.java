@@ -21,4 +21,13 @@ public class FoodBean implements Serializable{
 	public int foodSale;
 	public double foodPrice;
 	public Bitmap foodImage;
+	public int selectCount=0;
+	public void changeSelectCount(int num){
+		if(num>=0){
+			selectCount+=num;
+		}else{
+			if(selectCount+num<0)selectCount=0;
+			else selectCount+=num;
+		}
+	}
 }
