@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:textColor="@color/type_normal"
         android:textSize="12sp" />
 

@@ -2,8 +2,8 @@ package com.app.utils;
 
 
 import android.content.Context;
-import android.text.style.IconMarginSpan;
-import android.util.Log;
+
+import android.graphics.BitmapFactory;
 
 
 import com.app.Models.Cuisine;
@@ -148,18 +148,6 @@ public class BaseUtils {
 		});
 	}
 
-	public static List<FoodBean> getDetails(List<FoodBean> fList) {
-		ArrayList<FoodBean> flist = new ArrayList<>();
-		for (int i = 1; i < 5; i++) {
-			if (fList.size() > i * 10) {
-				flist.add(fList.get(i * 10 - 1));
-				flist.add(fList.get(i * 10));
-			} else {
-				break;
-			}
-		}
-		return flist;
-	}
 
 	protected static <T extends AVObject> String prettyJSON(List<T> objects) {
 		StringBuilder sb = new StringBuilder();
@@ -175,10 +163,6 @@ public class BaseUtils {
 	protected static String prettyJSON(AVObject object) {
 		String  jsonObject = object.toJSONString();
 		return jsonObject;
-	}
-	protected static void log(String format, @Nullable Object... objects) {
-		final String msg = String.format(format, objects);
-		Log.d("LOG", msg);
 	}
 
 

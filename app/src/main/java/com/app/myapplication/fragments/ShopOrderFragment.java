@@ -47,7 +47,7 @@ public class ShopOrderFragment extends Fragment {
                 BaseUtils.getDatas(new RequestListener() {
                     @Override
                     public void success(List FoodData) {
-                        ((ListContainer)getActivity().findViewById(R.id.listcontainer)).load(FoodData,data);
+                        ((ListContainer)getActivity().findViewById(R.id.listcontainer)).load(FoodData);
                     }
 
                     @Override
