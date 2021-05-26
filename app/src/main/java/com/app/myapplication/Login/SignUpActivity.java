@@ -5,66 +5,56 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.myapplication.R;
 
-public class LoginActivity extends Activity implements View.OnClickListener {
 
-    private TextView mBtnLogin,goSign;
-
-    private View progress;
-
+public class SignUpActivity extends Activity implements View.OnClickListener {
     private View mInputLayout;
-
+    private LinearLayout mName, mPsw, mPswRep;
+    private TextView mBtnSignUp, retLog;
     private float mWidth, mHeight;
 
-    private LinearLayout mName, mPsw;
+    private View progress;
+    private EditText pswText,pswRepText,nameText;
+    LayoutInflater inflater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_login);
-
-        mBtnLogin = (TextView) findViewById(R.id.main_btn_login);
-        progress = findViewById(R.id.layout_progress);
-        mInputLayout = findViewById(R.id.input_layout);
-        mName = (LinearLayout) findViewById(R.id.input_layout_name);
-        mPsw = (LinearLayout) findViewById(R.id.input_layout_psw);
-        goSign= findViewById(R.id.go_signup);
-        mBtnLogin.setOnClickListener(this);
-
-        goSign.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_sign_up);
+        mInputLayout = findViewById(R.id.input_sign);
+        mName = findViewById(R.id.input_layout_name_sign);
+        mPsw= findViewById(R.id.input_layout_psw_sign);
+        mBtnSignUp = findViewById(R.id.main_btn_sign);
+        mPswRep = findViewById(R.id.input_layout_pasRep);
+        progress = findViewById(R.id.layout_progress_sign);
+        pswText = findViewById(R.id.psw_sign);
+        pswRepText = findViewById(R.id.psw_sign_rep);
+        mBtnSignUp.setOnClickListener(this);
+        nameText = findViewById(R.id.name_sign);
+        retLog=findViewById(R.id.return_login);
+        inflater = LayoutInflater.from(this);
+        retLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(LoginActivity.this , SignUpActivity.class);
+                Intent i = new Intent(SignUpActivity.this , LoginActivity.class);
                 startActivity(i);
             }
         });
-    }
-
-
-    @Override
-    public void onClick(View v) {
-
-        mWidth = mBtnLogin.getMeasuredWidth();
-        mHeight = mBtnLogin.getMeasuredHeight();
-
-        mName.setVisibility(View.INVISIBLE);
-        mPsw.setVisibility(View.INVISIBLE);
-
-        inputAnimator(mInputLayout, mWidth, mHeight);
-
     }
 
     private void inputAnimator(final View view, float w, float h) {
@@ -135,14 +125,13 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     }
 
-    /**
-     * �ָ���ʼ״̬
-     */
+
     private void recovery() {
         progress.setVisibility(View.GONE);
         mInputLayout.setVisibility(View.VISIBLE);
         mName.setVisibility(View.VISIBLE);
         mPsw.setVisibility(View.VISIBLE);
+        mPswRep.setVisibility(View.VISIBLE);
 
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mInputLayout.getLayoutParams();
         params.leftMargin = 0;
@@ -155,4 +144,44 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         animator2.setInterpolator(new AccelerateDecelerateInterpolator());
         animator2.start();
     }
+
+    @SuppressLint("ResourceAsColor")
+    @Override
+    public void onClick(View v) {
+        if(TextUtils.isEmpty(nameText.getText())){
+            nameText.setHint("用户名不能为空");
+        }
+        else if(TextUtils.isEmpty(pswText.getText())){
+            pswText.setHint("新密码不能为空");
+        }
+        else if(TextUtils.isEmpty(pswRepText.getText())){
+            pswRepText.setHint("请确认密码");
+        }
+        else if(!matchFormat(pswText.getText().toString())){
+            pswText.setText("");
+            pswText.setHint("至少8位，含大小写字母数字、字符");
+        }
+        else if(!pswText.getText().toString().equals(pswRepText.getText().toString())){
+            pswRepText.setText("");
+            pswRepText.setHint("两次输入不相同");
+        }
+        else{
+            mWidth = mBtnSignUp.getMeasuredWidth();
+            mHeight = mBtnSignUp.getMeasuredHeight();
+            mName.setVisibility(View.INVISIBLE);
+            mPsw.setVisibility(View.INVISIBLE);
+            mPswRep.setVisibility(View.INVISIBLE);
+            inputAnimator(mInputLayout, mWidth, mHeight);
+        }
+    }
+
+    private boolean matchFormat(String psw){
+        final String PW_PATTERN ="^(?![A-Za-z0-9]+$)(?![a-z0-9\\W]+$)(?![A-Za-z\\W]+$)(?![A-Z0-9\\W]+$)[a-zA-Z0-9\\W]{8,}$";
+        if(psw.matches(PW_PATTERN)){
+            return true;
+        }else
+            return false;
+    }
+
+
 }
