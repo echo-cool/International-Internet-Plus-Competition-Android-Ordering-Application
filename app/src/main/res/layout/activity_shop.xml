@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="false"
 
-
+    android:theme="@style/shop"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -41,16 +41,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/shop_image_loading" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:fitsSystemWindows="true"
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:paddingTop="19dp"
-                app:navigationIcon="@drawable/back_arror"
+                android:layout_height="56dp"
+                android:fitsSystemWindows="true"
+
                 app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/back_arror"
                 app:title="ABC">
 
             </androidx.appcompat.widget.Toolbar>
@@ -68,7 +69,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
             android:orientation="vertical">
 
             <LinearLayout
@@ -80,40 +80,31 @@
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tab"
+
                     android:layout_width="wrap_content"
                     android:layout_height="40dp">
 
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="tab1" />
+                        android:text="@string/title_order" />
 
                     <com.google.android.material.tabs.TabItem
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:text="tab2" />
+                        android:text="@string/title_comments" />
 
 
                 </com.google.android.material.tabs.TabLayout>
             </LinearLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/pager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/pager"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:fitsSystemWindows="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true" />
 
         </LinearLayout>
-
     </com.app.myapplication.views.StickyScrollView>
 
 

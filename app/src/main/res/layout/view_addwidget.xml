@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
               android:layout_height="wrap_content"
 
 
@@ -8,32 +9,26 @@
               android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/iv_sub"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_gravity="right"
-        android:alpha="0"
-        android:padding="2dp"
-        android:src="@drawable/ic_remove_circle_black_24dp"
-        android:tint="@color/colorPrimary" />
+        android:id="@+id/imageView_remove"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_weight="1"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/remove" />
 
     <TextView
-        android:id="@+id/tv_count"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_gravity="right"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:alpha="0"
-        android:gravity="center"
-        android:text="1"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:id="@+id/textView_count"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="0"
+        android:textAlignment="center"
+        android:visibility="invisible" />
 
-    <com.app.myapplication.views.AddButton
-        android:id="@+id/addbutton"
-        android:layout_gravity="right"
-        android:layout_width="@dimen/add_width"
-        android:layout_height="22dp"/>
-
+    <ImageView
+        android:id="@+id/imageView_add"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/add" />
 </LinearLayout>
