@@ -2,8 +2,12 @@ package com.app;
 
 import android.app.Application;
 
+import com.app.Models.Cuisine;
+import com.app.Models.Cuisine_Type;
+
 import cn.leancloud.AVLogger;
 import cn.leancloud.AVOSCloud;
+import cn.leancloud.AVObject;
 
 public class App extends Application {
     @Override
@@ -14,7 +18,8 @@ public class App extends Application {
         // 在 AVOSCloud.initialize() 之前调用
         AVOSCloud.setLogLevel(AVLogger.Level.DEBUG);
         AVOSCloud.initialize(this, "aXtS1Ar4i3CRKa6oc72bp5Ro-gzGzoHsz", "KD4f0t7AfuBKztLIC8GeATaR", "https://axts1ar4.lc-cn-n1-shared.com");
-
+        AVObject.registerSubclass(Cuisine_Type.class);
+        AVObject.registerSubclass(Cuisine.class);
     }
 }
 
