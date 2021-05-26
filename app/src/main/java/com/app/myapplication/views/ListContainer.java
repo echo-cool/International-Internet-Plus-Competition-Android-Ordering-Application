@@ -33,6 +33,7 @@ import com.app.utils.ViewUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ListContainer extends LinearLayout {
@@ -56,10 +57,20 @@ public class ListContainer extends LinearLayout {
 		recyclerView2=findViewById(R.id.recycler2);
 	}
 
-	public void load(List<FoodBean> flist, List<TypeBean> tlist){
-		typeAdapter=new TypeAdapter(tlist);
-		foodAdapter=new FoodAdapter(flist);
+	public void load(List<FoodBean> flist){
 
+		foodAdapter=new FoodAdapter(flist);
+		List<TypeBean> tlist=new LinkedList<>();
+		for(FoodBean foodBean:flist){
+			if(tlist.size()==0){
+				tlist.add(new TypeBean(foodBean.foodType));
+				continue;
+			}
+			if(!tlist.get(tlist.size()-1).name.equals(foodBean.foodType)){
+				tlist.add(new TypeBean(foodBean.foodType));
+			}
+		}
+		typeAdapter=new TypeAdapter(tlist);
 		recyclerView1.setLayoutManager(new LinearLayoutManager(mContext));
 		recyclerView1.setAdapter(typeAdapter);
 		recyclerView1.addOnItemTouchListener(new OnItemClickListener() {

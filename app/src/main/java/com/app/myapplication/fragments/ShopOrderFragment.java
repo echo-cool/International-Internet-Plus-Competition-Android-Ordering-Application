@@ -38,7 +38,7 @@ public class ShopOrderFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(ShopOrderViewModel.class);
         // TODO: Use the ViewModel
 
-        ((ListContainer)getActivity().findViewById(R.id.listcontainer)).load(BaseUtils.getDatas(getContext()),BaseUtils.getTypes());
+        ((ListContainer)getActivity().findViewById(R.id.listcontainer)).load(BaseUtils.getDatas(getContext()));
     }
 
 

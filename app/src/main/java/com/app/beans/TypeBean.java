@@ -11,4 +11,10 @@ public class TypeBean {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public TypeBean(String name){
+		this.name=name;
+	}
+	public TypeBean(){
+
+	}
 }
