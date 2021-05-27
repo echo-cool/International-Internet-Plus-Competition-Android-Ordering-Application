@@ -41,11 +41,21 @@ public class ShopOrderFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(ShopOrderViewModel.class);
         // TODO: Use the ViewModel
+
         BaseUtils.getDatas(new RequestListener() {
+            Boolean finished = false;
             @Override
             public void success(List FoodData) {
-                ((ListContainer)getActivity().findViewById(R.id.listcontainer)).load(FoodData);
+//                if(finished)
+                //((ListContainer)getActivity().findViewById(R.id.listcontainer)).load(FoodData);
             }
+
+            @Override
+            public void processing(int now, int size, List data) {
+                if(now + 1 == size)
+                    ((ListContainer)getActivity().findViewById(R.id.listcontainer)).load(data);
+            }
+
 
             @Override
             public void failed(String reason) {

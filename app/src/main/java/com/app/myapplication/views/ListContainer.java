@@ -57,20 +57,29 @@ public class ListContainer extends LinearLayout {
 		recyclerView2=findViewById(R.id.recycler2);
 	}
 
-	public void load(List<FoodBean> flist){
-
-		foodAdapter=new FoodAdapter(flist);
-		List<TypeBean> tlist=new LinkedList<>();
-		for(FoodBean foodBean:flist){
-			if(tlist.size()==0){
-				tlist.add(new TypeBean(foodBean.foodType));
-				continue;
+	public void load(List<FoodBean> foodBeanList){
+//		for(FoodBean foodBean:foodBeanList){
+//			foodBean.FoodTypeBean = new TypeBean(foodBean.foodType);
+//		}
+		foodAdapter=new FoodAdapter(foodBeanList);
+		List<TypeBean> typeBeanLinkedList=new LinkedList<>();
+		for(FoodBean foodBean:foodBeanList){
+			Boolean flag = true;
+			for(TypeBean typeBean:typeBeanLinkedList){
+				if(typeBean.name.equals(foodBean.foodType))
+					flag = false;
 			}
-			if(!tlist.get(tlist.size()-1).name.equals(foodBean.foodType)){
-				tlist.add(new TypeBean(foodBean.foodType));
-			}
+			if(flag)
+				typeBeanLinkedList.add(new TypeBean(foodBean.foodType));
+//			if(typeBeanLinkedList.size()==0){
+//				typeBeanLinkedList.add(new TypeBean(foodBean.foodType));
+//				continue;
+//			}
+//			if(!typeBeanLinkedList.get(typeBeanLinkedList.size()-1).name.equals(foodBean.foodType)){
+//				typeBeanLinkedList.add(new TypeBean(foodBean.foodType));
+//			}
 		}
-		typeAdapter=new TypeAdapter(tlist);
+		typeAdapter=new TypeAdapter(typeBeanLinkedList);
 		recyclerView1.setLayoutManager(new LinearLayoutManager(mContext));
 		recyclerView1.setAdapter(typeAdapter);
 		recyclerView1.addOnItemTouchListener(new OnItemClickListener() {
