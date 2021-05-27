@@ -1,5 +1,6 @@
 package com.app.myapplication.fragments;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -36,9 +37,10 @@ public class ShopOrderFragment extends Fragment {
 
     private ShopOrderViewModel mViewModel;
     ListContainer listContainer;
+    private String RestaurantID;
 
-    public static ShopOrderFragment newInstance() {
-        return new ShopOrderFragment();
+    public ShopOrderFragment(String RestaurantID) {
+        this.RestaurantID = RestaurantID;
     }
 
     @Override
@@ -54,7 +56,7 @@ public class ShopOrderFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(ShopOrderViewModel.class);
         // TODO: Use the ViewModel
         listContainer=getActivity().findViewById(R.id.listcontainer);
-        loadFoodList("60aa42ef6d8bee18f6112967");
+        loadFoodList(this.RestaurantID);
 
 //        BaseUtils.getDatas(new RequestListener() {
 //            Boolean finished = false;
@@ -100,6 +102,31 @@ public class ShopOrderFragment extends Fragment {
 
     public void loadFoodList(String id){
         AVQuery<AVObject> query = new AVQuery<>("Cuisine");
+//        AVQuery<AVObject> query2 = new AVQuery<>("Restaurant");
+//        query2.getInBackground(id).subscribe(new Observer<AVObject>() {
+//            @Override
+//            public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+//
+//            }
+//
+//            @Override
+//            public void onNext(@io.reactivex.annotations.NonNull AVObject avObject) {
+//                String name = avObject.getString("Name");
+//                Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+//                toolbar.setTitle(name);
+//                toolbar.upda
+//            }
+//
+//            @Override
+//            public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+//
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//
+//            }
+//        });
         query.include("Type");
         AVObject pointer = AVObject.createWithoutData("Restaurant", id);
         query.whereEqualTo("Restaurant",pointer);

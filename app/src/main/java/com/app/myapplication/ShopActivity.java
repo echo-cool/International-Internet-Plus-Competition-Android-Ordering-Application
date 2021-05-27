@@ -2,6 +2,7 @@ package com.app.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -60,6 +61,11 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import cn.leancloud.AVObject;
+import cn.leancloud.AVQuery;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 //
 //public class ShopActivity extends BaseActivity implements AddWidget.OnAddClick {
 //    public static final int chose_puhoto=2;
@@ -370,6 +376,7 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
     public BottomSheetBehavior behavior;
     public View scroll_container;
     private Fragment firstFragment;
+    String RestaurantID = "60aa42ef6d8bee18f6112967";
 //    public static CarAdapter carAdapter;
    // private ShopCarView shopCarView;
 
@@ -378,8 +385,35 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ShopActivity this_ = this;
         setContentView(R.layout.activity_shop);
         setViewPager();
+        AVQuery<AVObject> query2 = new AVQuery<>("Restaurant");
+        query2.getInBackground(RestaurantID).subscribe(new Observer<AVObject>() {
+            @Override
+            public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+
+            }
+            @Override
+            public void onNext(@io.reactivex.annotations.NonNull AVObject avObject) {
+                String name = avObject.getString("Name");
+                System.out.println(name);
+                Toolbar toolbar = this_.findViewById(R.id.toolbar);
+                toolbar.setTitle(name);
+
+            }
+
+            @Override
+            public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
 //        setContentView(R.layout.shop_order_fragment);
 //        ((ListContainer)findViewById(R.id.listcontainer)).load(BaseUtils.getDatas(this),BaseUtils.getTypes());
 
@@ -389,7 +423,7 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
     private void setViewPager(){
         TabLayout tabLayout = findViewById(R.id.tab);
         ViewPager2 viewPager2=findViewById(R.id.pager);
-        final Fragment[] fragments={new ShopOrderFragment(),new ShopCommentsFragment()};
+        final Fragment[] fragments={new ShopOrderFragment(RestaurantID),new ShopCommentsFragment()};
         final String[] strings={getString(R.string.title_order),getString(R.string.title_comments)};
         viewPager2.setAdapter(new FragmentStateAdapter(this) {
             @NonNull
