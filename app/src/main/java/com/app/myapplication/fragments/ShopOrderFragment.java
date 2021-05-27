@@ -41,27 +41,28 @@ public class ShopOrderFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(ShopOrderViewModel.class);
         // TODO: Use the ViewModel
-        BaseUtils.getTypes(new RequestListener<TypeBean>() {
+        BaseUtils.getDatas(new RequestListener() {
             @Override
-            public void success(List<TypeBean> data) {
-                BaseUtils.getDatas(new RequestListener() {
-                    @Override
-                    public void success(List FoodData) {
-                        ((ListContainer)getActivity().findViewById(R.id.listcontainer)).load(FoodData);
-                    }
-
-                    @Override
-                    public void failed(String reason) {
-
-                    }
-                });
-
+            public void success(List FoodData) {
+                ((ListContainer)getActivity().findViewById(R.id.listcontainer)).load(FoodData);
             }
+
             @Override
             public void failed(String reason) {
-                System.out.println("ERROR");
+
             }
         });
+//        BaseUtils.getTypes(new RequestListener<TypeBean>() {
+//            @Override
+//            public void success(List<TypeBean> data) {
+//
+//
+//            }
+//            @Override
+//            public void failed(String reason) {
+//                System.out.println("ERROR");
+//            }
+//        });
 
     }
 
