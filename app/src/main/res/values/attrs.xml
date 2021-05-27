@@ -10,4 +10,8 @@
         <attr name="notification_content" format="string"/>
         <attr name="notification_time" format="string"/>
     </declare-styleable>
+    <declare-styleable name="StickyScrollView">
+        <attr name="stuckShadowHeight" format="dimension" />
+        <attr name="stuckShadowDrawable" format="reference" />
+    </declare-styleable>
 </resources>
