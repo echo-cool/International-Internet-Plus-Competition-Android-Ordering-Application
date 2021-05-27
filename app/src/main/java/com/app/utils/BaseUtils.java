@@ -69,6 +69,12 @@ public class BaseUtils {
 				}
 				listener.success(tList);
 			}
+
+			@Override
+			public void processing(int now, int size, List<Cuisine_Type> data) {
+
+			}
+
 			@Override
 			public void failed(String reason) {
 				listener.failed("ERROR Processing");
@@ -115,6 +121,7 @@ public class BaseUtils {
 					foodBean.selectCount=0;
 					String Type_ID = data.get(i).getType().getObjectId();
 					AVQuery<Cuisine_Type> query = AVQuery.getQuery(Cuisine_Type.class);
+					int finalI = i;
 					query.getInBackground(Type_ID).subscribe(new Observer<Cuisine_Type>() {
 						@Override
 						public void onSubscribe(@NonNull Disposable d) {
@@ -123,7 +130,8 @@ public class BaseUtils {
 						@Override
 						public void onNext(@NonNull Cuisine_Type cuisine_type) {
 							foodBean.foodType=(cuisine_type.getNAME());
-							System.out.println(foodBean.foodType);
+
+							//System.out.println(foodBean.foodType);
 							int resID =R.drawable.shop_image_loading;
 							fList.add(foodBean);
 						}
@@ -135,17 +143,27 @@ public class BaseUtils {
 
 						@Override
 						public void onComplete() {
-							listener.success(fList);
+							listener.processing(finalI, data.size(), fList);
+							//listener.success(fList);
 						}
 					});
 				}
 
+
 			}
+
+			@Override
+			public void processing(int now, int size, List<Cuisine> data) {
+
+			}
+
+
 			@Override
 			public void failed(String reason) {
 
 			}
 		});
+
 	}
 
 

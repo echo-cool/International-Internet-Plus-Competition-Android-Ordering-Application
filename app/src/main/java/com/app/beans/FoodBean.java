@@ -22,6 +22,7 @@ public class FoodBean implements Serializable{
 	public double foodPrice;
 	public Bitmap foodImage;
 	public int selectCount=0;
+	public TypeBean FoodTypeBean;
 	public void changeSelectCount(int num){
 		if(num>=0){
 			selectCount+=num;
