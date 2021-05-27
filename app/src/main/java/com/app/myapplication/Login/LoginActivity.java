@@ -76,16 +76,27 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        EditText usernameView = v.findViewById(R.id.username);
-        EditText passwordView = v.findViewById(R.id.password);
-        String username = usernameView.getEditableText().toString();
-        String password = passwordView.getEditableText().toString();
-        System.out.println(username);
+        EditText usernameView = findViewById(R.id.input_layout).findViewById(R.id.editText_account);
+        EditText passwordView = findViewById(R.id.input_layout).findViewById(R.id.editText_password);
+        String username = usernameView.getText().toString();
+        String password = passwordView.getText().toString();
         mWidth = mBtnLogin.getMeasuredWidth();
         mHeight = mBtnLogin.getMeasuredHeight();
         mName.setVisibility(View.INVISIBLE);
         mPsw.setVisibility(View.INVISIBLE);
         inputAnimator(mInputLayout, mWidth, mHeight);
+        login(username, password, new LoginListener() {
+            @Override
+            public void LoginSuccess(AVUser avUser) {
+                System.out.println("LoginSuccess ");
+            }
+
+            @Override
+            public void LoginFailed(String reason) {
+                System.out.println("LoginFailed");
+            }
+        });
+
 
     }
 

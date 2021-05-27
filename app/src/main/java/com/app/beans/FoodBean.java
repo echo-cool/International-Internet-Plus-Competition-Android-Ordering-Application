@@ -31,7 +31,11 @@ public class FoodBean implements Serializable{
 			else selectCount+=num;
 		}
 	}
-	public FoodBean(int id,String name,String type,String summary,int sale,double foodPrice){
+
+	public FoodBean() {
+	}
+
+	public FoodBean(int id, String name, String type, String summary, int sale, double foodPrice){
 
 	}
 }
