@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -75,9 +76,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        View usernameView = v.findViewById(R.id.input_layout_username);
-        View passwordView = v.findViewById(R.id.input_layout_password);
-
+        EditText usernameView = v.findViewById(R.id.username);
+        EditText passwordView = v.findViewById(R.id.password);
+        String username = usernameView.getEditableText().toString();
+        String password = passwordView.getEditableText().toString();
+        System.out.println(username);
         mWidth = mBtnLogin.getMeasuredWidth();
         mHeight = mBtnLogin.getMeasuredHeight();
         mName.setVisibility(View.INVISIBLE);
