@@ -76,8 +76,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        EditText usernameView = v.findViewById(R.id.username);
-        EditText passwordView = v.findViewById(R.id.password);
+        EditText usernameView = findViewById(R.id.input_layout).findViewById(R.id.editText_account);
+        EditText passwordView = findViewById(R.id.input_layout).findViewById(R.id.editText_password);
         String username = usernameView.getEditableText().toString();
         String password = passwordView.getEditableText().toString();
         System.out.println(username);

@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class FoodBean implements Serializable{
-	public int id;
+	public String id;
 	public String foodName;
 	public String foodType;
 	public String foodSummary;
@@ -31,7 +31,16 @@ public class FoodBean implements Serializable{
 			else selectCount+=num;
 		}
 	}
-	public FoodBean(int id,String name,String type,String summary,int sale,double foodPrice){
+	public FoodBean(String id,String name,String type,String summary,int sale,double foodPrice){
+		this.id=id;
+		this.foodName=name;
+		this.foodType=type;
+		this.foodSummary=summary;
+		this.foodSale=sale;
+		this.foodPrice=foodPrice;
+	}
+
+	public FoodBean(){
 
 	}
 }

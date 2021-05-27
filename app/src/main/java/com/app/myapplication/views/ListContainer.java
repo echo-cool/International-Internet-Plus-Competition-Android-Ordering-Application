@@ -61,17 +61,29 @@ public class ListContainer extends LinearLayout {
 //		for(FoodBean foodBean:foodBeanList){
 //			foodBean.FoodTypeBean = new TypeBean(foodBean.foodType);
 //		}
+//		foodAdapter=new FoodAdapter(foodBeanList);
+//		List<TypeBean> typeBeanLinkedList=new LinkedList<>();
+//		for(FoodBean foodBean:foodBeanList){
+//			Boolean flag = true;
+//			for(TypeBean typeBean:typeBeanLinkedList){
+//				if(typeBean.name.equals(foodBean.foodType))
+//					flag = false;
+//			}
+//			if(flag)
+//				typeBeanLinkedList.add(new TypeBean(foodBean.foodType));
+//		}
 		foodAdapter=new FoodAdapter(foodBeanList);
 		List<TypeBean> typeBeanLinkedList=new LinkedList<>();
 		for(FoodBean foodBean:foodBeanList){
-			Boolean flag = true;
-			for(TypeBean typeBean:typeBeanLinkedList){
-				if(typeBean.name.equals(foodBean.foodType))
-					flag = false;
-			}
-			if(flag)
+			if(typeBeanLinkedList.size()==0){
 				typeBeanLinkedList.add(new TypeBean(foodBean.foodType));
+				continue;
+			}
+			if(!typeBeanLinkedList.get(typeBeanLinkedList.size()-1).name.equals(foodBean.foodType)){
+				typeBeanLinkedList.add(new TypeBean(foodBean.foodType));
+			}
 		}
+
 		typeAdapter=new TypeAdapter(typeBeanLinkedList);
 		recyclerView1.setLayoutManager(new LinearLayoutManager(mContext));
 		recyclerView1.setAdapter(typeAdapter);

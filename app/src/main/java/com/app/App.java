@@ -21,7 +21,7 @@ public class App extends Application {
         AVOSCloud.initialize(this, "aXtS1Ar4i3CRKa6oc72bp5Ro-gzGzoHsz", "KD4f0t7AfuBKztLIC8GeATaR", "https://axts1ar4.lc-cn-n1-shared.com");
         AVObject.registerSubclass(Cuisine_Type.class);
         AVObject.registerSubclass(Cuisine.class);
-        TestUtils.test1("60aa42ef6d8bee18f6112967");
+        //TestUtils.test1("60aa42ef6d8bee18f6112967");
     }
 }
 
