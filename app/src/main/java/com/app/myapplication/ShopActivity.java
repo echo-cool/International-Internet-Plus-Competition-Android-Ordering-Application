@@ -1,65 +1,26 @@
 package com.app.myapplication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
-
-import android.Manifest;
-import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.ContentUris;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.app.beans.FoodBean;
-import com.app.myapplication.R;
-//import com.app.myapplication.adapters.CarAdapter;
 import com.app.myapplication.fragments.ShopCommentsFragment;
 import com.app.myapplication.fragments.ShopOrderFragment;
 import com.app.myapplication.fragments.TestShopOrderFragment;
-//import com.app.myapplication.views.ShopCarView;
-import com.app.myapplication.views.AddWidget;
-//import com.app.myapplication.views.ShopCarView;
-import com.app.myapplication.views.ListContainer;
-import com.app.utils.BaseUtils;
-import com.github.florent37.viewanimator.ViewAnimator;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
+
+//import com.app.myapplication.adapters.CarAdapter;
+//import com.app.myapplication.views.ShopCarView;
+//import com.app.myapplication.views.ShopCarView;
 //
 //public class ShopActivity extends BaseActivity implements AddWidget.OnAddClick {
 //    public static final int chose_puhoto=2;
@@ -370,6 +331,9 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
     public BottomSheetBehavior behavior;
     public View scroll_container;
     private Fragment firstFragment;
+
+    public ShopActivity() {
+    }
 //    public static CarAdapter carAdapter;
    // private ShopCarView shopCarView;
 
