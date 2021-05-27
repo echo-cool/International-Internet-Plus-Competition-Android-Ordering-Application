@@ -7,6 +7,8 @@ import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +23,7 @@ import android.widget.TextView;
 
 import com.app.Models.SignUpListener;
 import com.app.myapplication.R;
+import com.app.myapplication.ShopActivity;
 
 import cn.leancloud.AVUser;
 import io.reactivex.Observer;
@@ -176,6 +179,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
     @SuppressLint("ResourceAsColor")
     @Override
     public void onClick(View v) {
+        SignUpActivity this_ = this;
         if(TextUtils.isEmpty(nameText.getText())){
             nameText.setHint("用户名不能为空");
         }
@@ -204,11 +208,48 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
                 @Override
                 public void SignUpSuccess(AVUser avUser) {
                     System.out.println("SignUpSuccess");
+                    AlertDialog alertDialog;
+                    AlertDialog.Builder alertDialog_builder=new AlertDialog.Builder(this_);
+                    alertDialog_builder.setTitle("注册成功！");
+                    alertDialog_builder.setMessage("是否进入登陆页面？");
+                    alertDialog_builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(this_, LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                    alertDialog_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    alertDialog=alertDialog_builder.create();
+                    alertDialog.show();
                 }
 
                 @Override
                 public void SignUpFailed(String reason) {
                     System.out.println("SignUpFailed");
+                    AlertDialog alertDialog;
+                    AlertDialog.Builder alertDialog_builder=new AlertDialog.Builder(this_);
+                    alertDialog_builder.setTitle("注册失败！");
+                    alertDialog_builder.setMessage(reason);
+                    alertDialog_builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    alertDialog_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    alertDialog=alertDialog_builder.create();
+                    alertDialog.show();
                 }
             });
 
