@@ -16,7 +16,12 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.app.Models.LoginListener;
 import com.app.myapplication.R;
+
+import cn.leancloud.AVUser;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
 
@@ -39,8 +44,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         mBtnLogin = (TextView) findViewById(R.id.main_btn_login);
         progress = findViewById(R.id.layout_progress);
         mInputLayout = findViewById(R.id.input_layout);
-        mName = (LinearLayout) findViewById(R.id.input_layout_name);
-        mPsw = (LinearLayout) findViewById(R.id.input_layout_psw);
+        mName = (LinearLayout) findViewById(R.id.input_layout_username);
+        mPsw = (LinearLayout) findViewById(R.id.input_layout_password);
         goSign= findViewById(R.id.go_signup);
         mBtnLogin.setOnClickListener(this);
 
@@ -52,17 +57,31 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             }
         });
     }
+    public void login(String username, String password, LoginListener listener){
+        AVUser.logIn(username, password).subscribe(new Observer<AVUser>() {
+            public void onSubscribe(Disposable disposable) {}
+            public void onNext(AVUser user) {
+                // 登录成功
+                listener.LoginSuccess(user);
+            }
+            public void onError(Throwable throwable) {
+                // 登录失败（可能是密码错误）
+                listener.LoginFailed(throwable.toString());
+            }
+            public void onComplete() {}
+        });
+    }
 
 
     @Override
     public void onClick(View v) {
+        View usernameView = v.findViewById(R.id.input_layout_username);
+        View passwordView = v.findViewById(R.id.input_layout_password);
 
         mWidth = mBtnLogin.getMeasuredWidth();
         mHeight = mBtnLogin.getMeasuredHeight();
-
         mName.setVisibility(View.INVISIBLE);
         mPsw.setVisibility(View.INVISIBLE);
-
         inputAnimator(mInputLayout, mWidth, mHeight);
 
     }

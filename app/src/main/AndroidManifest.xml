@@ -14,7 +14,11 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".Login.SignUpActivity"></activity>
         <activity android:name=".Login.LoginActivity">
-<!--            <intent-filter>-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
@@ -22,15 +26,9 @@
         </activity>
         <activity android:name=".Home.NavigationActivity">
 
-
         </activity>
         <activity android:name=".ShopActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
     </application>

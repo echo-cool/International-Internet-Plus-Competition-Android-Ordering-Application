@@ -13,7 +13,7 @@
         android:padding="10dip" >
 
         <LinearLayout
-            android:id="@+id/input_layout_name"
+            android:id="@+id/input_layout_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -43,7 +43,7 @@
             android:background="#eeeeee" />
 
         <LinearLayout
-            android:id="@+id/input_layout_psw"
+            android:id="@+id/input_layout_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
