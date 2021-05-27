@@ -71,13 +71,6 @@ public class ListContainer extends LinearLayout {
 			}
 			if(flag)
 				typeBeanLinkedList.add(new TypeBean(foodBean.foodType));
-//			if(typeBeanLinkedList.size()==0){
-//				typeBeanLinkedList.add(new TypeBean(foodBean.foodType));
-//				continue;
-//			}
-//			if(!typeBeanLinkedList.get(typeBeanLinkedList.size()-1).name.equals(foodBean.foodType)){
-//				typeBeanLinkedList.add(new TypeBean(foodBean.foodType));
-//			}
 		}
 		typeAdapter=new TypeAdapter(typeBeanLinkedList);
 		recyclerView1.setLayoutManager(new LinearLayoutManager(mContext));
@@ -98,10 +91,6 @@ public class ListContainer extends LinearLayout {
 				}
 			}
 		});
-
-
-
-
 		recyclerView2.setLayoutManager(new LinearLayoutManager(mContext));
 		recyclerView2.setAdapter(foodAdapter);
 		recyclerView2.addOnScrollListener(new RecyclerView.OnScrollListener() {
