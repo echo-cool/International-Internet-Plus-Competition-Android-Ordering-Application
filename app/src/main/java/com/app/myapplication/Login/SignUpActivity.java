@@ -19,7 +19,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.app.Models.SignUpListener;
 import com.app.myapplication.R;
+
+import cn.leancloud.AVUser;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 
 public class SignUpActivity extends Activity implements View.OnClickListener {
@@ -143,6 +148,29 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
         animator2.setDuration(500);
         animator2.setInterpolator(new AccelerateDecelerateInterpolator());
         animator2.start();
+    }
+
+    public void SignUp(String username, String password, SignUpListener listener){
+        AVUser user = new AVUser();
+
+// 等同于 user.put("username", "Tom")
+        user.setUsername(username);
+        user.setPassword(password);
+
+
+        user.signUpInBackground().subscribe(new Observer<AVUser>() {
+            public void onSubscribe(Disposable disposable) {}
+            public void onNext(AVUser user) {
+                // 注册成功
+                System.out.println("注册成功。objectId：" + user.getObjectId());
+                listener.SignUpSuccess(user);
+            }
+            public void onError(Throwable throwable) {
+                // 注册失败（通常是因为用户名已被使用）
+                listener.SignUpFailed(throwable.toString());
+            }
+            public void onComplete() {}
+        });
     }
 
     @SuppressLint("ResourceAsColor")
