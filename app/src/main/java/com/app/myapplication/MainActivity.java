@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
                 e.printStackTrace();
             }
             this.runOnUiThread(()->{
-                activity.setContentView(R.layout.activity_main);
+                activity.setContentView(R.layout.view_home_navigation);
             });
         }).start();
     }

@@ -29,8 +29,7 @@ import io.reactivex.disposables.Disposable;
 public class BaseUtils {
 	public static ArrayList<String> food_name = new ArrayList<>() ;
 	public static ArrayList<String> classes = new ArrayList<>() ;
-	public static double[] prices={9,12.5,8,14.5,15,8,16,15,8,20};
-	public static int[] sales={21,8,15,7,7,3,19,10,14,13,11,11,11};
+
 
 	private static void getClasses(RequestListener listener){
 
@@ -110,6 +109,7 @@ public class BaseUtils {
 					FoodBean foodBean = new FoodBean();
 					foodBean.id=i;
 					foodBean.foodName=data.get(i).getNAME();
+					food_name.add(data.get(i).getNAME());
 					foodBean.foodPrice= (double) (data.get(i).getfoodPrice());
 					foodBean.foodSale= (int) data.get(i).getStock();
 					foodBean.selectCount=0;

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.gauravk.bubblenavigation.BubbleNavigationConstraintView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_constraint"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="380dp"
+    android:background="@drawable/background_round"
+    android:elevation="4dp"
+    android:orientation="horizontal"
+    android:outlineProvider="background"
+    android:padding="12dp"
+    android:touchscreenBlocksFocus="false"
+    app:bnc_mode="inside">
+
+    <com.gauravk.bubblenavigation.BubbleToggleView
+        android:id="@+id/home_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9dp"
+        android:layout_marginStart="9dp"
+        app:bt_active="true"
+        app:bt_colorActive="@color/search_active"
+        app:bt_colorInactive="@color/search_inactive"
+        app:bt_icon="@drawable/ic_baseline_brightness_4_24"
+        app:bt_padding="@dimen/internal_padding"
+        app:bt_shape="@drawable/rounded_rect"
+        app:bt_shapeColor="@color/antiquewhite"
+        app:bt_title="Home"
+        app:bt_titlePadding="@dimen/title_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/notification_page"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.406" />
+
+
+    <com.gauravk.bubblenavigation.BubbleToggleView
+        android:id="@+id/notification_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9dp"
+        android:layout_marginStart="9dp"
+        app:bt_active="true"
+        app:bt_colorActive="@color/search_active"
+        app:bt_colorInactive="@color/search_inactive"
+        app:bt_icon="@drawable/ic_baseline_brightness_4_24"
+        app:bt_padding="@dimen/internal_padding"
+        app:bt_shape="@drawable/rounded_rect"
+        app:bt_shapeColor="@color/honeydew"
+        app:bt_title="Notifications"
+        app:bt_titlePadding="@dimen/title_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/forum_page"
+        app:layout_constraintStart_toEndOf="@+id/home_page"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.gauravk.bubblenavigation.BubbleToggleView
+        android:id="@+id/forum_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9dp"
+        android:layout_marginStart="9dp"
+        app:bt_active="true"
+        app:bt_colorActive="@color/search_active"
+        app:bt_colorInactive="@color/search_inactive"
+        app:bt_icon="@drawable/ic_baseline_brightness_4_24"
+        app:bt_padding="@dimen/internal_padding"
+        app:bt_shape="@drawable/rounded_rect"
+        app:bt_shapeColor="@color/lightpink"
+        app:bt_title="Forum"
+        app:bt_titlePadding="@dimen/title_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/user_page"
+        app:layout_constraintStart_toEndOf="@+id/notification_page"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.gauravk.bubblenavigation.BubbleToggleView
+        android:id="@+id/user_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9dp"
+        android:layout_marginStart="9dp"
+        app:bt_active="true"
+        app:bt_colorActive="@color/search_active"
+        app:bt_colorInactive="@color/search_inactive"
+        app:bt_icon="@drawable/ic_baseline_brightness_4_24"
+        app:bt_padding="@dimen/internal_padding"
+        app:bt_shape="@drawable/rounded_rect"
+        app:bt_shapeColor="@color/lightcyan"
+        app:bt_title="User"
+        app:bt_titlePadding="@dimen/title_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/forum_page"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Add more child items here - max upto 5 -->
+
+</com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
