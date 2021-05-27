@@ -200,6 +200,18 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
             mPsw.setVisibility(View.INVISIBLE);
             mPswRep.setVisibility(View.INVISIBLE);
             inputAnimator(mInputLayout, mWidth, mHeight);
+            SignUp(nameText.getText().toString(), pswRepText.getText().toString(), new SignUpListener() {
+                @Override
+                public void SignUpSuccess(AVUser avUser) {
+                    System.out.println("SignUpSuccess");
+                }
+
+                @Override
+                public void SignUpFailed(String reason) {
+                    System.out.println("SignUpFailed");
+                }
+            });
+
         }
     }
 
