@@ -130,7 +130,8 @@ public class BaseUtils {
 						@Override
 						public void onNext(@NonNull Cuisine_Type cuisine_type) {
 							foodBean.foodType=(cuisine_type.getNAME());
-							System.out.println(foodBean.foodType);
+
+							//System.out.println(foodBean.foodType);
 							int resID =R.drawable.shop_image_loading;
 							fList.add(foodBean);
 						}

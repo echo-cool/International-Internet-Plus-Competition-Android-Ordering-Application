@@ -7,7 +7,7 @@ import cn.leancloud.AVParcelableObject;
 import cn.leancloud.annotation.AVClassName;
 
 @AVClassName("Cuisine_Type")
-public class Cuisine_Type extends AVObject {
+public class Cuisine_Type extends AVObject{
     public static final Parcelable.Creator CREATOR = AVParcelableObject.AVObjectCreator.instance;
     public static final String NAME = "Name";
     public static final String ENABLE = "Enable";
