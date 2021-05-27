@@ -6,25 +6,35 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.app.Models.LoginListener;
 import com.app.myapplication.R;
+
+import cn.leancloud.AVUser;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
 
-    private TextView mBtnLogin;
-    private View progress;
-    private View mInputLayout;
-    private float mWidth, mHeight;
-    private LinearLayout mName, mPsw;
+    private TextView mBtnLogin,goSign;
 
+    private View progress;
+
+    private View mInputLayout;
+
+    private float mWidth, mHeight;
+
+    private LinearLayout mName, mPsw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,23 +45,58 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         mBtnLogin = (TextView) findViewById(R.id.main_btn_login);
         progress = findViewById(R.id.layout_progress);
         mInputLayout = findViewById(R.id.input_layout);
-        mName = (LinearLayout) findViewById(R.id.input_layout_name);
-        mPsw = (LinearLayout) findViewById(R.id.input_layout_pas);
-
+        mName = (LinearLayout) findViewById(R.id.input_layout_username);
+        mPsw = (LinearLayout) findViewById(R.id.input_layout_password);
+        goSign= findViewById(R.id.go_signup);
         mBtnLogin.setOnClickListener(this);
+
+        goSign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LoginActivity.this , SignUpActivity.class);
+                startActivity(i);
+            }
+        });
+    }
+    public void login(String username, String password, LoginListener listener){
+        AVUser.logIn(username, password).subscribe(new Observer<AVUser>() {
+            public void onSubscribe(Disposable disposable) {}
+            public void onNext(AVUser user) {
+                // 登录成功
+                listener.LoginSuccess(user);
+            }
+            public void onError(Throwable throwable) {
+                // 登录失败（可能是密码错误）
+                listener.LoginFailed(throwable.toString());
+            }
+            public void onComplete() {}
+        });
     }
 
 
     @Override
     public void onClick(View v) {
-
+        EditText usernameView = findViewById(R.id.input_layout).findViewById(R.id.editText_account);
+        EditText passwordView = findViewById(R.id.input_layout).findViewById(R.id.editText_password);
+        String username = usernameView.getText().toString();
+        String password = passwordView.getText().toString();
         mWidth = mBtnLogin.getMeasuredWidth();
         mHeight = mBtnLogin.getMeasuredHeight();
-
         mName.setVisibility(View.INVISIBLE);
         mPsw.setVisibility(View.INVISIBLE);
-
         inputAnimator(mInputLayout, mWidth, mHeight);
+        login(username, password, new LoginListener() {
+            @Override
+            public void LoginSuccess(AVUser avUser) {
+                System.out.println("LoginSuccess ");
+            }
+
+            @Override
+            public void LoginFailed(String reason) {
+                System.out.println("LoginFailed");
+            }
+        });
+
 
     }
 
@@ -123,7 +168,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     }
 
-
+    /**
+     * �ָ���ʼ״̬
+     */
     private void recovery() {
         progress.setVisibility(View.GONE);
         mInputLayout.setVisibility(View.VISIBLE);

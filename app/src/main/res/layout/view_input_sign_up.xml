@@ -20,6 +20,7 @@
 
 
             <EditText
+                android:id="@+id/name_sign"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dip"
@@ -55,13 +56,16 @@
 
 
             <EditText
+                android:id="@+id/psw_sign_rep"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dip"
                 android:background="#00000000"
                 android:hint="请重复输入密码"
                 android:padding="5dip"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:lines="1"
+                android:inputType="text"/>
         </LinearLayout>
     </LinearLayout>
 
