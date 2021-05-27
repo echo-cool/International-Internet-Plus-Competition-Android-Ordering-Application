@@ -8,8 +8,8 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_order">Order</string>
-    <string name="title_comments">comments</string>
+    <string name="title_order">点餐</string>
+    <string name="title_comments">评论</string>
     <string name="detail_header_behavior">detail_header_behavior</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_login">Sign in</string>
