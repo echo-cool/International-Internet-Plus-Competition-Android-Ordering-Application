@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +27,7 @@ public class MerchantActivity extends AppCompatActivity {
 
     MerchantAdapter mctAdapter;
     RecyclerView mctView;
-    List<MerchantBean> temp = new LinkedList<>();
+    Queue<MerchantBean> temp = new LinkedList<>();
     Boolean isFin = false;
 
 
@@ -71,13 +72,27 @@ public class MerchantActivity extends AppCompatActivity {
                             if (temp == null) {
                                 mctAdapter.loadMoreFail();
                             } else {
-                                mctAdapter.addData(temp);
+                                List<MerchantBean> merchants =new LinkedList<>();
+                                for(int i=0;i<10;i++){
+                                    if(!temp.isEmpty()){
+                                    merchants.add(temp.poll());}
+                                }
+                                mctAdapter.addData(merchants);
                                 mctAdapter.loadMoreComplete();
-                                temp = null;
                             }
                         }else {
-                            mctAdapter.addData(temp);
-                            mctAdapter.loadMoreEnd();
+                            if(temp.isEmpty()){
+                                mctAdapter.loadMoreEnd();
+                            }else {
+                                List<MerchantBean> merchants =new LinkedList<>();
+                                for(int i=0;i<10;i++){
+                                    if(!temp.isEmpty()){
+                                        merchants.add(temp.poll());}
+                                }
+                                mctAdapter.addData(merchants);
+                                mctAdapter.loadMoreComplete();
+                            }
+
                         }
                     }
                 }, 3000);
@@ -95,11 +110,11 @@ public class MerchantActivity extends AppCompatActivity {
             isFin = true;
             mct.remove(mct.size()-1);
             for(MerchantBean mb:mct){
-                temp.add(mb);
+                temp.offer(mb);
             }
         }else {
             for (MerchantBean mb : mct) {
-                temp.add(mb);
+                temp.offer(mb);
             }
         }
     }
@@ -119,10 +134,11 @@ public class MerchantActivity extends AppCompatActivity {
         mct.add(new MerchantBean("222","好贵"));
         load(mct);
         List<MerchantBean> mct1 =new LinkedList<>();
-        mct1.add(new MerchantBean("111","好吃不贵"));
-        mct1.add(new MerchantBean("111","好吃不贵"));
-        mct1.add(new MerchantBean("111","好吃不贵"));
-        mct1.add(new MerchantBean("111","好吃不贵"));
+        for(int i=0;i<35;i++){
+            mct1.add(new MerchantBean("111","好吃不贵"));
+        }
+
+
         loadMore(mct1);
         List<MerchantBean> mct2 =new LinkedList<>();
         mct2.add(new MerchantBean("333","怎么能这么难吃"));
