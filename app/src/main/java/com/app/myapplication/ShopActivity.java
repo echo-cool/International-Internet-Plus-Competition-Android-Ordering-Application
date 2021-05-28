@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 //import com.app.myapplication.adapters.CarAdapter;
 import com.app.myapplication.fragments.ShopCommentsFragment;
@@ -350,6 +352,7 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setWindow();
         setContentView(R.layout.activity_shop);
         Intent intent=getIntent();
         shopId=intent.getStringExtra("shopId");
@@ -362,6 +365,13 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
 //        setContentView(R.layout.shop_order_fragment);
 //        ((ListContainer)findViewById(R.id.listcontainer)).load(BaseUtils.getDatas(this),BaseUtils.getTypes());
 
+    }
+
+    private void setWindow(){
+        Window window=getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
     }
 
 

@@ -13,10 +13,10 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".merchant.MerchantActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity android:name=".Login.SignUpActivity"></activity>
         <activity android:name=".Login.LoginActivity">
@@ -27,10 +27,10 @@
 
         </activity>
         <activity android:name=".ShopActivity" >
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
     </application>
