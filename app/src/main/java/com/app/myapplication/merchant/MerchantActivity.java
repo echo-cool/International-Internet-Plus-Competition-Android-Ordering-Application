@@ -3,6 +3,7 @@ package com.app.myapplication.merchant;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import com.app.beans.MerchantBean;
@@ -25,6 +26,8 @@ public class MerchantActivity extends AppCompatActivity {
 
     MerchantAdapter mctAdapter;
     RecyclerView mctView;
+    List<MerchantBean> temp = new LinkedList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +43,7 @@ public class MerchantActivity extends AppCompatActivity {
             }
         });
 
-        //test();
+        test();
 
         mctAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -54,19 +57,51 @@ public class MerchantActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        mctAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //加载请求，结束
+                        //mctAdapter.loadMoreEnd();
+                        //加载请求，加载
+                        mctAdapter.addData(temp);
+                        mctAdapter.loadMoreComplete();
+                        //加载失败
+                        //mctAdapter.loadMoreFail();
+                    }
+                }, 3000);
+            }
+        }, mctView);
     }
 
     public void load(List<MerchantBean> mct){
         mctAdapter = new MerchantAdapter(mct);
         mctView.setAdapter(mctAdapter);
-
     }
+
+
 
     private void test(){
         List<MerchantBean> mct =new LinkedList<>();
         mct.add(new MerchantBean("111","好吃不贵"));
         mct.add(new MerchantBean("222","好贵"));
+        mct.add(new MerchantBean("222","好贵"));
+        mct.add(new MerchantBean("222","好贵"));
+        mct.add(new MerchantBean("222","好贵"));
+        mct.add(new MerchantBean("222","好贵"));
+        mct.add(new MerchantBean("222","好贵"));
+        mct.add(new MerchantBean("222","好贵"));
+        mct.add(new MerchantBean("222","好贵"));
         mctAdapter = new MerchantAdapter(mct);
         mctView.setAdapter(mctAdapter);
+        temp.add(new MerchantBean("111","好吃不贵"));
+        temp.add(new MerchantBean("111","好吃不贵"));
+        temp.add(new MerchantBean("111","好吃不贵"));
+        temp.add(new MerchantBean("111","好吃不贵"));
+        temp.add(new MerchantBean("111","好吃不贵"));
+        temp.add(new MerchantBean("111","好吃不贵"));
     }
 }

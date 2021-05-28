@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="false"
-
     android:theme="@style/shop"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -11,7 +9,6 @@
     <com.google.android.material.appbar.AppBarLayout
         android:fitsSystemWindows="false"
         android:id="@+id/appbar"
-
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:layout_height="192dp"
         android:layout_width="match_parent">
@@ -23,7 +20,6 @@
             app:toolbarId="@+id/toolbar"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:layout_scrollInterpolator="@android:anim/decelerate_interpolator"
-
             app:contentScrim="?attr/colorPrimary">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,11 +33,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:fitsSystemWindows="true"
-
                 app:layout_collapseMode="pin"
-
                 app:navigationIcon="@drawable/back_arror"
-
                 app:title="校园商家"
                 >
 

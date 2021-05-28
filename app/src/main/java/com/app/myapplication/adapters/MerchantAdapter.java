@@ -9,7 +9,7 @@ import java.util.List;
 
 import androidx.annotation.Nullable;
 
-public class MerchantAdapter extends BaseQuickAdapter<MerchantBean, BaseViewHolder> {
+public class MerchantAdapter extends BaseQuickAdapter<MerchantBean, BaseViewHolder>{
     List<MerchantBean> list;
 
     public MerchantAdapter(@Nullable List<MerchantBean> data) {
