@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dip"
             android:gravity="center"
-            android:text="杏会光荫"
+            android:text="杏会"
             android:textColor="#ffffff"
             android:textSize="24sp" />
 
@@ -157,3 +157,4 @@
     </RelativeLayout>
 
 </RelativeLayout>
+
