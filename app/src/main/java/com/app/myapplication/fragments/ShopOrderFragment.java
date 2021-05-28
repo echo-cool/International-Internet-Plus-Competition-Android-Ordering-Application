@@ -36,10 +36,16 @@ public class ShopOrderFragment extends Fragment {
 
     private ShopOrderViewModel mViewModel;
     ListContainer listContainer;
+    private String id;
 
-    public static ShopOrderFragment newInstance() {
-        return new ShopOrderFragment();
+//    public static ShopOrderFragment newInstance() {
+//        return new ShopOrderFragment();
+//    }
+
+    public ShopOrderFragment(String id){
+        this.id=id;
     }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -54,7 +60,7 @@ public class ShopOrderFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(ShopOrderViewModel.class);
         // TODO: Use the ViewModel
         listContainer=getActivity().findViewById(R.id.listcontainer);
-        loadFoodList("60aa42ef6d8bee18f6112967");
+        loadFoodList(id);
 
 //        BaseUtils.getDatas(new RequestListener() {
 //            Boolean finished = false;

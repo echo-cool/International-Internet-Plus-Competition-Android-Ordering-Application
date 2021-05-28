@@ -1,16 +1,5 @@
 package com.app.myapplication;
 
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.View;
-
-import com.app.myapplication.fragments.ShopCommentsFragment;
-import com.app.myapplication.fragments.ShopOrderFragment;
-import com.app.myapplication.fragments.TestShopOrderFragment;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -18,9 +7,28 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+
 //import com.app.myapplication.adapters.CarAdapter;
+import com.app.myapplication.fragments.ShopCommentsFragment;
+import com.app.myapplication.fragments.ShopOrderFragment;
+import com.app.myapplication.fragments.TestShopOrderFragment;
 //import com.app.myapplication.views.ShopCarView;
 //import com.app.myapplication.views.ShopCarView;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+
+import org.jetbrains.annotations.NotNull;
+
+import cn.leancloud.AVObject;
+import cn.leancloud.AVQuery;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 //
 //public class ShopActivity extends BaseActivity implements AddWidget.OnAddClick {
 //    public static final int chose_puhoto=2;
@@ -331,11 +339,11 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
     public BottomSheetBehavior behavior;
     public View scroll_container;
     private Fragment firstFragment;
-
-    public ShopActivity() {
-    }
 //    public static CarAdapter carAdapter;
    // private ShopCarView shopCarView;
+
+    private String shopId;
+    private String shopName;
 
 
 
@@ -343,6 +351,13 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
+        Intent intent=getIntent();
+        shopId=intent.getStringExtra("shopId");
+        shopName=intent.getStringExtra("shopName");
+        if(shopId==null){
+            shopId="60aa42ef6d8bee18f6112967";
+        }
+        loadShopInformation();
         setViewPager();
 //        setContentView(R.layout.shop_order_fragment);
 //        ((ListContainer)findViewById(R.id.listcontainer)).load(BaseUtils.getDatas(this),BaseUtils.getTypes());
@@ -353,7 +368,7 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
     private void setViewPager(){
         TabLayout tabLayout = findViewById(R.id.tab);
         ViewPager2 viewPager2=findViewById(R.id.pager);
-        final Fragment[] fragments={new ShopOrderFragment(),new ShopCommentsFragment()};
+        final Fragment[] fragments={new ShopOrderFragment(shopId),new ShopCommentsFragment()};
         final String[] strings={getString(R.string.title_order),getString(R.string.title_comments)};
         viewPager2.setAdapter(new FragmentStateAdapter(this) {
             @NonNull
@@ -378,5 +393,41 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    private void loadShopInformation(){
+        if(shopName==null){
+            AVQuery<AVObject> query = new AVQuery<>("Restaurant");
+            query.getInBackground(shopId).subscribe(new Observer<AVObject>() {
+
+                @Override
+                public void onSubscribe(@NotNull Disposable d) {
+
+                }
+
+                @Override
+                public void onNext(@NotNull AVObject avObject) {
+                    shopName=avObject.getString("Name");
+
+                    CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.shop_collaspsing_toolbar);
+                    collapsingToolbarLayout.setTitle(shopName);
+
+                }
+
+                @Override
+                public void onError(@NotNull Throwable e) {
+
+                }
+
+                @Override
+                public void onComplete() {
+
+                }
+            });
+        }else{
+            CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.shop_collaspsing_toolbar);
+            collapsingToolbarLayout.setTitle(shopName);
+
+        }
     }
 }
