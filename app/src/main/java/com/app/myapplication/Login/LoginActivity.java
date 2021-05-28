@@ -68,7 +68,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             // 跳到首页
             System.out.println("已经登陆成功。");
             Intent intent = new Intent(this, ShopActivity.class);
-            startActivity(intent);
+            //startActivity(intent);
         } else {
             // 显示注册或登录页面
             // pass
@@ -97,11 +97,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         EditText passwordView = findViewById(R.id.input_layout).findViewById(R.id.editText_password);
         String username = usernameView.getText().toString();
         String password = passwordView.getText().toString();
-        mWidth = mBtnLogin.getMeasuredWidth();
-        mHeight = mBtnLogin.getMeasuredHeight();
-        mName.setVisibility(View.INVISIBLE);
-        mPsw.setVisibility(View.INVISIBLE);
-        inputAnimator(mInputLayout, mWidth, mHeight);
+//        mWidth = mBtnLogin.getMeasuredWidth();
+//        mHeight = mBtnLogin.getMeasuredHeight();
+//        mName.setVisibility(View.INVISIBLE);
+//        mPsw.setVisibility(View.INVISIBLE);
+//        inputAnimator(mInputLayout, mWidth, mHeight);
         login(username, password, new LoginListener() {
             @Override
             public void LoginSuccess(AVUser avUser) {
@@ -131,6 +131,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             @Override
             public void LoginFailed(String reason) {
                 System.out.println("LoginFailed");
+                passwordView.setError("登陆失败！");
                 AlertDialog alertDialog;
                 AlertDialog.Builder alertDialog_builder=new AlertDialog.Builder(this_);
                 alertDialog_builder.setTitle("登陆失败！");
