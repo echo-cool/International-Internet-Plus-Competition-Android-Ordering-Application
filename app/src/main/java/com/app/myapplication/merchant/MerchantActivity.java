@@ -23,6 +23,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import cn.leancloud.AVObject;
+import cn.leancloud.AVQuery;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
 public class MerchantActivity extends AppCompatActivity {
 
     MerchantAdapter mctAdapter;
@@ -98,7 +103,7 @@ public class MerchantActivity extends AppCompatActivity {
                 }, 3000);
             }
         }, mctView);
-        //test();
+        test();
     }
 
     public void load(List<MerchantBean> mct){
@@ -123,26 +128,54 @@ public class MerchantActivity extends AppCompatActivity {
 
     private void test(){
         List<MerchantBean> mct =new LinkedList<>();
-        mct.add(new MerchantBean("111","好吃不贵"));
-        mct.add(new MerchantBean("222","好贵"));
-        mct.add(new MerchantBean("222","好贵"));
-        mct.add(new MerchantBean("222","好贵"));
-        mct.add(new MerchantBean("222","好贵"));
-        mct.add(new MerchantBean("222","好贵"));
-        mct.add(new MerchantBean("222","好贵"));
-        mct.add(new MerchantBean("222","好贵"));
-        mct.add(new MerchantBean("222","好贵"));
-        load(mct);
-        List<MerchantBean> mct1 =new LinkedList<>();
-        for(int i=0;i<35;i++){
-            mct1.add(new MerchantBean("111","好吃不贵"));
-        }
+        AVQuery<AVObject> query = new AVQuery<>("Restaurant");
+        query.findInBackground().subscribe(new Observer<List<AVObject>>() {
+            @Override
+            public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
 
+            }
 
-        loadMore(mct1);
-        List<MerchantBean> mct2 =new LinkedList<>();
-        mct2.add(new MerchantBean("333","怎么能这么难吃"));
-        mct2.add(null);
-        loadMore(mct2);
+            @Override
+            public void onNext(@io.reactivex.annotations.NonNull List<AVObject> avObjects) {
+                for (AVObject res: avObjects
+                     ) {
+                    mct.add(new MerchantBean(res.getObjectId(), res.getString("Name")));
+                }
+                load(mct);
+
+            }
+
+            @Override
+            public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
+//        mct.add(new MerchantBean("111","好吃不贵"));
+//        mct.add(new MerchantBean("222","好贵"));
+//        mct.add(new MerchantBean("222","好贵"));
+//        mct.add(new MerchantBean("222","好贵"));
+//        mct.add(new MerchantBean("222","好贵"));
+//        mct.add(new MerchantBean("222","好贵"));
+//        mct.add(new MerchantBean("222","好贵"));
+//        mct.add(new MerchantBean("222","好贵"));
+//        mct.add(new MerchantBean("222","好贵"));
+//        load(mct);
+//        List<MerchantBean> mct1 =new LinkedList<>();
+//        for(int i=0;i<35;i++){
+//            mct1.add(new MerchantBean("111","好吃不贵"));
+//        }
+//
+//
+//        loadMore(mct1);
+//        List<MerchantBean> mct2 =new LinkedList<>();
+//        mct2.add(new MerchantBean("333","怎么能这么难吃"));
+//        mct2.add(null);
+//        loadMore(mct2);
     }
 }
