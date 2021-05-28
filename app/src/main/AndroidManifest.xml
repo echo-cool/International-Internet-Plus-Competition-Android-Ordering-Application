@@ -26,7 +26,9 @@
         <activity android:name=".Home.NavigationActivity">
 
         </activity>
-        <activity android:name=".ShopActivity" >
+        <activity android:name=".ShopActivity"
+            android:theme="@style/shop">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

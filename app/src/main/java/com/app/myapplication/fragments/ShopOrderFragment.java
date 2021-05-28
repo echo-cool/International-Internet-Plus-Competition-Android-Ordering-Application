@@ -2,6 +2,7 @@ package com.app.myapplication.fragments;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -127,13 +128,26 @@ public class ShopOrderFragment extends Fragment {
                 for(AVObject avObject: map.keySet()){
                     foodBeans.addAll(map.get(avObject));
                 }
-                getActivity().runOnUiThread(()->{
+//                getActivity().runOnUiThread(()->{
                     listContainer.load(foodBeans);
-                });
+//                });
             }
             public void onError(Throwable throwable) {}
             public void onComplete() {}
         });
+    }
+
+
+    public Bitmap loadImage(String id){
+        //
+        AVQuery<AVObject> query = new AVQuery<>("Cuisine");
+        query.include("Type");
+        AVObject pointer = AVObject.createWithoutData("Restaurant", id);
+        query.whereEqualTo("Restaurant",pointer);
+        List<AVObject>  avObjects=query.find();
+
+
+        return null;
     }
 
 
