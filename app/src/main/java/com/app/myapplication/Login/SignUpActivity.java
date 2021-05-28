@@ -54,7 +54,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
         pswRepText = findViewById(R.id.psw_sign_rep);
         mBtnSignUp.setOnClickListener(this);
         nameText = findViewById(R.id.name_sign);
-        retLog=findViewById(R.id.return_login);
+        //retLog=findViewById(R.id.return_login);
         inflater = LayoutInflater.from(this);
         retLog.setOnClickListener(new View.OnClickListener() {
             @Override
