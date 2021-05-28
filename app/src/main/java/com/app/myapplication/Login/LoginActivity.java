@@ -6,6 +6,9 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,10 +16,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.fragment.app.DialogFragment;
+
+import com.app.Models.LoginListener;
 import com.app.myapplication.R;
+import com.app.myapplication.ShopActivity;
+
+import cn.leancloud.AVUser;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
 
@@ -39,8 +51,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         mBtnLogin = (TextView) findViewById(R.id.main_btn_login);
         progress = findViewById(R.id.layout_progress);
         mInputLayout = findViewById(R.id.input_layout);
-        mName = (LinearLayout) findViewById(R.id.input_layout_name);
-        mPsw = (LinearLayout) findViewById(R.id.input_layout_psw);
+        mName = (LinearLayout) findViewById(R.id.input_layout_username);
+        mPsw = (LinearLayout) findViewById(R.id.input_layout_password);
         goSign= findViewById(R.id.go_signup);
         mBtnLogin.setOnClickListener(this);
 
@@ -51,19 +63,95 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 startActivity(i);
             }
         });
+        AVUser currentUser = AVUser.getCurrentUser();
+        if (currentUser != null) {
+            // 跳到首页
+            System.out.println("已经登陆成功。");
+            Intent intent = new Intent(this, ShopActivity.class);
+            startActivity(intent);
+        } else {
+            // 显示注册或登录页面
+            // pass
+        }
+    }
+    public void login(String username, String password, LoginListener listener){
+        AVUser.logIn(username, password).subscribe(new Observer<AVUser>() {
+            public void onSubscribe(Disposable disposable) {}
+            public void onNext(AVUser user) {
+                // 登录成功
+                listener.LoginSuccess(user);
+            }
+            public void onError(Throwable throwable) {
+                // 登录失败（可能是密码错误）
+                listener.LoginFailed(throwable.toString());
+            }
+            public void onComplete() {}
+        });
     }
 
 
     @Override
     public void onClick(View v) {
-
+        LoginActivity this_ = this;
+        EditText usernameView = findViewById(R.id.input_layout).findViewById(R.id.editText_account);
+        EditText passwordView = findViewById(R.id.input_layout).findViewById(R.id.editText_password);
+        String username = usernameView.getText().toString();
+        String password = passwordView.getText().toString();
         mWidth = mBtnLogin.getMeasuredWidth();
         mHeight = mBtnLogin.getMeasuredHeight();
-
         mName.setVisibility(View.INVISIBLE);
         mPsw.setVisibility(View.INVISIBLE);
-
         inputAnimator(mInputLayout, mWidth, mHeight);
+        login(username, password, new LoginListener() {
+            @Override
+            public void LoginSuccess(AVUser avUser) {
+                System.out.println("LoginSuccess ");
+                AlertDialog alertDialog;
+                AlertDialog.Builder alertDialog_builder=new AlertDialog.Builder(this_);
+                alertDialog_builder.setTitle("登陆成功！");
+                alertDialog_builder.setMessage("是否进入点餐页面？");
+                alertDialog_builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(this_, ShopActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                alertDialog_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog=alertDialog_builder.create();
+                alertDialog.show();
+
+            }
+
+            @Override
+            public void LoginFailed(String reason) {
+                System.out.println("LoginFailed");
+                AlertDialog alertDialog;
+                AlertDialog.Builder alertDialog_builder=new AlertDialog.Builder(this_);
+                alertDialog_builder.setTitle("登陆失败！");
+                alertDialog_builder.setMessage(reason);
+                alertDialog_builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog=alertDialog_builder.create();
+                alertDialog.show();
+            }
+        });
+
 
     }
 

@@ -113,7 +113,7 @@ public class BaseUtils {
 			public void success(List<Cuisine> data) {
 				for (int i = 0; i < data.size(); i++) {
 					FoodBean foodBean = new FoodBean();
-					foodBean.id=i;
+					//foodBean.id=i;
 					foodBean.foodName=data.get(i).getNAME();
 					food_name.add(data.get(i).getNAME());
 					foodBean.foodPrice= (double) (data.get(i).getfoodPrice());

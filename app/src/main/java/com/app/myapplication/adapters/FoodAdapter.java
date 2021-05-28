@@ -48,9 +48,6 @@ public class FoodAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
                 }catch (NullPointerException ignore){}
             }
         });
-        for(FoodBean i: getList()){
-            System.out.println(i.foodName+"|||"+i.selectCount);
-        }
     }
 
     public List<FoodBean> getList() {
