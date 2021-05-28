@@ -27,6 +27,7 @@ public class MerchantActivity extends AppCompatActivity {
     MerchantAdapter mctAdapter;
     RecyclerView mctView;
     List<MerchantBean> temp = new LinkedList<>();
+    Boolean isFin = false;
 
 
     @Override
@@ -43,7 +44,9 @@ public class MerchantActivity extends AppCompatActivity {
             }
         });
 
-        test();
+
+        mctAdapter = new MerchantAdapter(new LinkedList<>());
+        mctView.setAdapter(mctAdapter);
 
         mctAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -64,22 +67,41 @@ public class MerchantActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        //加载请求，结束
-                        //mctAdapter.loadMoreEnd();
-                        //加载请求，加载
-                        mctAdapter.addData(temp);
-                        mctAdapter.loadMoreComplete();
-                        //加载失败
-                        //mctAdapter.loadMoreFail();
+                        if(!isFin) {
+                            if (temp == null) {
+                                mctAdapter.loadMoreFail();
+                            } else {
+                                mctAdapter.addData(temp);
+                                mctAdapter.loadMoreComplete();
+                                temp = null;
+                            }
+                        }else {
+                            mctAdapter.addData(temp);
+                            mctAdapter.loadMoreEnd();
+                        }
                     }
                 }, 3000);
             }
         }, mctView);
+        //test();
     }
 
     public void load(List<MerchantBean> mct){
-        mctAdapter = new MerchantAdapter(mct);
-        mctView.setAdapter(mctAdapter);
+        mctAdapter.addData(mct);
+    }
+    public void loadMore(List<MerchantBean> mct){
+        //加入更多数据，list末尾为null判断所有数据加载完成
+        if(mct. get(mct.size()-1) ==null){
+            isFin = true;
+            mct.remove(mct.size()-1);
+            for(MerchantBean mb:mct){
+                temp.add(mb);
+            }
+        }else {
+            for (MerchantBean mb : mct) {
+                temp.add(mb);
+            }
+        }
     }
 
 
@@ -95,13 +117,16 @@ public class MerchantActivity extends AppCompatActivity {
         mct.add(new MerchantBean("222","好贵"));
         mct.add(new MerchantBean("222","好贵"));
         mct.add(new MerchantBean("222","好贵"));
-        mctAdapter = new MerchantAdapter(mct);
-        mctView.setAdapter(mctAdapter);
-        temp.add(new MerchantBean("111","好吃不贵"));
-        temp.add(new MerchantBean("111","好吃不贵"));
-        temp.add(new MerchantBean("111","好吃不贵"));
-        temp.add(new MerchantBean("111","好吃不贵"));
-        temp.add(new MerchantBean("111","好吃不贵"));
-        temp.add(new MerchantBean("111","好吃不贵"));
+        load(mct);
+        List<MerchantBean> mct1 =new LinkedList<>();
+        mct1.add(new MerchantBean("111","好吃不贵"));
+        mct1.add(new MerchantBean("111","好吃不贵"));
+        mct1.add(new MerchantBean("111","好吃不贵"));
+        mct1.add(new MerchantBean("111","好吃不贵"));
+        loadMore(mct1);
+        List<MerchantBean> mct2 =new LinkedList<>();
+        mct2.add(new MerchantBean("333","怎么能这么难吃"));
+        mct2.add(null);
+        loadMore(mct2);
     }
 }
