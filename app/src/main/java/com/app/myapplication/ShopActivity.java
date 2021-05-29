@@ -26,6 +26,7 @@ import com.app.myapplication.fragments.TestShopOrderFragment;
 //import com.app.myapplication.views.ShopCarView;
 //import com.app.myapplication.views.ShopCarView;
 import com.app.myapplication.views.ListContainer;
+import com.app.myapplication.views.ShopCarView;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -425,16 +426,11 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
                             if(i.selectCount!=0)flag=true;
                         }
                         double finalTotal_price = total_price;
-                        FloatingActionButton floatingActionButton=((Activity)mContext).findViewById(R.id.floatButton);
+
                         boolean finalFlag = flag;
                         ((Activity)mContext).runOnUiThread(()->{
-                            if(!finalFlag){
-                                floatingActionButton.setImageAlpha(255);
-                                ((TextView)((Activity) mContext).findViewById(R.id.textView6)).setText("");
-                            }else{
-                                floatingActionButton.setImageAlpha(0);
-                                ((TextView)((Activity) mContext).findViewById(R.id.textView6)).setText("¥"+new DecimalFormat("0.00").format(finalTotal_price));
-                            }
+                                ((ShopCarView)((Activity) mContext).findViewById(R.id.shopcar)).setPrice(finalTotal_price);
+
                             //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+finalTotal_price);
                         });
                     }).start();

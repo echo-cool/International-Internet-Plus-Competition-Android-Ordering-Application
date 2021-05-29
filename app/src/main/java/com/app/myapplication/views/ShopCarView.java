@@ -26,7 +26,7 @@ public class ShopCarView extends ConstraintLayout {
 
     public void setPrice(double price){
         if(price!=0)
-            ((TextView)findViewById(R.id.textView7)).setText(new DecimalFormat("0.00").format(price));
+            ((TextView)findViewById(R.id.textView7)).setText(new DecimalFormat("0.0").format(price));
         else
             ((TextView)findViewById(R.id.textView7)).setText("0");
     }

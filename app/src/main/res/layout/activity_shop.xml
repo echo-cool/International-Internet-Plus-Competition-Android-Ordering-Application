@@ -109,25 +109,13 @@
         </LinearLayout>
     </com.app.myapplication.views.StickyScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatButton"
-        android:layout_width="wrap_content"
+    <com.app.myapplication.views.ShopCarView
+        android:id="@+id/shopcar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:src="@drawable/shopping_cart"
-        >
+        android:layout_gravity="bottom">
 
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="10dp"
-        android:textColor="@color/white"
-        app:layout_anchor="@id/floatButton"
-        app:layout_anchorGravity="center" />
+    </com.app.myapplication.views.ShopCarView>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
