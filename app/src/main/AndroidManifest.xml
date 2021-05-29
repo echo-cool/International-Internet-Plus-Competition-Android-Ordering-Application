@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.app.myapplication">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:name="com.app.App"
         android:allowBackup="true"
@@ -12,33 +16,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".OrderEnsureActivity"></activity>
         <activity android:name=".merchant.MerchantActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
-        <activity android:name=".Login.SignUpActivity"></activity>
-        <activity android:name=".Login.LoginActivity">
 
-
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".Home.NavigationActivity">
-
-        </activity>
-        <activity android:name=".ShopActivity"
+        <activity android:name=".Login.SignUpActivity" />
+        <activity android:name=".Login.LoginActivity"></activity>
+        <activity android:name=".Home.NavigationActivity"></activity>
+        <activity
+            android:name=".ShopActivity"
             android:theme="@style/shop">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
 </manifest>

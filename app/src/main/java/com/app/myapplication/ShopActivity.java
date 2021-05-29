@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -14,19 +16,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 //import com.app.myapplication.adapters.CarAdapter;
+import com.app.beans.FoodBean;
 import com.app.myapplication.fragments.ShopCommentsFragment;
 import com.app.myapplication.fragments.ShopOrderFragment;
 import com.app.myapplication.fragments.TestShopOrderFragment;
 //import com.app.myapplication.views.ShopCarView;
 //import com.app.myapplication.views.ShopCarView;
+import com.app.myapplication.views.ListContainer;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.text.DecimalFormat;
+import java.util.List;
 
 import cn.leancloud.AVObject;
 import cn.leancloud.AVQuery;
@@ -347,6 +356,7 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
 
     private String shopId;
     private String shopName;
+    private Context mContext;
 
 
 
@@ -355,6 +365,7 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
         super.onCreate(savedInstanceState);
         setWindow();
         setContentView(R.layout.activity_shop);
+        mContext=this;
         Intent intent=getIntent();
         shopId=intent.getStringExtra("shopId");
         shopName=intent.getStringExtra("shopName");
@@ -401,6 +412,40 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
         new TabLayoutMediator(tabLayout, viewPager2,
                 (tab, position) -> tab.setText(strings[position])
         ).attach();
+        ((ShopOrderFragment)fragments[0]).setOnLoadListener(new ShopOrderFragment.OnLoadListener() {
+            @Override
+            public void onSuccess() {
+                ((ShopOrderFragment) fragments[0]).getListContainer().setOnOrderChange(() -> {
+                    new Thread(()->{
+                        List<FoodBean> list=((ShopOrderFragment) fragments[0]).getListContainer().foodAdapter.getList();
+                        double total_price=0;
+                        boolean flag=false;
+                        for(FoodBean i:list){
+                            total_price+=i.foodPrice*i.selectCount;
+                            if(i.selectCount!=0)flag=true;
+                        }
+                        double finalTotal_price = total_price;
+                        FloatingActionButton floatingActionButton=((Activity)mContext).findViewById(R.id.floatButton);
+                        boolean finalFlag = flag;
+                        ((Activity)mContext).runOnUiThread(()->{
+                            if(!finalFlag){
+                                floatingActionButton.setImageAlpha(255);
+                                ((TextView)((Activity) mContext).findViewById(R.id.textView6)).setText("");
+                            }else{
+                                floatingActionButton.setImageAlpha(0);
+                                ((TextView)((Activity) mContext).findViewById(R.id.textView6)).setText("¥"+new DecimalFormat("0.00").format(finalTotal_price));
+                            }
+                            //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+finalTotal_price);
+                        });
+                    }).start();
+                });
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
     }
 
     @Override
@@ -440,7 +485,6 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
         }else{
             CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.shop_collaspsing_toolbar);
             collapsingToolbarLayout.setTitle(shopName);
-
         }
     }
 }
