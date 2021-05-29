@@ -54,7 +54,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
         pswRepText = findViewById(R.id.psw_sign_rep);
         mBtnSignUp.setOnClickListener(this);
         nameText = findViewById(R.id.name_sign);
-        //retLog=findViewById(R.id.return_login);
+        retLog=findViewById(R.id.return_login);
         inflater = LayoutInflater.from(this);
         retLog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,21 +181,21 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         SignUpActivity this_ = this;
         if(TextUtils.isEmpty(nameText.getText())){
-            nameText.setHint("用户名不能为空");
+            nameText.setError("用户名不能为空");
         }
         else if(TextUtils.isEmpty(pswText.getText())){
-            pswText.setHint("新密码不能为空");
+            pswText.setError("新密码不能为空");
         }
         else if(TextUtils.isEmpty(pswRepText.getText())){
-            pswRepText.setHint("请确认密码");
+            pswRepText.setError("请确认密码");
         }
         else if(!matchFormat(pswText.getText().toString())){
             pswText.setText("");
-            pswText.setHint("至少8位，含大小写字母数字、字符");
+            pswText.setError("至少8位，含大小写字母数字、字符");
         }
         else if(!pswText.getText().toString().equals(pswRepText.getText().toString())){
             pswRepText.setText("");
-            pswRepText.setHint("两次输入不相同");
+            pswRepText.setError("两次输入不相同");
         }
         else{
             mWidth = mBtnSignUp.getMeasuredWidth();
