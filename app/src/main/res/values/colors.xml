@@ -319,4 +319,6 @@
     <color name="type_checked">#535353</color>
     <color name="divider_gray">#fafafa</color>
     <color name="dividerColor">#BDBDBD</color>
+    <color name="lightCyan">#E1FFFF</color>
+    <color name="lightYellow">#FFFFF0</color>
 </resources>
