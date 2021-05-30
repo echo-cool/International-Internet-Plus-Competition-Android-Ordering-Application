@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
+import com.app.beans.FoodBean;
 import com.app.beans.MerchantBean;
 import com.app.myapplication.R;
 import com.app.myapplication.ShopActivity;
@@ -14,8 +15,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
 import androidx.annotation.NonNull;
@@ -104,7 +107,26 @@ public class MerchantActivity extends AppCompatActivity {
                 }, 3000);
             }
         }, mctView);
-        test();
+        loadMerchantList("北京工业大学");
+    }
+
+    public void loadMerchantList(String school){
+        AVQuery<AVObject> query = new AVQuery<>("Restaurant");
+        //食堂是否在本校
+        query.whereEqualTo("Location",school);
+        query.findInBackground().subscribe(new Observer<List<AVObject>>() {
+            public void onSubscribe(Disposable disposable) {}
+            public void onNext(List<AVObject> list) {
+                List<MerchantBean> merchantList = new LinkedList<>();
+                //public MerchantBean(String id, String name)
+                for(AVObject avObject: list){
+                    merchantList.add(new MerchantBean(avObject.getObjectId(),avObject.getString("Name")));
+                }
+                load(merchantList);
+            }
+            public void onError(Throwable throwable) {}
+            public void onComplete() {}
+        });
     }
 
     public void load(List<MerchantBean> mct){
@@ -125,37 +147,6 @@ public class MerchantActivity extends AppCompatActivity {
         }
     }
 
-
-
-    private void test(){
-        List<MerchantBean> mct =new LinkedList<>();
-        AVQuery<AVObject> query = new AVQuery<>("Restaurant");
-        query.findInBackground().subscribe(new Observer<List<AVObject>>() {
-            @Override
-            public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(@io.reactivex.annotations.NonNull List<AVObject> avObjects) {
-                for (AVObject res: avObjects
-                     ) {
-                    mct.add(new MerchantBean(res.getObjectId(), res.getString("Name")));
-                }
-                load(mct);
-
-            }
-
-            @Override
-            public void onError(@io.reactivex.annotations.NonNull Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
 
 //        mct.add(new MerchantBean("111","好吃不贵"));
 //        mct.add(new MerchantBean("222","好贵"));
