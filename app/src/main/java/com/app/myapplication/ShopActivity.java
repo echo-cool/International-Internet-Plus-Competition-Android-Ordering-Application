@@ -399,8 +399,11 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
         double Total_Price = 0;
         for (FoodBean foodBean: foodBeans
         ) {
-            foods.put("Food", foodBean.cuisineOBJ);
-            foods.put("selectCount", foodBean.selectCount);
+            HashMap<String, Object> food = new HashMap<>();
+            food.put("id", foodBean.cuisineOBJ.getObjectId());
+            food.put("name", foodBean.foodName);
+            food.put("selectCount", foodBean.selectCount);
+            foods.put(foodBean.cuisineOBJ.getObjectId(), food);
             Total_Price += foodBean.foodPrice * foodBean.selectCount;
         }
         // 构建对象
