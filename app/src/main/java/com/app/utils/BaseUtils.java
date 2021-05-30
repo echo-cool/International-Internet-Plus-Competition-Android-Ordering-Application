@@ -3,6 +3,7 @@ package com.app.utils;
 
 import android.content.Context;
 
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 
@@ -13,6 +14,7 @@ import com.app.beans.FoodBean;
 import com.app.beans.TypeBean;
 import com.app.myapplication.R;
 
+import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -164,6 +166,17 @@ public class BaseUtils {
 			}
 		});
 
+	}
+
+	public static Bitmap getBitmap(byte[] data){
+		return BitmapFactory.decodeByteArray(data, 0, data.length);//从字节数组解码位图
+	}
+
+	public static byte[] getBytes(Bitmap bitmap){
+		//实例化字节数组输出流
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		bitmap.compress(Bitmap.CompressFormat.PNG, 0, baos);//压缩位图
+		return baos.toByteArray();//创建分配字节数组
 	}
 
 

@@ -30,24 +30,25 @@
         <activity android:name=".Login.LoginActivity">
         </activity>
         <activity android:name=".Home.NavigationActivity">
-        </activity>
-        <activity android:name=".ShopActivity"
-            android:theme="@style/shop">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ShopActivity"
+            android:theme="@style/shop">
+
+        </activity>
 
 
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
+<!--             <intent-filter> -->
+<!--             <action android:name="android.intent.action.MAIN" /> -->
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+<!--             <category android:name="android.intent.category.LAUNCHER" /> -->
+<!--             </intent-filter> -->
 
 
         <activity android:name=".MainActivity" />

@@ -23,7 +23,7 @@ public class FoodBean implements Serializable{
 	public String foodSummary;
 	public int foodSale;
 	public double foodPrice;
-	public Bitmap foodImage;
+	public byte[] foodImage;
 	public int selectCount=0;
 	public TypeBean FoodTypeBean;
 	public String Image_url;

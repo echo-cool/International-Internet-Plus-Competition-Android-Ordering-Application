@@ -1,13 +1,24 @@
 package com.app.myapplication.Home;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.app.beans.NotificationBean;
 import com.app.myapplication.R;
+import com.app.myapplication.adapters.RecyclerAdapter;
+import com.example.myapplication.activity_notification;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,6 +26,12 @@ import androidx.fragment.app.Fragment;
  * create an instance of this fragment.
  */
 public class NotificationFragment extends Fragment {
+
+    private RecyclerView mRecyclerView;
+    private List<NotificationBean> dataBeanList;
+    private NotificationBean dataBean;
+    private RecyclerAdapter mAdapter;
+    private Context mContext;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,9 +74,67 @@ public class NotificationFragment extends Fragment {
     }
 
     @Override
+    public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        this.mContext=this.getActivity();
+        mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.recycle_view14);
+        initData();
+
+        mAdapter.setmOnItemClickLitener(new RecyclerAdapter.OnItemClickLitener() {
+            @Override
+            public void onItemLongClick(View view, final int position) {
+                final String[] items = {"删除"};
+                final NotificationBean notificationBean = dataBeanList.get( position );
+                android.app.AlertDialog.Builder listDialog = new android.app.AlertDialog.Builder(mContext);
+                listDialog.setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (i == 0) {
+                            mAdapter.removeData(position);
+                        }
+                    }
+                });
+                listDialog.show();
+            }
+        });
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification, container, false);
+
+
+        return inflater.inflate(R.layout.activity_notification, container, false);
     }
+    private void initData(){
+        dataBeanList = new ArrayList<>();
+        for (int i = 1; i <= 50; i++) {
+            dataBean = new NotificationBean();
+            dataBean.setID(i+"");
+            dataBean.setType(0);
+            dataBean.setParentLeftTxt("Message --"+i);
+            dataBean.setParentRightTxt("Time--"+i);
+            dataBean.setChildLeftTxt("Details--"+i);
+            dataBean.setChildRightTxt("Content-"+i);
+            dataBean.setChildBean(dataBean);
+            dataBeanList.add(dataBean);
+        }
+        setData();
+    }
+
+
+    private void setData(){
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        mAdapter = new RecyclerAdapter(this.getContext(),dataBeanList);
+        mRecyclerView.setAdapter(mAdapter);
+        //滚动监听
+        mAdapter.setOnScrollListener(new RecyclerAdapter.OnScrollListener() {
+            @Override
+            public void scrollTo(int pos) {
+                mRecyclerView.scrollToPosition(pos);
+            }
+        });
+    }
+
 }

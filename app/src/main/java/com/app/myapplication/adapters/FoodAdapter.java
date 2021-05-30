@@ -2,6 +2,7 @@ package com.app.myapplication.adapters;
 
 
 import android.app.Activity;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.Log;
@@ -50,7 +51,7 @@ public class FoodAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
 
         }else {
             broccoli.removePlaceholder(helper.getView(R.id.iv_food));
-            helper.setImageBitmap(R.id.iv_food, item.foodImage);
+            helper.setImageBitmap(R.id.iv_food, BitmapFactory.decodeByteArray(item.foodImage, 0, item.foodImage.length));
         }
         broccoli.show();
         //helper.setImageDrawable(R.id.iv_food,mContext.getDrawable(R.drawable.app_logo));

@@ -26,7 +26,7 @@ public class activity_notification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view14);
         initData();
 
         mAdapter.setmOnItemClickLitener(new RecyclerAdapter.OnItemClickLitener() {

@@ -179,7 +179,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<BaseViewHolder> implem
     @Override
     public boolean onLongClick(View view) {
         //回调长按事件
-        RecyclerView.ViewHolder holder = (RecyclerView.ViewHolder) view.getTag(R.id.recycle_view);
+        RecyclerView.ViewHolder holder = (RecyclerView.ViewHolder) view.getTag(R.id.recycle_view14);
         if (mOnItemClickLitener != null) {
             this.mOnItemClickLitener.onItemLongClick(view, holder.getAdapterPosition());
         }

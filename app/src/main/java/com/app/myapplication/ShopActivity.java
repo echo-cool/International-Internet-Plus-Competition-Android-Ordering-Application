@@ -386,7 +386,7 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
                 LinkedList<FoodBean> foodBeans = (LinkedList<FoodBean>)getOrderedFoodList();
                 intent.putExtra("Foods",foodBeans);
                 intent.putExtra("Shop",merchantBean);
-                saveOrder(foodBeans, merchantBean);
+                //saveOrder(foodBeans, merchantBean);
                 startActivity(intent);
             }
         });
@@ -526,6 +526,7 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
 
                     CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.shop_collaspsing_toolbar);
                     collapsingToolbarLayout.setTitle(shopName);
+                    merchantBean=new MerchantBean(avObject.getObjectId(),shopName);
 
                 }
 
