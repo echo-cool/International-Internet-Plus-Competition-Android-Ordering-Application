@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 //import com.app.myapplication.adapters.CarAdapter;
+import com.app.Models.Cuisine;
 import com.app.beans.FoodBean;
 import com.app.beans.MerchantBean;
 import com.app.myapplication.fragments.ShopCommentsFragment;
@@ -38,11 +39,14 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 import cn.leancloud.AVObject;
 import cn.leancloud.AVQuery;
+import cn.leancloud.AVUser;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 //
@@ -367,7 +371,9 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
         shopId=intent.getStringExtra("shopId");
         shopName=intent.getStringExtra("shopName");
         merchantBean= (MerchantBean) intent.getSerializableExtra("shop");
-        if(merchantBean==null) merchantBean=new MerchantBean(shopId,shopName);
+        if(merchantBean==null) {
+            merchantBean = new MerchantBean(shopId, shopName);
+        }
         if(shopId==null){
             shopId="60aa42ef6d8bee18f6112967";
         }
@@ -377,14 +383,47 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
             @Override
             public void onSettleClick() {
                 Intent intent=new Intent(mContext,OrderEnsureActivity.class);
-                intent.putExtra("Foods",(LinkedList<FoodBean>)getOrderedFoodList());
+                LinkedList<FoodBean> foodBeans = (LinkedList<FoodBean>)getOrderedFoodList();
+                intent.putExtra("Foods",foodBeans);
                 intent.putExtra("Shop",merchantBean);
+                saveOrder(foodBeans, merchantBean);
                 startActivity(intent);
             }
         });
 //        setContentView(R.layout.shop_order_fragment);
 //        ((ListContainer)findViewById(R.id.listcontainer)).load(BaseUtils.getDatas(this),BaseUtils.getTypes());
 
+    }
+    public void saveOrder(LinkedList<FoodBean> foodBeans, MerchantBean merchantBean){
+        HashMap<String, Object> foods = new HashMap<>();
+        double Total_Price = 0;
+        for (FoodBean foodBean: foodBeans
+        ) {
+            foods.put("Food", foodBean.cuisineOBJ);
+            foods.put("selectCount", foodBean.selectCount);
+            Total_Price += foodBean.foodPrice * foodBean.selectCount;
+        }
+        // 构建对象
+        AVObject todo = new AVObject("Order");
+        // 为属性赋值
+        todo.put("username", AVUser.getCurrentUser().getUsername());
+        todo.put("user", AVUser.getCurrentUser());
+        todo.put("merchantName", merchantBean.mctName);
+        todo.put("merchant", merchantBean.merchantOBJ);
+        todo.put("foods", foods);
+        todo.put("Total_Price", Total_Price);
+        // 将对象保存到云端
+        todo.saveInBackground().subscribe(new Observer<AVObject>() {
+            public void onSubscribe(Disposable disposable) {}
+            public void onNext(AVObject todo) {
+                // 成功保存之后，执行其他逻辑
+                System.out.println("保存成功。objectId：" + todo.getObjectId());
+            }
+            public void onError(Throwable throwable) {
+                // 异常处理
+            }
+            public void onComplete() {}
+        });
     }
 
     private List<FoodBean> getOrderedFoodList(){

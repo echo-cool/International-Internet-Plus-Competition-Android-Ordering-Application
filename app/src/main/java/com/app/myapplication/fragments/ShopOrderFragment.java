@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.app.Models.Cuisine;
 import com.app.Models.ImageListener;
 import com.app.Models.RequestListener;
 import com.app.beans.FoodBean;
@@ -179,6 +180,7 @@ public class ShopOrderFragment extends Fragment {
                         map.put(avObject.getAVObject("Type"),new LinkedList<>());
                     }
                     FoodBean food = new FoodBean(avObject.getObjectId(),avObject.getString("Name"),avObject.getAVObject("Type").getString("Name"),avObject.getString("Description"),avObject.getInt("Daysales"),avObject.getDouble("foodPrice"));
+                    food.setCuisineOBJ((Cuisine) avObject);
                     String food_url = avObject.getAVFile("Main_Photo").getUrl();
                     food.setImage_url(food_url);
                     loadImage(food_url, new ImageListener() {
