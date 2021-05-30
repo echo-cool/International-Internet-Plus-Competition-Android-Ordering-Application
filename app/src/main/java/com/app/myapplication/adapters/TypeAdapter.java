@@ -18,94 +18,85 @@ import java.util.HashMap;
 import java.util.List;
 
 public class TypeAdapter extends BaseQuickAdapter<TypeBean, BaseViewHolder> {
-	private int checked;
-	private List<TypeBean> data;
-	public boolean fromClick;
-	private String typeStr;
-	private HashMap<String, Long> badges = new HashMap<>();
 
-	public TypeAdapter(@Nullable List<TypeBean> data) {
-		super(R.layout.item_type, data);
-		this.data = data;
-		if (data != null && data.size() > 0) {
-			typeStr = data.get(0).getName();
-		}
+	private List<TypeBean> list;
+	private int position=0;
+
+
+	public TypeAdapter(@Nullable List<TypeBean> list) {
+		super(R.layout.item_type, list);
+		this.list = list;
+
 	}
 
-	public void updateBadge(HashMap<String, Long> badges) {
-		this.badges = badges;
+	public void update() {
+
 		notifyDataSetChanged();
 	}
 
 
 	@Override
 	protected void convert(BaseViewHolder helper, TypeBean item) {
-		helper.setText(R.id.tv_name, item.getName())
-				.setTag(R.id.item_main, item.getName());
-		if (helper.getAdapterPosition() == checked) {
-			helper.setBackgroundColor(R.id.item_main, Color.WHITE)
-					.setTextColor(R.id.tv_name, Color.BLACK)
-					.setTypeface(R.id.tv_name, Typeface.DEFAULT_BOLD)
-			;
-		} else {
-			helper.setBackgroundColor(R.id.item_main, ContextCompat.getColor(mContext, R.color.type_gray))
-					.setTextColor(R.id.tv_name, ContextCompat.getColor(mContext, R.color.type_normal))
-					.setTypeface(R.id.tv_name, Typeface.DEFAULT)
-			;
+		helper.setText(R.id.tv_name, item.getName());
+		if(item.equals(list.get(position))){
+			helper.setBackgroundColor(R.id.item_main,ContextCompat.getColor(mContext,R.color.white));
+		}else {
+			helper.setBackgroundColor(R.id.item_main,ContextCompat.getColor(mContext,R.color.type_gray));
 		}
-		if (badges.containsKey(item.getName()) && badges.get(item.getName()) > 0) {
-			helper.setVisible(R.id.item_badge, true).setText(R.id.item_badge, String.valueOf(badges.get(item.getName())));
-		} else {
-			helper.setVisible(R.id.item_badge, false);
-		}
+		if(item.count!=0){
+			helper.setText(R.id.item_badge,""+item.count);
+			helper.setVisible(R.id.item_badge,true);
 
+		}else{
+			helper.setVisible(R.id.item_badge,false);
+		}
 	}
 
-	public void setChecked(int checked) {
-		this.checked = checked;
-		typeStr = data.get(checked).getName();
-		notifyDataSetChanged();
+	public void setPosition(int position){
+		if(position!=this.position){
+			this.position=position;
+			notifyDataSetChanged();
+		}
 	}
 
-	public void setType(String type) {
-		if (fromClick) {
-			fromClick = !type.equals(typeStr);
-			return;
-		}
-		if (type.equals(typeStr)) {
-			return;
-		}
-		for (int i = 0; i < data.size(); i++) {
-			if (data.get(i).getName().equals(type) && i != checked) {
-				setChecked(i);
-				moveToPosition(i);
+
+	public void moveToType(String type){
+		int old=position;
+		for(int i=0;i<list.size();i++){
+			if(list.get(i).name.equals(type)){
+				position=i;
 				break;
 			}
 		}
+
+		if(old!=position){
+
+			notifyDataSetChanged();
+		}
 	}
 
-	private void moveToPosition(int i) {
-		LinearLayoutManager linlm = (LinearLayoutManager) getRecyclerView().getLayoutManager();
-		int firstItem = linlm.findFirstVisibleItemPosition();
-		int lastItem = linlm.findLastVisibleItemPosition();
-		if (getItemCount() > 5) {//提前把9滑出来
-			lastItem -= 3;
-		}
-		if (i <= firstItem) {
-			getRecyclerView().scrollToPosition(i);
-		} else if (i <= lastItem) {
-			//当要置顶的项已经在屏幕上显示时不处理
-		} else {
-			//当要置顶的项在当前显示的最后一项的后面时
-			getRecyclerView().scrollToPosition(i);
-			int n = i - linlm.findFirstVisibleItemPosition();
-			if (0 <= n && n < getRecyclerView().getChildCount()) {
-				int top = getRecyclerView().getChildAt(n).getTop();
-				getRecyclerView().smoothScrollBy(0, top);
+
+	public int getTypePosition(String type){
+		int old=position;
+		for(int i=0;i<list.size();i++){
+			if(list.get(i).name.equals(type)){
+				position=i;
+				break;
 			}
 		}
 
+		return position;
+	}
 
+	@Nullable
+	@org.jetbrains.annotations.Nullable
+	@Override
+	public TypeBean getItem(int position) {
+		return super.getItem(position);
+	}
+
+	public List<TypeBean> getList() {
+		return list;
 	}
 
 }

@@ -22,4 +22,22 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">10sp</item>
     </style>
+
+    <style name="shop" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+        <item name="colorPrimary">#FF9800</item>
+        <item name="colorPrimaryDark">#FF9800</item>
+        <item name="colorAccent">#F44336</item>
+    </style>
+    <style name="tv_price">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorSpecialDark</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
