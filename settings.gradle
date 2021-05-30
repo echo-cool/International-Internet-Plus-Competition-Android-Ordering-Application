@@ -1,2 +1,3 @@
-include ':app'
+include ':studentclient'
 rootProject.name='My Application'
+include ':restaurantclient'
