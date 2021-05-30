@@ -27,12 +27,14 @@ public class FoodAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
     List<FoodBean> list;
     OnCountChange onCountChange;
     FoodAdapter self;
+    Broccoli broccoli;
 
 
     public FoodAdapter(@Nullable  List<FoodBean> data) {
         super(R.layout.item_food,data);
         list=data;
         self=this;
+        broccoli = new Broccoli();
 
     }
 
@@ -42,7 +44,6 @@ public class FoodAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
         helper.setText(R.id.tv_summary,item.foodSummary);
         helper.setText(R.id.tv_price,"¥ "+item.foodPrice);
         helper.setText(R.id.tv_sale,"日销:"+item.foodSale);
-        Broccoli broccoli = new Broccoli();
         //System.out.println("convert");
         if(item.foodImage==null){
             broccoli.addPlaceholder(new PlaceholderParameter.Builder().setView(helper.getView(R.id.iv_food)).setDrawable(new BroccoliGradientDrawable(Color.parseColor("#DDDDDD"), Color.parseColor("#CCCCCC"), 0, 1000, new LinearInterpolator())).build());

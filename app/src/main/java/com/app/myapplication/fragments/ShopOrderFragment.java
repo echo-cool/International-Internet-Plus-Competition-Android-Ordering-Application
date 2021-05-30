@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -140,6 +141,13 @@ public class ShopOrderFragment extends Fragment {
                 }
             }
         }).start();
+
+    }
+    public static void loadImage(FoodBean foodBean){
+        String url = foodBean.Image_url;
+        if(url != null){
+
+        }
 
     }
 
