@@ -484,6 +484,7 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
 
                     CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.shop_collaspsing_toolbar);
                     collapsingToolbarLayout.setTitle(shopName);
+                    merchantBean=new MerchantBean(avObject.getObjectId(),shopName);
 
                 }
 

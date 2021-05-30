@@ -5,9 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.app.beans.NotificationBean;
 import com.app.myapplication.R;
+import com.app.myapplication.adapters.RecyclerAdapter;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,6 +21,11 @@ import androidx.fragment.app.Fragment;
  * create an instance of this fragment.
  */
 public class NotificationFragment extends Fragment {
+
+    private RecyclerView mRecyclerView;
+    private List<NotificationBean> dataBeanList;
+    private NotificationBean dataBean;
+    private RecyclerAdapter mAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,6 +65,11 @@ public class NotificationFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override

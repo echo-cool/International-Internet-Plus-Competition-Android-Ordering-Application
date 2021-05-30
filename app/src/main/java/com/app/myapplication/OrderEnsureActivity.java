@@ -26,11 +26,11 @@ public class OrderEnsureActivity extends AppCompatActivity {
         Intent intent=getIntent();
         foodBeans= (ArrayList<FoodBean>) intent.getSerializableExtra("Foods");
         merchantBean= (MerchantBean) intent.getSerializableExtra("Shop");
-//        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>"+foodBeans.size());
-//        for(FoodBean foodBean:foodBeans){
-//            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>"+foodBean.foodName+"||||"+foodBean.selectCount);
-//        }
-//        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>"+merchantBean.mctName);
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>"+foodBeans.size());
+        for(FoodBean foodBean:foodBeans){
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>"+foodBean.foodName+"||||"+foodBean.selectCount);
+        }
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>"+merchantBean.id);
         RecyclerView recyclerView=((RecyclerView)findViewById(R.id.simple_food_list));
         foodSimpleAdapter=new FoodSimpleAdapter(foodBeans);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
