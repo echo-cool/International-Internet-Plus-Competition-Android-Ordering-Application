@@ -7,26 +7,39 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 //import com.app.myapplication.adapters.CarAdapter;
+import com.app.beans.FoodBean;
+import com.app.beans.MerchantBean;
 import com.app.myapplication.fragments.ShopCommentsFragment;
 import com.app.myapplication.fragments.ShopOrderFragment;
 import com.app.myapplication.fragments.TestShopOrderFragment;
 //import com.app.myapplication.views.ShopCarView;
 //import com.app.myapplication.views.ShopCarView;
+import com.app.myapplication.views.ListContainer;
+import com.app.myapplication.views.ShopCarView;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.text.DecimalFormat;
+import java.util.LinkedList;
+import java.util.List;
 
 import cn.leancloud.AVObject;
 import cn.leancloud.AVQuery;
@@ -334,19 +347,13 @@ import io.reactivex.disposables.Disposable;
 
 public class ShopActivity extends AppCompatActivity implements TestShopOrderFragment.OnFragmentInteractionListener {
 
-    public static final int chose_puhoto=2;
-
-    public static final String CAR_ACTION = "handleCar";
-    public static final String CLEARCAR_ACTION = "clearCar";
-    private CoordinatorLayout rootview;
-    public BottomSheetBehavior behavior;
-    public View scroll_container;
-    private Fragment firstFragment;
-//    public static CarAdapter carAdapter;
-   // private ShopCarView shopCarView;
+    private ShopOrderFragment shopOrderFragment;
+    private ShopCommentsFragment shopCommentsFragment;
 
     private String shopId;
     private String shopName;
+    private Context mContext;
+    private MerchantBean merchantBean;
 
 
 
@@ -355,17 +362,39 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
         super.onCreate(savedInstanceState);
         setWindow();
         setContentView(R.layout.activity_shop);
+        mContext=this;
         Intent intent=getIntent();
         shopId=intent.getStringExtra("shopId");
         shopName=intent.getStringExtra("shopName");
+        merchantBean= (MerchantBean) intent.getSerializableExtra("shop");
+        if(merchantBean==null) merchantBean=new MerchantBean(shopId,shopName);
         if(shopId==null){
             shopId="60aa42ef6d8bee18f6112967";
         }
         loadShopInformation();
         setViewPager();
+        ((ShopCarView)findViewById(R.id.shopcar)).setOnClickListener(new ShopCarView.OnClickListener() {
+            @Override
+            public void onSettleClick() {
+                Intent intent=new Intent(mContext,OrderEnsureActivity.class);
+                intent.putExtra("Foods",(LinkedList<FoodBean>)getOrderedFoodList());
+                intent.putExtra("Shop",merchantBean);
+                startActivity(intent);
+            }
+        });
 //        setContentView(R.layout.shop_order_fragment);
 //        ((ListContainer)findViewById(R.id.listcontainer)).load(BaseUtils.getDatas(this),BaseUtils.getTypes());
 
+    }
+
+    private List<FoodBean> getOrderedFoodList(){
+        List<FoodBean> foodBeans=shopOrderFragment.getListContainer().foodAdapter.getList();
+        List<FoodBean> orderedList=new LinkedList<>();
+        for(FoodBean foodBean:foodBeans){
+            if(foodBean.selectCount!=0)
+                orderedList.add(foodBean);
+        }
+        return orderedList;
     }
 
     private void setWindow(){
@@ -381,7 +410,9 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
     private void setViewPager(){
         TabLayout tabLayout = findViewById(R.id.tab);
         ViewPager2 viewPager2=findViewById(R.id.pager);
-        final Fragment[] fragments={new ShopOrderFragment(shopId),new ShopCommentsFragment()};
+        shopOrderFragment=new ShopOrderFragment(shopId);
+        shopCommentsFragment=new ShopCommentsFragment();
+        final Fragment[] fragments={shopOrderFragment,shopCommentsFragment};
         final String[] strings={getString(R.string.title_order),getString(R.string.title_comments)};
         viewPager2.setAdapter(new FragmentStateAdapter(this) {
             @NonNull
@@ -401,6 +432,35 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
         new TabLayoutMediator(tabLayout, viewPager2,
                 (tab, position) -> tab.setText(strings[position])
         ).attach();
+        ((ShopOrderFragment)fragments[0]).setOnLoadListener(new ShopOrderFragment.OnLoadListener() {
+            @Override
+            public void onSuccess() {
+                ((ShopOrderFragment) fragments[0]).getListContainer().setOnOrderChange(() -> {
+                    new Thread(()->{
+                        List<FoodBean> list=((ShopOrderFragment) fragments[0]).getListContainer().foodAdapter.getList();
+                        double total_price=0;
+                        boolean flag=false;
+                        for(FoodBean i:list){
+                            total_price+=i.foodPrice*i.selectCount;
+                            if(i.selectCount!=0)flag=true;
+                        }
+                        double finalTotal_price = total_price;
+
+                        boolean finalFlag = flag;
+                        ((Activity)mContext).runOnUiThread(()->{
+                                ((ShopCarView)((Activity) mContext).findViewById(R.id.shopcar)).setPrice(finalTotal_price);
+
+                            //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+finalTotal_price);
+                        });
+                    }).start();
+                });
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
     }
 
     @Override
@@ -440,7 +500,6 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
         }else{
             CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.shop_collaspsing_toolbar);
             collapsingToolbarLayout.setTitle(shopName);
-
         }
     }
 }

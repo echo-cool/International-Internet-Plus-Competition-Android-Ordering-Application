@@ -43,6 +43,7 @@ public class ListContainer extends LinearLayout {
 	public RecyclerView recyclerView2;
 	public TypeAdapter typeAdapter;
 	public FoodAdapter foodAdapter;
+	private OnOrderChange onOrderChange;
 
 	public ListContainer(Context context) {
 		super(context);
@@ -133,6 +134,9 @@ public class ListContainer extends LinearLayout {
 						public void run() {
 							typeBean.count=count;
 							typeAdapter.notifyDataSetChanged();
+							if(onOrderChange!=null){
+								onOrderChange.onChange();
+							}
 						}
 					});
 				}).start();
@@ -140,6 +144,14 @@ public class ListContainer extends LinearLayout {
 			}
 		});
 
+	}
+
+	public interface OnOrderChange{
+		void onChange();
+	}
+
+	public void setOnOrderChange(OnOrderChange onOrderChange){
+		this.onOrderChange=onOrderChange;
 	}
 
 	private void moveToPosition(int n) {

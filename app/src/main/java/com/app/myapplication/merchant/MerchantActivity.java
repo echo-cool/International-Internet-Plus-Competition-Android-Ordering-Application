@@ -63,8 +63,9 @@ public class MerchantActivity extends AppCompatActivity {
                 Intent i = new Intent(MerchantActivity.this , ShopActivity.class);
                 Bundle b = new Bundle();
                 MerchantBean  mb=  mctAdapter.getList().get(position);
-                b.putString("shopName",mb.mctName);
-                b.putString("shopId",mb.id);
+                i.putExtra("shop",mctAdapter.getList().get(position));
+                b.putString("name",mb.mctName);
+                b.putString("id",mb.id);
                 i.putExtras(b);
                 startActivity(i);
             }

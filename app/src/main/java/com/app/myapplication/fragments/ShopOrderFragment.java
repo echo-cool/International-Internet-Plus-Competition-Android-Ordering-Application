@@ -13,16 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.app.Models.Cuisine;
-import com.app.Models.RequestListener;
 import com.app.beans.FoodBean;
-import com.app.beans.TypeBean;
 import com.app.myapplication.R;
-import com.app.myapplication.ShopActivity;
 import com.app.myapplication.views.ListContainer;
-import com.app.utils.BaseUtils;
 
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,8 +30,9 @@ import io.reactivex.disposables.Disposable;
 public class ShopOrderFragment extends Fragment {
 
     private ShopOrderViewModel mViewModel;
-    ListContainer listContainer;
+    private ListContainer listContainer;
     private String id;
+    private OnLoadListener onLoadListener;
 
 //    public static ShopOrderFragment newInstance() {
 //        return new ShopOrderFragment();
@@ -132,8 +127,16 @@ public class ShopOrderFragment extends Fragment {
                     listContainer.load(foodBeans);
 //                });
             }
-            public void onError(Throwable throwable) {}
-            public void onComplete() {}
+            public void onError(Throwable throwable) {
+                if(onLoadListener !=null){
+                    onLoadListener.onError();
+                }
+            }
+            public void onComplete() {
+                if(onLoadListener !=null){
+                    onLoadListener.onSuccess();
+                }
+            }
         });
     }
 
@@ -148,6 +151,20 @@ public class ShopOrderFragment extends Fragment {
 
 
         return null;
+    }
+
+    public ListContainer getListContainer() {
+        return listContainer;
+    }
+
+    public void setOnLoadListener(OnLoadListener onLoadListener) {
+        this.onLoadListener = onLoadListener;
+    }
+
+    public interface OnLoadListener {
+        void onSuccess();
+
+        void onError();
     }
 
 
