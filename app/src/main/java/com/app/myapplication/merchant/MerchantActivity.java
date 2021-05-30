@@ -170,4 +170,3 @@ public class MerchantActivity extends AppCompatActivity {
 //        mct2.add(null);
 //        loadMore(mct2);
     }
-}
