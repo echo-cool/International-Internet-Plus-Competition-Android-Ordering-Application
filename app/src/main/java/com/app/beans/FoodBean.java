@@ -8,6 +8,8 @@ import android.text.SpannableString;
 import android.text.style.AbsoluteSizeSpan;
 
 
+import com.app.Models.ImageListener;
+import com.app.myapplication.fragments.ShopOrderFragment;
 import com.app.utils.ViewUtils;
 
 import java.io.Serializable;
@@ -23,6 +25,7 @@ public class FoodBean implements Serializable{
 	public Bitmap foodImage;
 	public int selectCount=0;
 	public TypeBean FoodTypeBean;
+	public String Image_url;
 	public void changeSelectCount(int num){
 		if(num>=0){
 			selectCount+=num;
@@ -38,6 +41,10 @@ public class FoodBean implements Serializable{
 		this.foodSummary=summary;
 		this.foodSale=sale;
 		this.foodPrice=foodPrice;
+	}
+
+	public void setImage_url(String image_url) {
+		Image_url = image_url;
 	}
 
 	public FoodBean(){

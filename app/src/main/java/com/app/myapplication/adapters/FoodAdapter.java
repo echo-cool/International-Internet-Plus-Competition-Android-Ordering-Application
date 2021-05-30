@@ -9,6 +9,7 @@ import android.view.animation.LinearInterpolator;
 
 import androidx.annotation.Nullable;
 
+import com.app.myapplication.fragments.ShopOrderFragment;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.app.beans.FoodBean;
@@ -42,13 +43,15 @@ public class FoodAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
         helper.setText(R.id.tv_price,"¥ "+item.foodPrice);
         helper.setText(R.id.tv_sale,"日销:"+item.foodSale);
         Broccoli broccoli = new Broccoli();
+        //System.out.println("convert");
         if(item.foodImage==null){
             broccoli.addPlaceholder(new PlaceholderParameter.Builder().setView(helper.getView(R.id.iv_food)).setDrawable(new BroccoliGradientDrawable(Color.parseColor("#DDDDDD"), Color.parseColor("#CCCCCC"), 0, 1000, new LinearInterpolator())).build());
-            broccoli.show();
+
         }else {
             broccoli.removePlaceholder(helper.getView(R.id.iv_food));
             helper.setImageBitmap(R.id.iv_food, item.foodImage);
         }
+        broccoli.show();
         //helper.setImageDrawable(R.id.iv_food,mContext.getDrawable(R.drawable.app_logo));
         AddWidget addWidget=((AddWidget)helper.getView(R.id.addwidget));
         addWidget.bindFoodBean(item);
@@ -59,6 +62,7 @@ public class FoodAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
                 self.notifyDataSetChanged();
                 try {
                     onCountChange.onChange(item);
+
                 }catch (NullPointerException ignore){}
             }
         });

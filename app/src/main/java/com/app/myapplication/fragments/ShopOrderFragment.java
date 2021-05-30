@@ -2,7 +2,10 @@ package com.app.myapplication.fragments;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,10 +16,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.app.Models.ImageListener;
+import com.app.Models.RequestListener;
 import com.app.beans.FoodBean;
 import com.app.myapplication.R;
+import com.app.myapplication.adapters.FoodAdapter;
 import com.app.myapplication.views.ListContainer;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,6 +46,8 @@ public class ShopOrderFragment extends Fragment {
     private ListContainer listContainer;
     private String id;
     private OnLoadListener onLoadListener;
+    private FoodAdapter foodAdapter;
+    private Context mContext;
 
 //    public static ShopOrderFragment newInstance() {
 //        return new ShopOrderFragment();
@@ -55,6 +70,7 @@ public class ShopOrderFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(ShopOrderViewModel.class);
         // TODO: Use the ViewModel
+        mContext=this.getActivity();
         listContainer=getActivity().findViewById(R.id.listcontainer);
         loadFoodList(id);
 
@@ -98,11 +114,40 @@ public class ShopOrderFragment extends Fragment {
 //        });
 
     }
+    public static void loadImage(String url, ImageListener listener){
+        final Bitmap[] bitmap = new Bitmap[1];
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                URL imageurl = null;
+
+                try {
+                    imageurl = new URL(url);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    HttpURLConnection conn = (HttpURLConnection)imageurl.openConnection();
+                    conn.setDoInput(true);
+                    conn.connect();
+                    InputStream is = conn.getInputStream();
+                    bitmap[0] = BitmapFactory.decodeStream(is);
+                    listener.success(bitmap[0]);
+                    is.close();
+                } catch (IOException e) {
+                    listener.failed(e.toString());
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+    }
 
 
     public void loadFoodList(String id){
         AVQuery<AVObject> query = new AVQuery<>("Cuisine");
         query.include("Type");
+        query.include("Main_Photo");
         AVObject pointer = AVObject.createWithoutData("Restaurant", id);
         query.whereEqualTo("Restaurant",pointer);
         query.findInBackground().subscribe(new Observer<List<AVObject>>() {
@@ -117,7 +162,26 @@ public class ShopOrderFragment extends Fragment {
                         System.out.println(avObject);
                         map.put(avObject.getAVObject("Type"),new LinkedList<>());
                     }
-                    map.get(avObject.getAVObject("Type")).add(new FoodBean(avObject.getObjectId(),avObject.getString("Name"),avObject.getAVObject("Type").getString("Name"),avObject.getString("Description"),avObject.getInt("Daysales"),avObject.getDouble("foodPrice")));
+                    FoodBean food = new FoodBean(avObject.getObjectId(),avObject.getString("Name"),avObject.getAVObject("Type").getString("Name"),avObject.getString("Description"),avObject.getInt("Daysales"),avObject.getDouble("foodPrice"));
+                    String food_url = avObject.getAVFile("Main_Photo").getUrl();
+                    food.setImage_url(food_url);
+                    loadImage(food_url, new ImageListener() {
+                        @Override
+                        public void success(Bitmap data) {
+                            food.foodImage = data;
+                            //System.out.println("...............................................");
+                            ((Activity)mContext).runOnUiThread(()->{
+                                listContainer.foodAdapter.notifyDataSetChanged();
+                            });
+                        }
+
+                        @Override
+                        public void failed(String reason) {
+                            System.out.println(reason);
+
+                        }
+                    });
+                    map.get(avObject.getAVObject("Type")).add(food);
                 }
                 List<FoodBean> foodBeans=new LinkedList<>();
                 for(AVObject avObject: map.keySet()){
