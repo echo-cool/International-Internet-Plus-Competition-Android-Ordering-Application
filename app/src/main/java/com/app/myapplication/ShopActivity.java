@@ -386,7 +386,7 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
                 LinkedList<FoodBean> foodBeans = (LinkedList<FoodBean>)getOrderedFoodList();
                 intent.putExtra("Foods",foodBeans);
                 intent.putExtra("Shop",merchantBean);
-                saveOrder(foodBeans, merchantBean);
+                //saveOrder(foodBeans, merchantBean);
                 startActivity(intent);
             }
         });

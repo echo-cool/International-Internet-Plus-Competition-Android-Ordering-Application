@@ -24,6 +24,7 @@ import com.app.beans.FoodBean;
 import com.app.myapplication.R;
 import com.app.myapplication.adapters.FoodAdapter;
 import com.app.myapplication.views.ListContainer;
+import com.app.utils.BaseUtils;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -150,7 +151,7 @@ public class ShopOrderFragment extends Fragment {
             loadImage(url, new ImageListener() {
                 @Override
                 public void success(Bitmap data) {
-                    foodBean.foodImage = data;
+                    foodBean.foodImage = BaseUtils.getBytes(data);
                 }
                 @Override
                 public void failed(String reason) {
@@ -186,7 +187,7 @@ public class ShopOrderFragment extends Fragment {
                     loadImage(food_url, new ImageListener() {
                         @Override
                         public void success(Bitmap data) {
-                            food.foodImage = data;
+                            food.foodImage = BaseUtils.getBytes(data);
                             //System.out.println("...............................................");
                             ((Activity)mContext).runOnUiThread(()->{
                                 listContainer.foodAdapter.notifyDataSetChanged();

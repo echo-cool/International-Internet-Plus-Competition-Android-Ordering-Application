@@ -1,5 +1,7 @@
 package com.app.myapplication.adapters;
 
+import android.graphics.BitmapFactory;
+
 import androidx.annotation.Nullable;
 
 import com.app.beans.FoodBean;
@@ -26,7 +28,7 @@ public class FoodSimpleAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder
         helper.setText(R.id.textView9,"x"+item.selectCount);
         helper.setText(R.id.tv_price,new DecimalFormat("0.0").format(item.foodPrice));
         if(item.foodImage!=null)
-            helper.setImageBitmap(R.id.iv_food,item.foodImage);
+            helper.setImageBitmap(R.id.iv_food, BitmapFactory.decodeByteArray(item.foodImage, 0, item.foodImage.length));
     }
 
     public List<FoodBean> getList() {
