@@ -1,8 +1,11 @@
 package com.app.myapplication.adapters;
 
 
+import android.app.Activity;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.animation.LinearInterpolator;
 
 import androidx.annotation.Nullable;
 
@@ -14,6 +17,10 @@ import com.app.myapplication.views.AddWidget;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import me.samlss.broccoli.Broccoli;
+import me.samlss.broccoli.BroccoliGradientDrawable;
+import me.samlss.broccoli.PlaceholderParameter;
 
 public class FoodAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
     List<FoodBean> list;
@@ -34,7 +41,14 @@ public class FoodAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
         helper.setText(R.id.tv_summary,item.foodSummary);
         helper.setText(R.id.tv_price,"¥ "+item.foodPrice);
         helper.setText(R.id.tv_sale,"日销:"+item.foodSale);
-        helper.setImageBitmap(R.id.iv_food,item.foodImage);
+        Broccoli broccoli = new Broccoli();
+        if(item.foodImage==null){
+            broccoli.addPlaceholder(new PlaceholderParameter.Builder().setView(helper.getView(R.id.iv_food)).setDrawable(new BroccoliGradientDrawable(Color.parseColor("#DDDDDD"), Color.parseColor("#CCCCCC"), 0, 1000, new LinearInterpolator())).build());
+            broccoli.show();
+        }else {
+            broccoli.removePlaceholder(helper.getView(R.id.iv_food));
+            helper.setImageBitmap(R.id.iv_food, item.foodImage);
+        }
         //helper.setImageDrawable(R.id.iv_food,mContext.getDrawable(R.drawable.app_logo));
         AddWidget addWidget=((AddWidget)helper.getView(R.id.addwidget));
         addWidget.bindFoodBean(item);
