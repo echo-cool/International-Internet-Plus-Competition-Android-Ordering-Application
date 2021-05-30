@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import com.app.beans.NotificationBean;
 import com.app.myapplication.R;
 import com.app.myapplication.adapters.RecyclerAdapter;
-import com.example.myapplication.activity_notification;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -105,7 +104,7 @@ public class NotificationFragment extends Fragment {
         // Inflate the layout for this fragment
 
 
-        return inflater.inflate(R.layout.activity_notification, container, false);
+        return inflater.inflate(R.layout.fragment_notification, container, false);
     }
     private void initData(){
         dataBeanList = new ArrayList<>();
