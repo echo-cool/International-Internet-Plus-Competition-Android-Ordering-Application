@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".OrderEnsureActivity"></activity>
+        <activity android:name=".OrderEnsureActivity">
+        </activity>
         <activity android:name=".merchant.MerchantActivity">
 
             <!-- <intent-filter> -->
@@ -25,8 +26,10 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".Login.SignUpActivity" />
-        <activity android:name=".Login.LoginActivity"></activity>
-        <activity android:name=".Home.NavigationActivity"></activity>
+        <activity android:name=".Login.LoginActivity">
+        </activity>
+        <activity android:name=".Home.NavigationActivity">
+        </activity>
         <activity
             android:name=".ShopActivity"
             android:theme="@style/shop">

@@ -105,6 +105,7 @@ public class ListContainer extends LinearLayout {
 			}
 		});
 		recyclerView2.setLayoutManager(new LinearLayoutManager(mContext));
+		foodAdapter.setFooterView(new MarginView(mContext));
 		recyclerView2.setAdapter(foodAdapter);
 		recyclerView2.addOnScrollListener(new RecyclerView.OnScrollListener() {
 			@Override

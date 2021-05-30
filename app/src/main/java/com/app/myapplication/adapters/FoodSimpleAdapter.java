@@ -25,6 +25,8 @@ public class FoodSimpleAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder
         helper.setText(R.id.tv_name,item.foodName);
         helper.setText(R.id.textView9,"x"+item.selectCount);
         helper.setText(R.id.tv_price,new DecimalFormat("0.0").format(item.foodPrice));
+        if(item.foodImage!=null)
+            helper.setImageBitmap(R.id.iv_food,item.foodImage);
     }
 
     public List<FoodBean> getList() {

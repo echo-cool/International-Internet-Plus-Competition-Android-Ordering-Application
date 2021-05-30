@@ -41,7 +41,7 @@ public class TypeAdapter extends BaseQuickAdapter<TypeBean, BaseViewHolder> {
 		if(item.equals(list.get(position))){
 			helper.setBackgroundColor(R.id.item_main,ContextCompat.getColor(mContext,R.color.white));
 		}else {
-			helper.setBackgroundColor(R.id.item_main,ContextCompat.getColor(mContext,R.color.type_gray));
+			helper.setBackgroundColor(R.id.item_main,ContextCompat.getColor(mContext,R.color.detail_divider));
 		}
 		if(item.count!=0){
 			helper.setText(R.id.item_badge,""+item.count);
