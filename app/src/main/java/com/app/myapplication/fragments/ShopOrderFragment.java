@@ -146,7 +146,15 @@ public class ShopOrderFragment extends Fragment {
     public static void loadImage(FoodBean foodBean){
         String url = foodBean.Image_url;
         if(url != null){
-
+            loadImage(url, new ImageListener() {
+                @Override
+                public void success(Bitmap data) {
+                    foodBean.foodImage = data;
+                }
+                @Override
+                public void failed(String reason) {
+                }
+            });
         }
 
     }
