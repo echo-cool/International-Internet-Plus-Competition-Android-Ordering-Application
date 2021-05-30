@@ -2,6 +2,8 @@ package com.app.Models;
 
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 import cn.leancloud.AVObject;
 import cn.leancloud.AVParcelableObject;
 import cn.leancloud.AVRelation;
@@ -9,7 +11,7 @@ import cn.leancloud.annotation.AVClassName;
 import cn.leancloud.types.AVGeoPoint;
 
 @AVClassName("Cuisine")
-public class Cuisine extends AVObject {
+public class Cuisine extends AVObject implements Serializable {
     public static final Parcelable.Creator CREATOR = AVParcelableObject.AVObjectCreator.instance;
     public static final String NAME = "Name";
     public static final String DESCRIPTION = "Description";

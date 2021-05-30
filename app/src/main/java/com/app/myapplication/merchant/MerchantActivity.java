@@ -120,7 +120,9 @@ public class MerchantActivity extends AppCompatActivity {
                 List<MerchantBean> merchantList = new LinkedList<>();
                 //public MerchantBean(String id, String name)
                 for(AVObject avObject: list){
-                    merchantList.add(new MerchantBean(avObject.getObjectId(),avObject.getString("Name")));
+                    MerchantBean merchantBean = new MerchantBean(avObject.getObjectId(),avObject.getString("Name"));
+                    merchantBean.setMerchantOBJ(avObject);
+                    merchantList.add(merchantBean);
                 }
                 load(merchantList);
             }
