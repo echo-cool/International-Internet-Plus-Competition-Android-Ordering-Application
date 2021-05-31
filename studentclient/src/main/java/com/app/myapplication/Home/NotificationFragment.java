@@ -10,6 +10,7 @@ import com.app.beans.NotificationBean;
 import com.app.myapplication.R;
 import com.app.myapplication.adapters.NotificationAdapter;
 //import com.app.myapplication.adapters.RecyclerAdapter;
+import com.app.myapplication.views.MarginView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 
@@ -77,6 +78,7 @@ public class NotificationFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        //getActivity().getWindow().setStatusBarColor(getActivity().getResources().getColor(R.color.notification_page));
         swipeRefreshLayout.setRefreshing(true);
         refresh();
     }
@@ -161,7 +163,6 @@ public class NotificationFragment extends Fragment {
 
     private void refresh(){
         load(testUtil());
-        System.out.println("999999999999999999999999999999999999999");
     }
 
 
