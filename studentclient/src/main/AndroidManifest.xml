@@ -17,24 +17,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        android:name=".MyLeanCloudApp" >
-
-        <!-- 即时通讯和推送 START -->
-        <!-- 即时通讯和推送都需要 PushService -->
-        <service android:name="cn.leancloud.push.PushService"/>
-        <receiver android:name="cn.leancloud.push.AVBroadcastReceiver">
+        <activity android:name=".TestActivity">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.USER_PRESENT"/>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </receiver>
-        <!-- 即时通讯和推送 END -->
-        <activity android:name=".OrderEnsureActivity">
         </activity>
+        <activity android:name=".OrderEnsureActivity"></activity>
         <activity android:name=".merchant.MerchantActivity">
 
             <!-- <intent-filter> -->
@@ -43,31 +36,20 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".Login.SignUpActivity" />
-        <activity android:name=".Login.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".Login.LoginActivity"></activity>
         <activity android:name=".Home.NavigationActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
-        <activity android:name=".ShopActivity"
-            android:theme="@style/shop">
-
-        </activity>
-
-
-
-<!--             <intent-filter> -->
-<!--             <action android:name="android.intent.action.MAIN" /> -->
-
-
-<!--             <category android:name="android.intent.category.LAUNCHER" /> -->
-<!--             </intent-filter> -->
-
-
+        <activity
+            android:name=".ShopActivity"
+            android:theme="@style/shop"></activity> <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
         <activity android:name=".MainActivity" />
     </application>
 
