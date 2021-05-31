@@ -68,7 +68,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             // 跳到首页
             System.out.println("已经登陆成功。");
             Intent intent = new Intent(this, ShopActivity.class);
-            //startActivity(intent);
+            startActivity(intent);
         } else {
             // 显示注册或登录页面
             // pass
