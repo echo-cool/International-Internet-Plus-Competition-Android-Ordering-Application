@@ -44,9 +44,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import cn.leancloud.AVInstallation;
 import cn.leancloud.AVObject;
 import cn.leancloud.AVQuery;
 import cn.leancloud.AVUser;
+import cn.leancloud.push.PushService;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 //
