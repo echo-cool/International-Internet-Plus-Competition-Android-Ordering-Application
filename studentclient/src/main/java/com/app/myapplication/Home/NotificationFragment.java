@@ -1,7 +1,6 @@
 package com.app.myapplication.Home;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,14 +8,18 @@ import android.view.ViewGroup;
 
 import com.app.beans.NotificationBean;
 import com.app.myapplication.R;
-import com.app.myapplication.adapters.RecyclerAdapter;
+import com.app.myapplication.adapters.NotificationAdapter;
+//import com.app.myapplication.adapters.RecyclerAdapter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -26,11 +29,10 @@ import java.util.List;
  */
 public class NotificationFragment extends Fragment {
 
-    private RecyclerView mRecyclerView;
-    private List<NotificationBean> dataBeanList;
-    private NotificationBean dataBean;
-    private RecyclerAdapter mAdapter;
     private Context mContext;
+    private RecyclerView recyclerView;
+    private NotificationAdapter nAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,27 +77,39 @@ public class NotificationFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.mContext=this.getActivity();
-        mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.recycle_view14);
-        initData();
-
-        mAdapter.setmOnItemClickLitener(new RecyclerAdapter.OnItemClickLitener() {
+        mContext=this.getActivity();
+        recyclerView=this.getActivity().findViewById(R.id.recyclerView17);
+        nAdapter =new NotificationAdapter(new LinkedList<>());
+        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        recyclerView.setAdapter(nAdapter);
+        recyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
-            public void onItemLongClick(View view, final int position) {
-                final String[] items = {"删除"};
-                final NotificationBean notificationBean = dataBeanList.get( position );
-                android.app.AlertDialog.Builder listDialog = new android.app.AlertDialog.Builder(mContext);
-                listDialog.setItems(items, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if (i == 0) {
-                            mAdapter.removeData(position);
-                        }
-                    }
-                });
-                listDialog.show();
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                int i=nAdapter.getExpandPosition();
+                if(nAdapter.getList().get(position)!=nAdapter.getExpandNotificationBean())
+                    nAdapter.setExpandNotificationBean(nAdapter.getList().get(position),position);
+                else nAdapter.setExpandNotificationBean(null);
+                //nAdapter.notifyDataSetChanged();
+                nAdapter.notifyItemChanged(i);
+                nAdapter.notifyItemChanged(position);
+
             }
         });
+
+        swipeRefreshLayout=((SwipeRefreshLayout)getActivity().findViewById(R.id.swipe_refresh));
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+            }
+        });
+
+
+
+        //load(testUtil());
+        swipeRefreshLayout.setRefreshing(true);
+        refresh();
+        //nAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -106,34 +120,36 @@ public class NotificationFragment extends Fragment {
 
         return inflater.inflate(R.layout.fragment_notification, container, false);
     }
-    private void initData(){
-        dataBeanList = new ArrayList<>();
-        for (int i = 1; i <= 50; i++) {
-            dataBean = new NotificationBean();
-            dataBean.setID(i+"");
-            dataBean.setType(0);
-            dataBean.setParentLeftTxt("Message --"+i);
-            dataBean.setParentRightTxt("Time--"+i);
-            dataBean.setChildLeftTxt("Details--"+i);
-            dataBean.setChildRightTxt("Content-"+i);
-            dataBean.setChildBean(dataBean);
-            dataBeanList.add(dataBean);
+
+    private void load(List<NotificationBean> list){
+        nAdapter.getList().clear();
+        nAdapter.addAll(list);
+        nAdapter.notifyDataSetChanged();
+    }
+
+    private void loadNotificationList(){
+        //TODO:完成拉取消息回调，记得拉去发给该用户的消息别拉到别人的消息了。success后调用load函数传入list，不论成功还是失败结尾都要调用一下swipeRefreshLayout.setRefreshing(false);
+    }
+
+    private List<NotificationBean> loadMore(NotificationBean notificationBean){
+        //TODO:拉取我传入的notificationBean之后的消息，！！！这个不准写成回调查询！！！，如果返回null代表查询失败，如果返回的list的最后一个值为null代表查完了，如果返回list的最后一个值是bean则代表还没查完。
+        return null;
+    }
+
+    private List<NotificationBean> testUtil(){
+        List<NotificationBean> list=new LinkedList<>();
+        for(int i=0;i<=10;i++){
+            list.add(new NotificationBean("title"+i, "emmmmmmm", "emmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"));
         }
-        setData();
+        return list;
     }
 
 
-    private void setData(){
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        mAdapter = new RecyclerAdapter(this.getContext(),dataBeanList);
-        mRecyclerView.setAdapter(mAdapter);
-        //滚动监听
-        mAdapter.setOnScrollListener(new RecyclerAdapter.OnScrollListener() {
-            @Override
-            public void scrollTo(int pos) {
-                mRecyclerView.scrollToPosition(pos);
-            }
-        });
+
+    private void refresh(){
+        load(testUtil());
     }
+
+
 
 }

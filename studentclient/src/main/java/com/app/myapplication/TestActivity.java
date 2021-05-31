@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.app.beans.NotificationCardBean;
+import com.app.beans.NotificationBean;
 import com.app.myapplication.adapters.NotificationAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -38,19 +38,18 @@ public class TestActivity extends AppCompatActivity {
             }
         });
         load(testUtil());
-        System.out.println("================================================"+notificationAdapter.getList().size());
         notificationAdapter.notifyDataSetChanged();
     }
 
 
-    private void load(List<NotificationCardBean> list){
+    private void load(List<NotificationBean> list){
         notificationAdapter.addAll(list);
     }
 
-    private List<NotificationCardBean> testUtil(){
-        List<NotificationCardBean> list=new LinkedList<>();
+    private List<NotificationBean> testUtil(){
+        List<NotificationBean> list=new LinkedList<>();
         for(int i=0;i<=10;i++){
-            list.add(new NotificationCardBean("title"+i, "emmmmmmm", "emmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"));
+            list.add(new NotificationBean("title"+i, "emmmmmmm", "emmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"));
         }
         return list;
     }
