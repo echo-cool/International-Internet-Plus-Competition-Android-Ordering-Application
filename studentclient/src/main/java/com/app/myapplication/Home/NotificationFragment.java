@@ -75,6 +75,19 @@ public class NotificationFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        swipeRefreshLayout.setRefreshing(true);
+        refresh();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mContext=this.getActivity();
@@ -100,7 +113,7 @@ public class NotificationFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                refresh();
             }
         });
 
@@ -117,8 +130,8 @@ public class NotificationFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-
         return inflater.inflate(R.layout.fragment_notification, container, false);
+
     }
 
     private void load(List<NotificationBean> list){
@@ -148,6 +161,7 @@ public class NotificationFragment extends Fragment {
 
     private void refresh(){
         load(testUtil());
+        System.out.println("999999999999999999999999999999999999999");
     }
 
 
