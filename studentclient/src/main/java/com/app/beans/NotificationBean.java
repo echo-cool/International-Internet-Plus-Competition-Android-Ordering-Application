@@ -78,4 +78,5 @@ public class NotificationBean {
     public void setID(String ID) {
         this.ID = ID;
     }
+
 }
