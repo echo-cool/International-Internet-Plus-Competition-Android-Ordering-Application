@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorTheme">#f5c820</color>
     <color name="colorPrimary">#D2E69C</color>
     <color name="colorPrimaryDark">#8FD9A8</color>
     <color name="colorAccent">#28B5B5</color>
@@ -323,4 +324,10 @@
     <color name="dividerColor">#BDBDBD</color>
     <color name="lightCyan">#E1FFFF</color>
     <color name="lightYellow">#FFFFF0</color>
+
+
+    <color name="home_page">#FCDD7C</color>
+    <color name="notification_page">#65c1dc</color>
+    <color name="forum_page">#7DC481</color>
+    <color name="user_page">#FFAAA7</color>
 </resources>

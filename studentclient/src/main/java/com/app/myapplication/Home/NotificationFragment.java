@@ -1,5 +1,8 @@
 package com.app.myapplication.Home;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,14 +13,20 @@ import com.app.beans.NotificationBean;
 import com.app.myapplication.R;
 import com.app.myapplication.adapters.NotificationAdapter;
 //import com.app.myapplication.adapters.RecyclerAdapter;
+import com.app.myapplication.animator.NoAlphaAnimator;
 import com.app.myapplication.views.MarginView;
+import com.app.utils.ViewUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.LinkedList;
@@ -43,6 +52,9 @@ public class NotificationFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+    View tempView;
 
     public NotificationFragment() {
         // Required empty public constructor
@@ -97,16 +109,134 @@ public class NotificationFragment extends Fragment {
         nAdapter =new NotificationAdapter(new LinkedList<>());
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(nAdapter);
+        recyclerView.setItemAnimator(new NoAlphaAnimator());
+
+        ((SimpleItemAnimator)recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
+
+
         recyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 int i=nAdapter.getExpandPosition();
-                if(nAdapter.getList().get(position)!=nAdapter.getExpandNotificationBean())
-                    nAdapter.setExpandNotificationBean(nAdapter.getList().get(position),position);
-                else nAdapter.setExpandNotificationBean(null);
+                View cardView=view.findViewById(R.id.notification_card);
+                View new_hidden=view.findViewById(R.id.hidden_information);
+                int duration=500;
+
+
+                if(i!=-1&&i!=position) {
+                    //同时关闭一个展开一个
+                    nAdapter.setExpandNotificationBean(nAdapter.getList().get(position), position);
+                    ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 1f);
+                    valueAnimator.setDuration(duration);
+                    new_hidden.setVisibility(View.VISIBLE);
+                    tempView.findViewById(R.id.hidden_information).setVisibility(View.GONE);
+                    valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                            float h =  (float)valueAnimator.getAnimatedValue();
+                            //动态更新view的高度
+                            cardView.getLayoutParams().height = ViewUtils.dip2px(mContext,88*(h*2+1));
+                            cardView.setAlpha(0.8f+h/5);
+                            ((ConstraintLayout.LayoutParams)cardView.getLayoutParams()).leftMargin=ViewUtils.dip2px(mContext,24-12*h);
+                            ((ConstraintLayout.LayoutParams)cardView.getLayoutParams()).rightMargin=ViewUtils.dip2px(mContext,24-12*h);
+                            cardView.requestLayout();
+
+
+                            tempView.getLayoutParams().height=ViewUtils.dip2px(mContext,88*3-88*(h*2));
+                            tempView.setAlpha(1.0f-h/5);
+                            ((ConstraintLayout.LayoutParams)tempView.getLayoutParams()).leftMargin=ViewUtils.dip2px(mContext,12+12*h);
+                            ((ConstraintLayout.LayoutParams)tempView.getLayoutParams()).rightMargin=ViewUtils.dip2px(mContext,12+12*h);
+                            tempView.requestLayout();
+                        }
+                    });
+                    valueAnimator.start();
+                    valueAnimator.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation, boolean isReverse) {
+                            tempView=cardView;
+                        }
+                    });
+
+                }else if(i==-1){
+                    nAdapter.setExpandNotificationBean(nAdapter.getList().get(position), position);
+
+                    tempView=cardView;
+                    ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 1f);
+                    valueAnimator.setDuration(duration);
+                    new_hidden.setVisibility(View.VISIBLE);
+                    valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                            float h =  (float)valueAnimator.getAnimatedValue();
+                            //动态更新view的高度
+                            cardView.getLayoutParams().height = ViewUtils.dip2px(mContext,88*(h*2+1));
+                            cardView.setAlpha(0.8f+h/5);
+                            ((ConstraintLayout.LayoutParams)cardView.getLayoutParams()).leftMargin=ViewUtils.dip2px(mContext,24-12*h);
+                            ((ConstraintLayout.LayoutParams)cardView.getLayoutParams()).rightMargin=ViewUtils.dip2px(mContext,24-12*h);
+                            cardView.requestLayout();
+                        }
+                    });
+                    valueAnimator.start();
+                }else{
+                    nAdapter.setExpandNotificationBean(null);
+                    nAdapter.setExpandPosition(-1);
+
+                    ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 1f);
+                    valueAnimator.setDuration(duration);
+                    new_hidden.setVisibility(View.GONE);
+                    valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                            float h =  (float)valueAnimator.getAnimatedValue();
+                            //动态更新view的高度
+                            cardView.getLayoutParams().height = ViewUtils.dip2px(mContext,88*3-88*(h*2));
+                            cardView.setAlpha(1.0f-h/5);
+                            ((ConstraintLayout.LayoutParams)cardView.getLayoutParams()).leftMargin=ViewUtils.dip2px(mContext,12+12*h);
+                            ((ConstraintLayout.LayoutParams)cardView.getLayoutParams()).rightMargin=ViewUtils.dip2px(mContext,12+12*h);
+                            cardView.requestLayout();
+                        }
+                    });
+                    valueAnimator.start();
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 //nAdapter.notifyDataSetChanged();
-                nAdapter.notifyItemChanged(i);
-                nAdapter.notifyItemChanged(position);
+//                nAdapter.notifyItemChanged(i);
+//                nAdapter.notifyItemChanged(position);
+//
+//
+//                View cardView=view.findViewById(R.id.notification_card);
+//                View view1=view.findViewById(R.id.hidden_information);
+//                int oldHeight=cardView.getMeasuredHeight();
+//                view1.setVisibility(View.VISIBLE);
+//                int newHeight=cardView.getMeasuredHeight();
+//                view1.setVisibility(View.GONE);
+//                ValueAnimator valueAnimator=ValueAnimator.ofInt(194,800);
+//                //System.out.println("================"+oldHeight+"================="+newHeight);
+//                valueAnimator.setDuration(800);
+//                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//                    @Override
+//                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+//                        int h =(Integer)valueAnimator.getAnimatedValue();
+//                        //动态更新view的高度
+//                        cardView.getLayoutParams().height = h;
+//                        cardView.requestLayout();
+//                    }
+//                });
+//                valueAnimator.start();
+//                //view1.setVisibility(View.VISIBLE);
 
             }
         });
@@ -164,6 +294,8 @@ public class NotificationFragment extends Fragment {
     private void refresh(){
         load(testUtil());
     }
+
+
 
 
 

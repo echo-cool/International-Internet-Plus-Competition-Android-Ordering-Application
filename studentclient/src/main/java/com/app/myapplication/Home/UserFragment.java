@@ -57,6 +57,12 @@ public class UserFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        //getActivity().getWindow().setStatusBarColor(getActivity().getResources().getColor(R.color.user_page));
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment

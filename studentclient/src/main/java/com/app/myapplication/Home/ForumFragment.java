@@ -48,6 +48,12 @@ public class ForumFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        //getActivity().getWindow().setStatusBarColor(getActivity().getResources().getColor(R.color.forum_page));
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
