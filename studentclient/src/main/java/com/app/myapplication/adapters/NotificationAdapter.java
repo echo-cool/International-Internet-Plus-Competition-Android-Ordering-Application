@@ -36,15 +36,17 @@ public class NotificationAdapter extends BaseQuickAdapter<NotificationBean, Base
         View view1=helper.getView(R.id.hidden_information);
         View view=helper.getView(R.id.notification_card);
 
+
+        view1.setVisibility(View.VISIBLE);
         if(expand==item) {
-            view1.setVisibility(View.VISIBLE);
+            //view1.setVisibility(View.VISIBLE);
             view.getLayoutParams().height= ViewUtils.dip2px(mContext,264);
             view.setAlpha(1.0f);
         }
         else {
             view.getLayoutParams().height= ViewUtils.dip2px(mContext,88);
             view.setAlpha(0.8f);
-            view1.setVisibility(View.GONE);
+            //view1.setVisibility(View.GONE);
         }
 //        if(item== list.get(0)){
 //            ConstraintLayout.LayoutParams layoutParams=(ConstraintLayout.LayoutParams) helper.getView(R.id.notification_card).getLayoutParams();

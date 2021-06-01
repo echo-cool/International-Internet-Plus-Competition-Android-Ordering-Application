@@ -34,6 +34,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import java.util.LinkedList;
 import java.util.List;
 
+import cn.leancloud.AVObject;
+import cn.leancloud.AVQuery;
+import cn.leancloud.AVUser;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link NotificationFragment#newInstance} factory method to
@@ -93,8 +99,8 @@ public class NotificationFragment extends Fragment {
     public void onResume() {
         super.onResume();
         //getActivity().getWindow().setStatusBarColor(getActivity().getResources().getColor(R.color.notification_page));
-        swipeRefreshLayout.setRefreshing(true);
-        refresh();
+        //swipeRefreshLayout.setRefreshing(true);
+        //refresh();
     }
 
     @Override
@@ -131,8 +137,8 @@ public class NotificationFragment extends Fragment {
                     nAdapter.setExpandNotificationBean(nAdapter.getList().get(position), position);
                     ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 1f);
                     valueAnimator.setDuration(duration);
-                    new_hidden.setVisibility(View.VISIBLE);
-                    tempView.findViewById(R.id.hidden_information).setVisibility(View.GONE);
+                    //new_hidden.setVisibility(View.VISIBLE);
+                    //tempView.findViewById(R.id.hidden_information).setVisibility(View.GONE);
                     valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                         @Override
                         public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -166,7 +172,7 @@ public class NotificationFragment extends Fragment {
                     tempView=cardView;
                     ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 1f);
                     valueAnimator.setDuration(duration);
-                    new_hidden.setVisibility(View.VISIBLE);
+                    //new_hidden.setVisibility(View.VISIBLE);
                     valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                         @Override
                         public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -186,7 +192,7 @@ public class NotificationFragment extends Fragment {
 
                     ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 1f);
                     valueAnimator.setDuration(duration);
-                    new_hidden.setVisibility(View.GONE);
+                    //new_hidden.setVisibility(View.GONE);
                     valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                         @Override
                         public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -269,6 +275,7 @@ public class NotificationFragment extends Fragment {
             public void onSubscribe(Disposable disposable) {}
             public void onNext(List<AVObject> list) {
                 // list 是包含满足条件的 All_notification 对象的数组
+                System.out.println("-----------------------------"+list.size());
                 List<NotificationBean> notificationList = new LinkedList<>();
                 // public NotificationBean(String title, String summary, String detail)
                 for(AVObject avObject : list){
@@ -277,8 +284,10 @@ public class NotificationFragment extends Fragment {
                 }
                 load(notificationList);
             }
-            public void onError(Throwable throwable) {}
-            public void onComplete() {}
+            public void onError(Throwable throwable) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+            public void onComplete() {swipeRefreshLayout.setRefreshing(false);}
         });
 
     }
@@ -298,11 +307,11 @@ public class NotificationFragment extends Fragment {
 
 
     private void refresh(){
-        loadNotificationList(AVUser.getCurrentUser().getObjectId() == null ? "60aa48575b51982eafa90605": AVUser.getCurrentUser().getObjectId());
+        tempView=null;
+        nAdapter.setExpandPosition(-1);
+        nAdapter.setExpandNotificationBean(null);
+        loadNotificationList(AVUser.getCurrentUser() == null ? "60afa0a3dd770475f266d21f": AVUser.getCurrentUser().getObjectId());
     }
-
-
-
 
 
 }
