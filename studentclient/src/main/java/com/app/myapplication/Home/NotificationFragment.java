@@ -34,12 +34,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import java.util.LinkedList;
 import java.util.List;
 
-import cn.leancloud.AVObject;
-import cn.leancloud.AVQuery;
-import cn.leancloud.AVUser;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link NotificationFragment#newInstance} factory method to
@@ -283,6 +277,7 @@ public class NotificationFragment extends Fragment {
             public void onError(Throwable throwable) {}
             public void onComplete() {}
         });
+
     }
 
     private List<NotificationBean> loadMore(NotificationBean notificationBean){
@@ -297,7 +292,6 @@ public class NotificationFragment extends Fragment {
         }
         return list;
     }
-
 
 
     private void refresh(){
