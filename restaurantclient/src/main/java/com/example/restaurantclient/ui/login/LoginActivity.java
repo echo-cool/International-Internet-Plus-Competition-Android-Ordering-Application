@@ -22,10 +22,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.restaurantclient.Models.LoginListener;
 import com.example.restaurantclient.R;
 import com.example.restaurantclient.ui.login.LoginViewModel;
 import com.example.restaurantclient.ui.login.LoginViewModelFactory;
 import com.example.restaurantclient.databinding.ActivityLoginBinding;
+
+import cn.leancloud.AVUser;
+import io.reactivex.disposables.Disposable;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -123,6 +127,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
