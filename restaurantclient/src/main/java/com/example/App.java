@@ -1,11 +1,6 @@
-package com.app;
+package com.example;
 
 import android.app.Application;
-
-import com.app.Models.Cuisine;
-import com.app.Models.Cuisine_Type;
-import com.app.myapplication.ShopActivity;
-import com.app.utils.TestUtils;
 
 import cn.leancloud.AVInstallation;
 import cn.leancloud.AVLogger;
@@ -24,8 +19,8 @@ public class App extends Application {
         // 在 AVOSCloud.initialize() 之前调用
         AVOSCloud.setLogLevel(AVLogger.Level.DEBUG);
         AVOSCloud.initialize(this, "aXtS1Ar4i3CRKa6oc72bp5Ro-gzGzoHsz", "KD4f0t7AfuBKztLIC8GeATaR", "https://axts1ar4.lc-cn-n1-shared.com");
-        AVObject.registerSubclass(Cuisine_Type.class);
-        AVObject.registerSubclass(Cuisine.class);
+//        AVObject.registerSubclass(Cuisine_Type.class);
+//        AVObject.registerSubclass(Cuisine.class);
         //TestUtils.test1("60aa42ef6d8bee18f6112967");
         PushService.setDefaultChannelId(this, "1");
         AVInstallation.getCurrentInstallation().saveInBackground().subscribe(new Observer<AVObject>() {
@@ -47,7 +42,6 @@ public class App extends Application {
             }
         });
         // 设置默认打开的 Activity
-        PushService.setDefaultPushCallback(this, ShopActivity.class);
 
 
 

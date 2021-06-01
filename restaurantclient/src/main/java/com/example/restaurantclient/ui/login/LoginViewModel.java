@@ -6,10 +6,14 @@ import androidx.lifecycle.ViewModel;
 
 import android.util.Patterns;
 
+import com.example.restaurantclient.Models.LoginListener;
 import com.example.restaurantclient.data.LoginRepository;
 import com.example.restaurantclient.data.Result;
 import com.example.restaurantclient.data.model.LoggedInUser;
 import com.example.restaurantclient.R;
+
+import cn.leancloud.AVUser;
+import io.reactivex.disposables.Disposable;
 
 public class LoginViewModel extends ViewModel {
 
@@ -28,17 +32,39 @@ public class LoginViewModel extends ViewModel {
     LiveData<LoginResult> getLoginResult() {
         return loginResult;
     }
+    public void login(String username, String password, LoginListener listener){
+        AVUser.logIn(username, password).subscribe(new io.reactivex.Observer<AVUser>() {
+            public void onSubscribe(Disposable disposable) {}
+            public void onNext(AVUser user) {
+                // 登录成功
+                listener.LoginSuccess(user);
+            }
+            public void onError(Throwable throwable) {
+                // 登录失败（可能是密码错误）
+                listener.LoginFailed(throwable.toString());
+            }
+            public void onComplete() {}
+        });
+    }
 
     public void login(String username, String password) {
         // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = loginRepository.login(username, password);
+//        Result<LoggedInUser> result = loginRepository.login(username, password);
+        login(username, password, new LoginListener() {
+            @Override
+            public void LoginSuccess(AVUser avUser) {
+                System.out.println("LoginSuccess");
+                System.out.println(avUser.getObjectId());
+                loginResult.setValue(new LoginResult(new LoggedInUserView(avUser.getUsername())));
+            }
 
-        if (result instanceof Result.Success) {
-            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
-        } else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
-        }
+            @Override
+            public void LoginFailed(String reason) {
+                System.out.println("LoginFailed");
+                System.out.println(reason);
+                loginResult.setValue(new LoginResult(R.string.login_failed));
+            }
+        });
     }
 
     public void loginDataChanged(String username, String password) {
