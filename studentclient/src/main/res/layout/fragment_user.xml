@@ -28,7 +28,6 @@
             <com.app.myapplication.views.UserInfoView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/aliceblue"
                 android:paddingTop="@dimen/appbar_padding_top">
 
             </com.app.myapplication.views.UserInfoView>
@@ -52,7 +51,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/notification_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0" />
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
