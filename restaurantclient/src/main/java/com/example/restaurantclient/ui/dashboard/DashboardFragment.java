@@ -1,7 +1,9 @@
 package com.example.restaurantclient.ui.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -14,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.restaurantclient.R;
 import com.example.restaurantclient.databinding.FragmentDashboardBinding;
+import com.example.restaurantclient.ui.login.LoginActivity;
 
 public class DashboardFragment extends Fragment {
 
@@ -36,11 +39,25 @@ public class DashboardFragment extends Fragment {
             }
         });
         return root;
+
+
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getActivity().findViewById(R.id.text_dashboard).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
