@@ -34,6 +34,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import java.util.LinkedList;
 import java.util.List;
 
+import cn.leancloud.AVObject;
+import cn.leancloud.AVQuery;
+import cn.leancloud.AVUser;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link NotificationFragment#newInstance} factory method to
@@ -255,8 +261,28 @@ public class NotificationFragment extends Fragment {
         nAdapter.notifyDataSetChanged();
     }
 
-    private void loadNotificationList(){
+    private void loadNotificationList(String receiverId){
         //TODO:完成拉取消息回调，记得拉去发给该用户的消息别拉到别人的消息了。success后调用load函数传入list，不论成功还是失败结尾都要调用一下swipeRefreshLayout.setRefreshing(false);
+        AVQuery<AVObject> query = new AVQuery<>("All_notification");
+        query.include("receiver");
+        AVObject pointer = AVObject.createWithoutData("receiver", receiverId);
+        query.whereEqualTo("receiver",pointer);
+        query.orderByDescending("updatedAt");
+        query.findInBackground().subscribe(new Observer<List<AVObject>>() {
+            public void onSubscribe(Disposable disposable) {}
+            public void onNext(List<AVObject> list) {
+                // list 是包含满足条件的 All_notification 对象的数组
+                List<NotificationBean> notificationList = new LinkedList<>();
+                // public NotificationBean(String title, String summary, String detail)
+                for(AVObject avObject : list){
+                    NotificationBean notificationBean = new NotificationBean(avObject.getString("title"), avObject.getString("summary"), avObject.getString("detail"));
+                    notificationList.add(notificationBean);
+                }
+                load(notificationList);
+            }
+            public void onError(Throwable throwable) {}
+            public void onComplete() {}
+        });
     }
 
     private List<NotificationBean> loadMore(NotificationBean notificationBean){
@@ -275,7 +301,7 @@ public class NotificationFragment extends Fragment {
 
 
     private void refresh(){
-        load(testUtil());
+        loadNotificationList(AVUser.getCurrentUser().getObjectId() == null ? "60aa48575b51982eafa90605": AVUser.getCurrentUser().getObjectId());
     }
 
 
