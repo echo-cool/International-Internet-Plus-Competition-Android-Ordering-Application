@@ -5,37 +5,48 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/user_information"
         android:layout_width="match_parent"
-        android:layout_height="125dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/user_avatar"
-            android:layout_width="126dp"
-            android:layout_height="match_parent"
-            android:background="@tools:sample/avatars"
-            android:src="@drawable/image_circle" />
+            android:layout_width="104dp"
+            android:layout_height="104dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/foodexample1"
+            android:src="@drawable/image_circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/user_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:text="TextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:layout_toRightOf="@id/user_avatar"
-            android:layout_marginTop="5dp"/>
+            app:layout_constraintBottom_toTopOf="@+id/user_profile"
+            app:layout_constraintStart_toEndOf="@+id/user_avatar"
+            app:layout_constraintTop_toTopOf="@+id/user_avatar" />
 
         <TextView
             android:id="@+id/user_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/user_username"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/user_avatar"
             android:text="TextView"
-            android:textColor="@color/white" />
-    </RelativeLayout>
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/user_avatar"
+            app:layout_constraintLeft_toRightOf="@id/user_avatar"
+            app:layout_constraintStart_toStartOf="@+id/user_username"
+            app:layout_constraintTop_toBottomOf="@+id/user_username" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>

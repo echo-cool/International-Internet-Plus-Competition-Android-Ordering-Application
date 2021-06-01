@@ -6,14 +6,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/user_page"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context=".Home.UserFragment">
 
     <com.app.myapplication.views.UserInfoView
         android:layout_width="match_parent"
-        android:layout_height="130dp">
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/appbar_padding_top">
 
     </com.app.myapplication.views.UserInfoView>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </androidx.core.widget.NestedScrollView>
 
 
 </LinearLayout>
