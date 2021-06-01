@@ -109,6 +109,7 @@ public class NotificationFragment extends Fragment {
         mContext=this.getActivity();
         recyclerView=this.getActivity().findViewById(R.id.recyclerView17);
         nAdapter =new NotificationAdapter(new LinkedList<>());
+        nAdapter.setHeaderView(new MarginView(mContext));
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(nAdapter);
         recyclerView.setItemAnimator(new NoAlphaAnimator());
@@ -216,7 +217,7 @@ public class NotificationFragment extends Fragment {
         recyclerView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View view, int i, int i1, int i2, int i3) {
-                System.out.println("||||||||||||||||||||||||||"+(i3-i1));
+               // System.out.println("||||||||||||||||||||||||||"+(i3-i1));
                 if(i3-i1<0){
                     //向下滚动
 //                    ((Activity)mContext).findViewById(R.id.navigation_card).setVisibility(View.GONE);
@@ -239,6 +240,8 @@ public class NotificationFragment extends Fragment {
         refresh();
         //nAdapter.notifyDataSetChanged();
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

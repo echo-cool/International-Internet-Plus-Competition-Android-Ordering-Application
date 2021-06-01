@@ -29,7 +29,7 @@ public class NotificationAdapter extends BaseQuickAdapter<NotificationBean, Base
 
     @Override
     protected void convert(BaseViewHolder helper, NotificationBean item) {
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
+        //System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++");
         helper.setText(R.id.textView10, item.title);
         helper.setText(R.id.textView11, item.summary);
         helper.setText(R.id.textView3, item.detail);

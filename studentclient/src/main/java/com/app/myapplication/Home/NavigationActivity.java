@@ -2,6 +2,8 @@ package com.app.myapplication.Home;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,7 +33,6 @@ public class NavigationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
         initPager();
-
     }
 
     @Override
