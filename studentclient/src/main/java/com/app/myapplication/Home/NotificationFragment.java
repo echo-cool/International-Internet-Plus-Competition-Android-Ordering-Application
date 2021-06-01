@@ -3,11 +3,13 @@ package com.app.myapplication.Home;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 
 import com.app.beans.NotificationBean;
 import com.app.myapplication.R;
@@ -199,45 +201,6 @@ public class NotificationFragment extends Fragment {
                     valueAnimator.start();
                 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-                //nAdapter.notifyDataSetChanged();
-//                nAdapter.notifyItemChanged(i);
-//                nAdapter.notifyItemChanged(position);
-//
-//
-//                View cardView=view.findViewById(R.id.notification_card);
-//                View view1=view.findViewById(R.id.hidden_information);
-//                int oldHeight=cardView.getMeasuredHeight();
-//                view1.setVisibility(View.VISIBLE);
-//                int newHeight=cardView.getMeasuredHeight();
-//                view1.setVisibility(View.GONE);
-//                ValueAnimator valueAnimator=ValueAnimator.ofInt(194,800);
-//                //System.out.println("================"+oldHeight+"================="+newHeight);
-//                valueAnimator.setDuration(800);
-//                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//                    @Override
-//                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
-//                        int h =(Integer)valueAnimator.getAnimatedValue();
-//                        //动态更新view的高度
-//                        cardView.getLayoutParams().height = h;
-//                        cardView.requestLayout();
-//                    }
-//                });
-//                valueAnimator.start();
-//                //view1.setVisibility(View.VISIBLE);
-
             }
         });
 
@@ -249,6 +212,26 @@ public class NotificationFragment extends Fragment {
             }
         });
 
+
+        recyclerView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
+                System.out.println("||||||||||||||||||||||||||"+(i3-i1));
+                if(i3-i1<0){
+                    //向下滚动
+//                    ((Activity)mContext).findViewById(R.id.navigation_card).setVisibility(View.GONE);
+//                    AlphaAnimation disappearAnimation = new AlphaAnimation(1, 0);
+//                    disappearAnimation.setDuration(500);
+//                    ((Activity)mContext).findViewById(R.id.navigation_card).startAnimation(disappearAnimation);
+
+                }else {
+//                    ((Activity)mContext).findViewById(R.id.navigation_card).setVisibility(View.VISIBLE);
+//                    AlphaAnimation appearAnimation = new AlphaAnimation(0, 1);
+//                    appearAnimation.setDuration(500);
+//                    ((Activity)mContext).findViewById(R.id.navigation_card).startAnimation(appearAnimation);
+                }
+            }
+        });
 
 
         //load(testUtil());
