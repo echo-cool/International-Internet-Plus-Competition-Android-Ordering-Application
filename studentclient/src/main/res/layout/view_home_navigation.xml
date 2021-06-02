@@ -24,8 +24,8 @@
         android:layout_marginBottom="8dp"
         app:bt_active="true"
         app:bt_colorActive="@color/home_page"
-        app:bt_colorInactive="@color/type_normal"
 
+        app:bt_colorInactive="@color/type_normal"
         app:bt_icon="@drawable/ic_home"
         app:bt_padding="@dimen/internal_padding"
         app:bt_shape="@drawable/blue_box"
@@ -33,38 +33,16 @@
         app:bt_title="@string/title_home"
         app:bt_titlePadding="@dimen/title_padding"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/notification_page"
+        app:layout_constraintEnd_toStartOf="@+id/forum_page"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.406" />
 
 
     <com.gauravk.bubblenavigation.BubbleToggleView
-        android:id="@+id/notification_page"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:bt_active="true"
-        app:bt_colorActive="@color/bluegreen"
-        app:bt_colorInactive="@color/type_normal"
-        app:bt_icon="@drawable/ic_notifications"
-        app:bt_padding="@dimen/internal_padding"
-        app:bt_shape="@drawable/blue_box"
-        app:bt_shapeColor="@color/bluegreen"
-        app:bt_title="@string/title_notification"
-        app:bt_titlePadding="@dimen/title_padding"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/forum_page"
-        app:layout_constraintStart_toEndOf="@+id/home_page"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <com.gauravk.bubblenavigation.BubbleToggleView
         android:id="@+id/forum_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         app:bt_active="true"
         app:bt_colorActive="@color/forum_page"
@@ -76,8 +54,8 @@
         app:bt_title="@string/title_forum"
         app:bt_titlePadding="@dimen/title_padding"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/user_page"
-        app:layout_constraintStart_toEndOf="@+id/notification_page"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 

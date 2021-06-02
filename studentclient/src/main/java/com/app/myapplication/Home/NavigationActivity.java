@@ -60,9 +60,9 @@ public class NavigationActivity extends AppCompatActivity {
             case 2:
                 bottomNavigation.setCurrentActiveItem(2);
                 break;
-            case 3:
-                bottomNavigation.setCurrentActiveItem(3);
-                break;
+//            case 3:
+//                bottomNavigation.setCurrentActiveItem(3);
+//                break;
         }
     }
 
@@ -78,11 +78,11 @@ public class NavigationActivity extends AppCompatActivity {
         vp2 = findViewById(R.id.myViewPager);
         //后期修改实例化fragment部分
         user = UserFragment.newInstance("","");
-        notification = new NotificationFragment();
+        //notification = new NotificationFragment();
         forum = new ForumFragment();
         home = new HomepageFragment();
         fragments.add(home);
-        fragments.add(notification);
+        //fragments.add(notification);
         fragments.add(forum);
         fragments.add(user);
         NavigationFragmentAdapter viewPageAdapter = new NavigationFragmentAdapter(getSupportFragmentManager(),getLifecycle(),fragments);
