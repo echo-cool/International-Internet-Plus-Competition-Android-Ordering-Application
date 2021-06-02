@@ -26,7 +26,7 @@ public class TestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
         mContext=this;
-        recyclerView=findViewById(R.id.recyclerView17);
+        recyclerView=findViewById(R.id.notification_list);
         notificationAdapter=new NotificationAdapter(new LinkedList<>());
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(notificationAdapter);

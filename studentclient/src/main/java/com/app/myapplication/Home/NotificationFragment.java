@@ -3,13 +3,11 @@ package com.app.myapplication.Home;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
 
 import com.app.beans.NotificationBean;
 import com.app.myapplication.R;
@@ -19,13 +17,11 @@ import com.app.myapplication.animator.NoAlphaAnimator;
 import com.app.myapplication.views.MarginView;
 import com.app.utils.ViewUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
@@ -113,7 +109,7 @@ public class NotificationFragment extends Fragment {
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mContext=this.getActivity();
-        recyclerView=this.getActivity().findViewById(R.id.recyclerView17);
+        recyclerView=this.getActivity().findViewById(R.id.notification_list);
         nAdapter =new NotificationAdapter(new LinkedList<>());
         nAdapter.setHeaderView(new MarginView(mContext));
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));

@@ -299,7 +299,7 @@ public class UserFragment extends Fragment {
     }
 
     public double getAlpha(int i){
-        return -1f*i/360;
+        return -1f*i/720+0.5;
     }
 
 

@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView17"
+            android:id="@+id/notification_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/notification_page"
