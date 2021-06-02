@@ -117,7 +117,8 @@ public class UserFragment extends Fragment {
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 System.out.println("=========================="+verticalOffset);
                 recyclerView.setAlpha((float) getAlpha(verticalOffset));
-                getActivity().findViewById(R.id.user_avatar).getLayoutParams().height=-(verticalOffset);
+                getActivity().findViewById(R.id.user_avatar).getLayoutParams().height=500+(verticalOffset);
+                getActivity().findViewById(R.id.user_avatar).getLayoutParams().width=500+(verticalOffset);
                 getActivity().findViewById(R.id.user_avatar).requestLayout();
             }
         });
