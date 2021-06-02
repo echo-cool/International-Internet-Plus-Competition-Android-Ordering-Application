@@ -46,8 +46,14 @@ public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
     }
 
     public void setList(List<OrderBean> list) {
+        //刷新时使用，用于重设list
         this.list.clear();
         this.list.addAll(list);
         notifyDataSetChanged();
+    }
+
+    public List<OrderBean> getList() {
+        //用于livequery
+        return list;
     }
 }
