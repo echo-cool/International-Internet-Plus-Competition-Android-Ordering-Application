@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.app.beans.FoodBean;
@@ -78,6 +79,7 @@ public class OrderEnsureActivity extends AppCompatActivity {
         todo.put("user", AVUser.getCurrentUser());
         todo.put("merchantName", merchantBean.mctName);
         todo.put("merchant", merchantBean.merchantOBJ);
+
         todo.put("foods", foods);
         todo.put("Total_Price", price);
         // 将对象保存到云端
