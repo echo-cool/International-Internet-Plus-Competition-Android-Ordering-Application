@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.app.beans.FoodBean;
@@ -75,6 +76,8 @@ public class OrderEnsureActivity extends AppCompatActivity {
         // 构建对象
         AVObject todo = new AVObject("Order");
         // 为属性赋值
+        String location = (((EditText)findViewById(R.id.editTextLocation)).getEditableText().toString());
+        todo.put("Location", location);
         todo.put("username", AVUser.getCurrentUser().getUsername());
         todo.put("user", AVUser.getCurrentUser());
         todo.put("Restaurant", this.merchantOBJ);
