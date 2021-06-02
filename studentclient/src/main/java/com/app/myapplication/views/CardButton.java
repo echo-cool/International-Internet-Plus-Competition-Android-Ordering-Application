@@ -2,6 +2,7 @@ package com.app.myapplication.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
@@ -20,9 +21,9 @@ public class CardButton extends ConstraintLayout {
         inflate(context, R.layout.view_card_button,this);
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CardButton);
         Drawable icon=array.getDrawable(R.styleable.CardButton_icon);
-        Drawable background=array.getDrawable(R.styleable.CardButton_background);
+        int backgroundColor=array.getColor(R.styleable.CardButton_background_color,0);
         setIcon(icon);
-        setBackground(background);
+        setBackgroundColor(backgroundColor);
         array.recycle();
     }
 

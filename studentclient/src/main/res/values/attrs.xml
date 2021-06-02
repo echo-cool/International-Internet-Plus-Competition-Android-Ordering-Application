@@ -16,6 +16,6 @@
     </declare-styleable>
     <declare-styleable name="CardButton">
         <attr name="icon" format="reference"/>
-        <attr name="background" format="color"/>
+        <attr name="background_color" format="color"/>
     </declare-styleable>
 </resources>

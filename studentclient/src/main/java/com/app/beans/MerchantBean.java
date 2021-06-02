@@ -9,7 +9,7 @@ import cn.leancloud.AVObject;
 public class MerchantBean implements Serializable {
     public String id;
     public String mctName;
-    public Bitmap mctImage;
+    transient public Bitmap mctImage;
     public AVObject merchantOBJ;
 
     public MerchantBean(String id, String name){
