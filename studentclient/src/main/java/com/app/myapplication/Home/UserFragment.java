@@ -97,6 +97,8 @@ public class UserFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        getActivity().findViewById(R.id.lwrlsp).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.lwrlsp).setVisibility(View.INVISIBLE);
         //getActivity().getWindow().setStatusBarColor(getActivity().getResources().getColor(R.color.user_page));
     }
 
@@ -117,9 +119,17 @@ public class UserFragment extends Fragment {
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 System.out.println("=========================="+verticalOffset);
                 recyclerView.setAlpha((float) getAlpha(verticalOffset));
-                getActivity().findViewById(R.id.user_avatar).getLayoutParams().height=500+(verticalOffset);
-                getActivity().findViewById(R.id.user_avatar).getLayoutParams().width=500+(verticalOffset);
+                getActivity().findViewById(R.id.user_avatar).getLayoutParams().height=ViewUtils.dip2px(mContext,104-(-verticalOffset)/13-10);
+                getActivity().findViewById(R.id.user_avatar).getLayoutParams().width=ViewUtils.dip2px(mContext,104-(-verticalOffset)/13-10);
+                ((ConstraintLayout.LayoutParams)getActivity().findViewById(R.id.user_avatar).getLayoutParams()).leftMargin=ViewUtils.dip2px(mContext,32+verticalOffset/12);
+                ((ConstraintLayout.LayoutParams)getActivity().findViewById(R.id.user_avatar).getLayoutParams()).topMargin=ViewUtils.dip2px(mContext,32-verticalOffset/4-2);
+
                 getActivity().findViewById(R.id.user_avatar).requestLayout();
+                if(verticalOffset<0){
+                    getActivity().findViewById(R.id.user_profile).setVisibility(View.INVISIBLE);
+                }else{
+                    getActivity().findViewById(R.id.user_profile).setVisibility(View.VISIBLE);
+                }
             }
         });
 
