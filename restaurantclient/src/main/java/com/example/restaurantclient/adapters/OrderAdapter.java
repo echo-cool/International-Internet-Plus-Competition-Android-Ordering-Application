@@ -35,13 +35,13 @@ public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
         helper.getView(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO:将数据库上该订单的isConfirmed设置为true,如果设置成功将item的isConfirm属性设置为true,同时调用_this.notifyDataSetChange();
+                //TODO:将数据库上该订单的isConfirmed设置为true,如果设置成功将item的isConfirm属性设置为true,同时调用_this.notifyDataSetChange(),同时向用户端推送骑手已取餐消息，在消息表上给用户写一条已取餐消息;
             }
         });
         helper.getView(R.id.button3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO:将数据库上该订单的isEnded设置为true,如果设置成功,从list中删除这个item并同时调用_this.notifyDataSetChange(),同时向用户端推送已送达消息;
+                //TODO:将数据库上该订单的isEnded设置为true,如果设置成功,从list中删除这个item并同时调用_this.notifyDataSetChange(),同时向用户端推送已送达消息，同时在消息表上给用户写一条订单结束消息;
 
             }
         });
