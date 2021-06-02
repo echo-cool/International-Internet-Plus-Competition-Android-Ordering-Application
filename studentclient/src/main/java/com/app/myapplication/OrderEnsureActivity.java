@@ -40,6 +40,7 @@ public class OrderEnsureActivity extends AppCompatActivity {
         Intent intent=getIntent();
         foodBeans= (ArrayList<FoodBean>) intent.getSerializableExtra("Foods");
         merchantBean= (MerchantBean) intent.getSerializableExtra("Shop");
+        System.out.println("++++++++++++++++++++++++++++++++"+merchantBean.merchantOBJ);
         RecyclerView recyclerView=((RecyclerView)findViewById(R.id.simple_food_list));
         foodSimpleAdapter=new FoodSimpleAdapter(foodBeans);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

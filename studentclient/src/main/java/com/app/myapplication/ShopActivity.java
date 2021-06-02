@@ -374,6 +374,7 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
         shopId=intent.getStringExtra("shopId");
         shopName=intent.getStringExtra("shopName");
         merchantBean= (MerchantBean) intent.getSerializableExtra("shop");
+        System.out.println("++++++++++++++++++++++++++++++++"+merchantBean.merchantOBJ);
         if(merchantBean==null) {
             merchantBean = new MerchantBean(shopId, shopName);
         }
@@ -389,6 +390,7 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
                     Intent intent = new Intent(mContext, OrderEnsureActivity.class);
                     LinkedList<FoodBean> foodBeans = (LinkedList<FoodBean>) getOrderedFoodList();
                     intent.putExtra("Foods", foodBeans);
+                    System.out.println("++++++++++++++++++++++++++++++++"+merchantBean.merchantOBJ);
                     intent.putExtra("Shop", merchantBean);
                     //saveOrder(foodBeans, merchantBean);
                     startActivity(intent);
@@ -498,10 +500,10 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
                 @Override
                 public void onNext(@NotNull AVObject avObject) {
                     shopName=avObject.getString("Name");
-
                     CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.shop_collaspsing_toolbar);
                     collapsingToolbarLayout.setTitle(shopName);
                     merchantBean=new MerchantBean(avObject.getObjectId(),shopName);
+                    merchantBean.setMerchantOBJ(avObject);
 
                 }
 
