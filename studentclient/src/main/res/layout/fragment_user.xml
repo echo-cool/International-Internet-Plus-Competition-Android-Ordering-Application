@@ -6,7 +6,8 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/user_page">
+    android:background="@color/user_page"
+    android:visibility="visible">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -63,10 +64,12 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/lwrlsp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:src="@android:drawable/ic_input_add" />"
+        android:src="@android:drawable/ic_input_add"
+        android:visibility="invisible" />"
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
