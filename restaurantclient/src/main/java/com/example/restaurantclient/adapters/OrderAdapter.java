@@ -38,6 +38,13 @@ public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
                 //TODO:将数据库上该订单的isConfirmed设置为true,如果设置成功将item的isConfirm属性设置为true,同时调用_this.notifyDataSetChange();
             }
         });
+        helper.getView(R.id.button3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO:将数据库上该订单的isEnded设置为true,如果设置成功,从list中删除这个item并同时调用_this.notifyDataSetChange(),同时向用户端推送已送达消息;
+
+            }
+        });
         if(item.isConfirmed){
             helper.getView(R.id.layout).setBackgroundColor(mContext.getResources().getColor(R.color.bluegreen));
             helper.getView(R.id.button).setEnabled(false);
