@@ -28,6 +28,11 @@ public class FoodBean implements Serializable{
 	public TypeBean FoodTypeBean;
 	public String Image_url;
 	public Cuisine cuisineOBJ;
+
+	public String getId() {
+		return id;
+	}
+
 	public void changeSelectCount(int num){
 		if(num>=0){
 			selectCount+=num;

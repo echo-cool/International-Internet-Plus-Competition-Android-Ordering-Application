@@ -33,6 +33,7 @@ public class OrderEnsureActivity extends AppCompatActivity {
     private FoodSimpleAdapter foodSimpleAdapter;
     private double price=0;
     private double packet_price=0;
+    private AVObject merchantOBJ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +42,7 @@ public class OrderEnsureActivity extends AppCompatActivity {
         Intent intent=getIntent();
         foodBeans= (ArrayList<FoodBean>) intent.getSerializableExtra("Foods");
         merchantBean= (MerchantBean) intent.getSerializableExtra("Shop");
-        System.out.println("++++++++++++++++++++++++++++++++"+merchantBean.merchantOBJ);
+        this.merchantOBJ = AVObject.createWithoutData("Restaurant", merchantBean.id);
         RecyclerView recyclerView=((RecyclerView)findViewById(R.id.simple_food_list));
         foodSimpleAdapter=new FoodSimpleAdapter(foodBeans);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -70,18 +71,18 @@ public class OrderEnsureActivity extends AppCompatActivity {
             food.put("id", foodBean.cuisineOBJ.getObjectId());
             food.put("name", foodBean.foodName);
             food.put("selectCount", foodBean.selectCount);
-            foods.put(foodBean.cuisineOBJ.getObjectId(), food);
+            foods.put(foodBean.getId(), food);
         }
         // 构建对象
         AVObject todo = new AVObject("Order");
         // 为属性赋值
+        String location = (((EditText)findViewById(R.id.editTextLocation)).getEditableText().toString());
+        todo.put("Location", location);
         todo.put("username", AVUser.getCurrentUser().getUsername());
         todo.put("user", AVUser.getCurrentUser());
-        todo.put("merchantName", merchantBean.mctName);
-        todo.put("merchant", merchantBean.merchantOBJ);
-
+        todo.put("Restaurant", this.merchantOBJ);
         todo.put("foods", foods);
-        todo.put("Total_Price", price);
+        todo.put("TotalPrice", price);
         // 将对象保存到云端
         todo.saveInBackground().subscribe(new Observer<AVObject>() {
             public void onSubscribe(Disposable disposable) {}
