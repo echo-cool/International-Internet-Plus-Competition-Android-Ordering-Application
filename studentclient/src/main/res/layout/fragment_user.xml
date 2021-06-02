@@ -27,6 +27,7 @@
             app:toolbarId="@+id/toolbar">
 
             <com.app.myapplication.views.UserInfoView
+                android:id="@+id/user_info"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingTop="@dimen/appbar_padding_top">
@@ -64,7 +65,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/lwrlsp"
+        android:id="@+id/temp_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

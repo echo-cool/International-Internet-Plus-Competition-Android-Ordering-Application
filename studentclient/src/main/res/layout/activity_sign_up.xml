@@ -3,14 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7adfb8"
-    tools:context=".MainActivity" >
+    android:background="@color/colorPrimaryDark"
+    tools:context=".MainActivity">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" >
+        android:layout_centerInParent="true">
+
         <include
             android:id="@+id/input_sign"
             layout="@layout/view_input_sign_up"
@@ -19,9 +20,9 @@
 
         <include
             android:id="@+id/layout_progress_sign"
+            layout="@layout/layout_progress"
             android:layout_width="match_parent"
             android:layout_height="130dip"
-            layout="@layout/layout_progress"
             android:visibility="gone" />
 
         <TextView
@@ -33,13 +34,13 @@
             android:layout_marginTop="15dip"
             android:background="@drawable/text_bg"
             android:gravity="center"
-            android:paddingBottom="2dip"
             android:paddingLeft="15dip"
-            android:paddingRight="15dip"
             android:paddingTop="2dip"
-            android:text="Sign up"
+            android:paddingRight="15dip"
+            android:paddingBottom="2dip"
+            android:text="@string/title_sign_up"
             android:textColor="#ffffff"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
     </RelativeLayout>
 
@@ -49,11 +50,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:gravity="bottom"
-        android:paddingBottom="2dip"
         android:paddingLeft="15dip"
-        android:paddingRight="15dip"
         android:paddingTop="2dip"
+        android:paddingRight="15dip"
+        android:paddingBottom="2dip"
         android:text="登录"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
 
 </RelativeLayout>

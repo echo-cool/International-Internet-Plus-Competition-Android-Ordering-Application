@@ -33,7 +33,8 @@
         </activity>
         <activity android:name=".Login.SignUpActivity" />
         <activity android:name=".Login.LoginActivity"></activity>
-        <activity android:name=".Home.NavigationActivity">
+        <activity android:name=".Home.NavigationActivity"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

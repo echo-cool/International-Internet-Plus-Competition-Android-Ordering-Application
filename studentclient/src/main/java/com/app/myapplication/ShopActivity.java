@@ -396,40 +396,7 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
 //        ((ListContainer)findViewById(R.id.listcontainer)).load(BaseUtils.getDatas(this),BaseUtils.getTypes());
 
     }
-    public void saveOrder(LinkedList<FoodBean> foodBeans, MerchantBean merchantBean){
-        HashMap<String, Object> foods = new HashMap<>();
-        double Total_Price = 0;
-        for (FoodBean foodBean: foodBeans
-        ) {
-            HashMap<String, Object> food = new HashMap<>();
-            food.put("id", foodBean.cuisineOBJ.getObjectId());
-            food.put("name", foodBean.foodName);
-            food.put("selectCount", foodBean.selectCount);
-            foods.put(foodBean.cuisineOBJ.getObjectId(), food);
-            Total_Price += foodBean.foodPrice * foodBean.selectCount;
-        }
-        // 构建对象
-        AVObject todo = new AVObject("Order");
-        // 为属性赋值
-        todo.put("username", AVUser.getCurrentUser().getUsername());
-        todo.put("user", AVUser.getCurrentUser());
-        todo.put("merchantName", merchantBean.mctName);
-        todo.put("merchant", merchantBean.merchantOBJ);
-        todo.put("foods", foods);
-        todo.put("Total_Price", Total_Price);
-        // 将对象保存到云端
-        todo.saveInBackground().subscribe(new Observer<AVObject>() {
-            public void onSubscribe(Disposable disposable) {}
-            public void onNext(AVObject todo) {
-                // 成功保存之后，执行其他逻辑
-                System.out.println("保存成功。objectId：" + todo.getObjectId());
-            }
-            public void onError(Throwable throwable) {
-                // 异常处理
-            }
-            public void onComplete() {}
-        });
-    }
+
 
     private List<FoodBean> getOrderedFoodList(){
         List<FoodBean> foodBeans=shopOrderFragment.getListContainer().foodAdapter.getList();

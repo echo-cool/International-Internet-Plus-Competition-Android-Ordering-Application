@@ -5,14 +5,17 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.app.beans.NotificationBean;
+import com.app.myapplication.Login.LoginActivity;
 import com.app.myapplication.R;
 import com.app.myapplication.adapters.NotificationAdapter;
 import com.app.myapplication.animator.NoAlphaAnimator;
@@ -97,8 +100,8 @@ public class UserFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().findViewById(R.id.lwrlsp).setVisibility(View.GONE);
-        getActivity().findViewById(R.id.lwrlsp).setVisibility(View.INVISIBLE);
+        getActivity().findViewById(R.id.temp_button).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.temp_button).setVisibility(View.INVISIBLE);
         //getActivity().getWindow().setStatusBarColor(getActivity().getResources().getColor(R.color.user_page));
     }
 
@@ -113,23 +116,25 @@ public class UserFragment extends Fragment {
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final NestedScrollView nestedScrollView=getActivity().findViewById(R.id.scroll_2);
+        loadUser();
         appBarLayout=getActivity().findViewById(R.id.appbar);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 System.out.println("=========================="+verticalOffset);
                 recyclerView.setAlpha((float) getAlpha(verticalOffset));
-                getActivity().findViewById(R.id.user_avatar).getLayoutParams().height=ViewUtils.dip2px(mContext,104-(-verticalOffset)/13-10);
-                getActivity().findViewById(R.id.user_avatar).getLayoutParams().width=ViewUtils.dip2px(mContext,104-(-verticalOffset)/13-10);
-                ((ConstraintLayout.LayoutParams)getActivity().findViewById(R.id.user_avatar).getLayoutParams()).leftMargin=ViewUtils.dip2px(mContext,32+verticalOffset/12);
-                ((ConstraintLayout.LayoutParams)getActivity().findViewById(R.id.user_avatar).getLayoutParams()).topMargin=ViewUtils.dip2px(mContext,32-verticalOffset/4-2);
+                getActivity().findViewById(R.id.user_profile).setAlpha(1-(float) getAlpha(verticalOffset));
+                getActivity().findViewById(R.id.user_avatar).getLayoutParams().height=ViewUtils.dip2px(mContext,104-(-verticalOffset)/7-10);
+                getActivity().findViewById(R.id.user_avatar).getLayoutParams().width=ViewUtils.dip2px(mContext,104-(-verticalOffset)/7-10);
+                //((ConstraintLayout.LayoutParams)getActivity().findViewById(R.id.user_avatar).getLayoutParams()).leftMargin=ViewUtils.dip2px(mContext,32+verticalOffset/32);
+                ((ConstraintLayout.LayoutParams)getActivity().findViewById(R.id.user_avatar).getLayoutParams()).topMargin=ViewUtils.dip2px(mContext,32-verticalOffset/4+16);
 
                 getActivity().findViewById(R.id.user_avatar).requestLayout();
-                if(verticalOffset<0){
-                    getActivity().findViewById(R.id.user_profile).setVisibility(View.INVISIBLE);
-                }else{
-                    getActivity().findViewById(R.id.user_profile).setVisibility(View.VISIBLE);
-                }
+//                if(verticalOffset<0){
+//                    getActivity().findViewById(R.id.user_profile).setVisibility(View.INVISIBLE);
+//                }else{
+//                    getActivity().findViewById(R.id.user_profile).setVisibility(View.VISIBLE);
+//                }
             }
         });
 
@@ -295,6 +300,24 @@ public class UserFragment extends Fragment {
 
     public double getAlpha(int i){
         return -1f*i/360;
+    }
+
+
+    private void loadUser(){
+        getActivity().findViewById(R.id.user_info).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), LoginActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+        if(AVUser.getCurrentUser()!=null){
+            ((TextView)getActivity().findViewById(R.id.user_username)).setText(AVUser.getCurrentUser().getUsername());
+            ((TextView)getActivity().findViewById(R.id.user_profile)).setText(AVUser.getCurrentUser().getEmail());
+        }else{
+            ((TextView)getActivity().findViewById(R.id.user_username)).setText("未登录");
+            ((TextView)getActivity().findViewById(R.id.user_profile)).setText("点击登录");
+        }
     }
 
 }
