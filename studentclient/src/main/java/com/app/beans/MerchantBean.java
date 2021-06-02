@@ -10,7 +10,7 @@ public class MerchantBean implements Serializable {
     public String id;
     public String mctName;
     transient public Bitmap mctImage;
-    public AVObject merchantOBJ;
+    public String merchantOBJ;
 
     public MerchantBean(String id, String name){
         this.id = id;
@@ -18,10 +18,12 @@ public class MerchantBean implements Serializable {
     }
 
     public AVObject getMerchantOBJ() {
-        return merchantOBJ;
+        return AVObject.parseAVObject(merchantOBJ);
     }
 
     public void setMerchantOBJ(AVObject merchantOBJ) {
-        this.merchantOBJ = merchantOBJ;
+        this.merchantOBJ = merchantOBJ.toString();
     }
+
+
 }

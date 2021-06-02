@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,50 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
             public void onClick(View view) {
                 Intent i = new Intent(SignUpActivity.this , LoginActivity.class);
                 startActivity(i);
+            }
+        });
+
+        pswText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if(TextUtils.isEmpty(nameText.getText())){
+                    nameText.setError("用户名不能为空");
+                }
+                else if(TextUtils.isEmpty(pswText.getText())){
+                    pswText.setError("新密码不能为空");
+                }
+                else if(TextUtils.isEmpty(pswRepText.getText())){
+                    pswRepText.setError("请确认密码");
+                }
+                else if(!matchFormat(pswText.getText().toString())){
+                    pswText.setError("至少8位，至少含有大小写字母数字和字符的其中三项");
+                }
+                else if(!pswText.getText().toString().equals(pswRepText.getText().toString())){
+                    pswRepText.setError("两次输入不相同");
+                }
+                return false;
+            }
+        });
+
+        pswRepText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if(TextUtils.isEmpty(nameText.getText())){
+                    nameText.setError("用户名不能为空");
+                }
+                else if(TextUtils.isEmpty(pswText.getText())){
+                    pswText.setError("新密码不能为空");
+                }
+                else if(TextUtils.isEmpty(pswRepText.getText())){
+                    pswRepText.setError("请确认密码");
+                }
+                else if(!matchFormat(pswText.getText().toString())){
+                    pswText.setError("至少8位，至少含有大小写字母数字和字符的其中三项");
+                }
+                else if(!pswText.getText().toString().equals(pswRepText.getText().toString())){
+                    pswRepText.setError("两次输入不相同");
+                }
+                return false;
             }
         });
     }
@@ -190,11 +235,9 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
             pswRepText.setError("请确认密码");
         }
         else if(!matchFormat(pswText.getText().toString())){
-            pswText.setText("");
-            pswText.setError("至少8位，含大小写字母数字、字符");
+            pswText.setError("至少8位，至少含有大小写字母数字和字符的其中三项");
         }
         else if(!pswText.getText().toString().equals(pswRepText.getText().toString())){
-            pswRepText.setText("");
             pswRepText.setError("两次输入不相同");
         }
         else{
@@ -215,8 +258,9 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
                     alertDialog_builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(this_, LoginActivity.class);
-                            startActivity(intent);
+//                            Intent intent = new Intent(this_, LoginActivity.class);
+//                            startActivity(intent);
+                            finish();
                         }
                     });
                     alertDialog_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -257,7 +301,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
     }
 
     private boolean matchFormat(String psw){
-        final String PW_PATTERN ="^(?![A-Za-z0-9]+$)(?![a-z0-9\\W]+$)(?![A-Za-z\\W]+$)(?![A-Z0-9\\W]+$)[a-zA-Z0-9\\W]{8,}$";
+        final String PW_PATTERN ="^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$";
         if(psw.matches(PW_PATTERN)){
             return true;
         }else

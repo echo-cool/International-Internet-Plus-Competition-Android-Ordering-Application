@@ -62,7 +62,6 @@ public class OrderEnsureActivity extends AppCompatActivity {
 
     public void saveOrder(ArrayList<FoodBean> foodBeans, MerchantBean merchantBean){
         HashMap<String, Object> foods = new HashMap<>();
-        double Total_Price = 0;
         for (FoodBean foodBean: foodBeans
         ) {
             HashMap<String, Object> food = new HashMap<>();
@@ -70,7 +69,6 @@ public class OrderEnsureActivity extends AppCompatActivity {
             food.put("name", foodBean.foodName);
             food.put("selectCount", foodBean.selectCount);
             foods.put(foodBean.cuisineOBJ.getObjectId(), food);
-            Total_Price += foodBean.foodPrice * foodBean.selectCount;
         }
         // 构建对象
         AVObject todo = new AVObject("Order");
@@ -80,7 +78,7 @@ public class OrderEnsureActivity extends AppCompatActivity {
         todo.put("merchantName", merchantBean.mctName);
         todo.put("merchant", merchantBean.merchantOBJ);
         todo.put("foods", foods);
-        todo.put("Total_Price", Total_Price);
+        todo.put("Total_Price", price);
         // 将对象保存到云端
         todo.saveInBackground().subscribe(new Observer<AVObject>() {
             public void onSubscribe(Disposable disposable) {}
@@ -91,6 +89,7 @@ public class OrderEnsureActivity extends AppCompatActivity {
             public void onError(Throwable throwable) {
                 // 异常处理
                 findViewById(R.id.loading).setVisibility(View.GONE);
+                System.out.println(throwable.toString());
             }
             public void onComplete() {
                 Intent intent=new Intent(mContext, NavigationActivity.class);

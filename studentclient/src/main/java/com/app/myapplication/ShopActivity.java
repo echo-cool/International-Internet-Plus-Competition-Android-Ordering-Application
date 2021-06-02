@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.app.Models.Cuisine;
 import com.app.beans.FoodBean;
 import com.app.beans.MerchantBean;
+import com.app.myapplication.Login.LoginActivity;
 import com.app.myapplication.fragments.ShopCommentsFragment;
 import com.app.myapplication.fragments.ShopOrderFragment;
 import com.app.myapplication.fragments.TestShopOrderFragment;
@@ -384,12 +385,17 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
         ((ShopCarView)findViewById(R.id.shopcar)).setOnClickListener(new ShopCarView.OnClickListener() {
             @Override
             public void onSettleClick() {
-                Intent intent=new Intent(mContext,OrderEnsureActivity.class);
-                LinkedList<FoodBean> foodBeans = (LinkedList<FoodBean>)getOrderedFoodList();
-                intent.putExtra("Foods",foodBeans);
-                intent.putExtra("Shop",merchantBean);
-                //saveOrder(foodBeans, merchantBean);
-                startActivity(intent);
+                if(AVUser.getCurrentUser()!=null) {
+                    Intent intent = new Intent(mContext, OrderEnsureActivity.class);
+                    LinkedList<FoodBean> foodBeans = (LinkedList<FoodBean>) getOrderedFoodList();
+                    intent.putExtra("Foods", foodBeans);
+                    intent.putExtra("Shop", merchantBean);
+                    //saveOrder(foodBeans, merchantBean);
+                    startActivity(intent);
+                }else{
+                    Intent intent=new Intent(mContext, LoginActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 //        setContentView(R.layout.shop_order_fragment);
