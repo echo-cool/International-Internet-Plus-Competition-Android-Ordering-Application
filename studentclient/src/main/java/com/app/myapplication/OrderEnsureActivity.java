@@ -80,7 +80,7 @@ public class OrderEnsureActivity extends AppCompatActivity {
         todo.put("merchantName", merchantBean.mctName);
         todo.put("merchant", merchantBean.merchantOBJ);
         todo.put("foods", foods);
-        todo.put("Total_Price", Total_Price);
+        todo.put("TotalPrice", Total_Price);
         // 将对象保存到云端
         todo.saveInBackground().subscribe(new Observer<AVObject>() {
             public void onSubscribe(Disposable disposable) {}
