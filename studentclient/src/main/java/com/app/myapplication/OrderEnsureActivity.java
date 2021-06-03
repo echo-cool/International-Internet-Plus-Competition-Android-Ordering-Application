@@ -50,10 +50,10 @@ public class OrderEnsureActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.canteen_name)).setText(merchantBean.mctName);
         for(FoodBean foodBean:foodBeans){
             price+=foodBean.foodPrice*foodBean.selectCount;
-            packet_price+=0.5;
+            packet_price+=1;
         }
         ((TextView)findViewById(R.id.text_price)).setText("¥"+(price+packet_price));
-        ((TextView)findViewById(R.id.text_packet_price)).setText("另需打包费用：¥"+(price+packet_price));
+        ((TextView)findViewById(R.id.text_packet_price)).setText("另需打包费用：¥"+(packet_price));
 
     }
 
