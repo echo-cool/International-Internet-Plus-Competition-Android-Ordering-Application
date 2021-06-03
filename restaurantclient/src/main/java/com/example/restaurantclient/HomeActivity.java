@@ -242,7 +242,16 @@ public class HomeActivity extends AppCompatActivity {
                     String location = res.getString("Location");
                     JSONObject foods = res.getJSONObject("foods");
                     Number price = res.getNumber("TotalPrice");
-                    OrderBean orderBean = new OrderBean(title,title,info, "总价：" + price.toString() + "\n收货地点：" + location + "\n订单详情：" + foods.toJSONString(),res.getAVObject("user"));
+                    String finalcontent = "内容：";
+                    for (String i: foods.keySet()){
+                        JSONObject s = foods.getJSONObject(i);
+                        String temp = s.getString("name")+"x"+s.getIntValue("selectCount")+" ";
+                        finalcontent+=temp;
+                    }
+
+                    OrderBean orderBean = new OrderBean(title,title,info, "总价：" + price.toString() + "\n收货地点：" + location + "\n订单详情：" + finalcontent,res.getAVObject("user"));
+
+
                     orderBean.isConfirmed=res.getBoolean("isConfirmed");
                     orderBean.isEnded=res.getBoolean("isEnded");
                     result.add(orderBean);
