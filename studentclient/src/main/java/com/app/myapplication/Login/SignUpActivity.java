@@ -26,6 +26,7 @@ import com.app.Models.SignUpListener;
 import com.app.myapplication.R;
 import com.app.myapplication.ShopActivity;
 
+import cn.leancloud.AVInstallation;
 import cn.leancloud.AVUser;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -251,6 +252,9 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
                 @Override
                 public void SignUpSuccess(AVUser avUser) {
                     System.out.println("SignUpSuccess");
+                    String InstallationID = AVInstallation.getCurrentInstallation().getInstallationId();
+                    avUser.put("InstallationID", InstallationID);
+                    avUser.saveInBackground();
                     AlertDialog alertDialog;
                     AlertDialog.Builder alertDialog_builder=new AlertDialog.Builder(this_);
                     alertDialog_builder.setTitle("注册成功！");

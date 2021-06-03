@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import cn.leancloud.AVInstallation;
 import cn.leancloud.AVObject;
 import cn.leancloud.AVUser;
 import io.reactivex.Observer;
@@ -84,6 +85,13 @@ public class OrderEnsureActivity extends AppCompatActivity {
         todo.put("foods", foods);
         todo.put("TotalPrice", price);
         todo.put("Owner",merchantOBJ.getAVObject("Owner"));
+        todo.put("InstallationID", AVInstallation.getCurrentInstallation().getInstallationId());
+        AVUser user = AVUser.getCurrentUser();
+        if(user != null){
+            String InstallationID = AVInstallation.getCurrentInstallation().getInstallationId();
+            user.put("InstallationID", InstallationID);
+            user.saveInBackground();
+        }
         // 将对象保存到云端
         todo.saveInBackground().subscribe(new Observer<AVObject>() {
             public void onSubscribe(Disposable disposable) {}
