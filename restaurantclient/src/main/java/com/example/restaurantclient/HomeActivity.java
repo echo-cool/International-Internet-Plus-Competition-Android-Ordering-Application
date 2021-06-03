@@ -242,7 +242,7 @@ public class HomeActivity extends AppCompatActivity {
                     String location = res.getString("Location");
                     JSONObject foods = res.getJSONObject("foods");
                     Number price = res.getNumber("TotalPrice");
-                    OrderBean orderBean = new OrderBean(title,title,info, "总价：" + price.toString() + "\n收货地点：" + location + "\n订单详情：" + foods.toJSONString());
+                    OrderBean orderBean = new OrderBean(title,title,info, "总价：" + price.toString() + "\n收货地点：" + location + "\n订单详情：" + foods.toJSONString(),res.getAVObject("user"));
                     orderBean.isConfirmed=res.getBoolean("isConfirmed");
                     orderBean.isEnded=res.getBoolean("isEnded");
                     result.add(orderBean);
@@ -262,17 +262,17 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    public List<OrderBean> testUtil(){
-        List<OrderBean> list=new LinkedList<>();
-        list.add(new OrderBean("1","asfsda","sdgsdgs","sdfgdsfhsfd\nsfdsgffdgsfd\nsfdgsfdgsdf\nsgfdsgdfsgsdgdfgsdfgfdsgdsgdfgsdfgsdfg"));
-        list.add(new OrderBean("1","asfsda","sdgsdgs","sdfgdsfhsfd\nsfdsgffdgsfd\nsfdgsfdgsdf\nsgfdsgdfsgsdgdfgsdfgfdsgdsgdfgsdfgsdfg"));
-        list.add(new OrderBean("1","asfsda","sdgsdgs","sdfgdsfhsfd\nsfdsgffdgsfd\nsfdgsfdgsdf\nsgfdsgdfsgsdgdfgsdfgfdsgdsgdfgsdfgsdfg"));
-        list.add(new OrderBean("1","asfsda","sdgsdgs","sdfgdsfhsfd\nsfdsgffdgsfd\nsfdgsfdgsdf\nsgfdsgdfsgsdgdfgsdfgfdsgdsgdfgsdfgsdfg"));
-        list.add(new OrderBean("1","asfsda","sdgsdgs","sdfgdsfhsfd\nsfdsgffdgsfd\nsfdgsfdgsdf\nsgfdsgdfsgsdgdfgsdfgfdsgdsgdfgsdfgsdfg"));
-        list.add(new OrderBean("1","asfsda","sdgsdgs","sdfgdsfhsfd\nsfdsgffdgsfd\nsfdgsfdgsdf\nsgfdsgdfsgsdgdfgsdfgfdsgdsgdfgsdfgsdfg"));
-        list.get(3).isConfirmed=true;
-        return list;
-    }
+//    public List<OrderBean> testUtil(){
+//        List<OrderBean> list=new LinkedList<>();
+//        list.add(new OrderBean("1","asfsda","sdgsdgs","sdfgdsfhsfd\nsfdsgffdgsfd\nsfdgsfdgsdf\nsgfdsgdfsgsdgdfgsdfgfdsgdsgdfgsdfgsdfg"));
+//        list.add(new OrderBean("1","asfsda","sdgsdgs","sdfgdsfhsfd\nsfdsgffdgsfd\nsfdgsfdgsdf\nsgfdsgdfsgsdgdfgsdfgfdsgdsgdfgsdfgsdfg"));
+//        list.add(new OrderBean("1","asfsda","sdgsdgs","sdfgdsfhsfd\nsfdsgffdgsfd\nsfdgsfdgsdf\nsgfdsgdfsgsdgdfgsdfgfdsgdsgdfgsdfgsdfg"));
+//        list.add(new OrderBean("1","asfsda","sdgsdgs","sdfgdsfhsfd\nsfdsgffdgsfd\nsfdgsfdgsdf\nsgfdsgdfsgsdgdfgsdfgfdsgdsgdfgsdfgsdfg"));
+//        list.add(new OrderBean("1","asfsda","sdgsdgs","sdfgdsfhsfd\nsfdsgffdgsfd\nsfdgsfdgsdf\nsgfdsgdfsgsdgdfgsdfgfdsgdsgdfgsdfgsdfg"));
+//        list.add(new OrderBean("1","asfsda","sdgsdgs","sdfgdsfhsfd\nsfdsgffdgsfd\nsfdgsfdgsdf\nsgfdsgdfsgsdgdfgsdfgfdsgdsgdfgsdfgsdfg"));
+//        list.get(3).isConfirmed=true;
+//        return list;
+//    }
 
     @Override
     protected void onResume() {

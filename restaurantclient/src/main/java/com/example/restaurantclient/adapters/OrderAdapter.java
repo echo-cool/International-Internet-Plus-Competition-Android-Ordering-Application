@@ -18,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 import cn.leancloud.AVObject;
+import cn.leancloud.AVUser;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -62,6 +63,13 @@ public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
                         _this.notifyDataSetChanged();
                     }
                 });
+                AVObject notification =new AVObject("All_notification");
+                notification.put("title","您的订单已成功下单");
+                notification.put("summary","订单号"+item.id);
+                notification.put("detail",item.content);
+                notification.put("sender", AVUser.getCurrentUser());
+                notification.put("receiver",item.getUserObject());
+                notification.saveInBackground().subscribe();
             }
         });
         helper.getView(R.id.button3).setOnClickListener(new View.OnClickListener() {
@@ -91,7 +99,13 @@ public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
                         _this.notifyDataSetChanged();
                     }
                 });
-
+                AVObject notification =new AVObject("All_notification");
+                notification.put("title","您的订单已送达");
+                notification.put("summary","订单号"+item.id);
+                notification.put("detail",item.content);
+                notification.put("sender", AVUser.getCurrentUser());
+                notification.put("receiver",item.getUserObject());
+                notification.saveInBackground().subscribe();
 
             }
         });
