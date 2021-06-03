@@ -70,6 +70,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 initLiveQuery();
+//                orderAdapter.notifyDataSetChanged();
             }
         });
 
@@ -95,6 +96,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void success(List data) {
                         orderAdapter.setList(data);
+                        orderAdapter.notifyDataSetChanged();
                     }
 
                     @Override
@@ -115,6 +117,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void success(List data) {
                         orderAdapter.setList(data);
+                        orderAdapter.notifyDataSetChanged();
                     }
 
                     @Override
@@ -136,6 +139,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void success(List data) {
                         orderAdapter.setList(data);
+                        orderAdapter.notifyDataSetChanged();
                     }
 
                     @Override
@@ -157,6 +161,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void success(List data) {
                         orderAdapter.setList(data);
+                        orderAdapter.notifyDataSetChanged();
                     }
 
                     @Override
@@ -178,6 +183,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void success(List data) {
                         orderAdapter.setList(data);
+                        orderAdapter.notifyDataSetChanged();
                     }
 
                     @Override
@@ -250,6 +256,7 @@ public class HomeActivity extends AppCompatActivity {
                 System.out.println("-----------------------------"+throwable.toString());
             }
             public void onComplete() {
+                orderAdapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });

@@ -51,7 +51,7 @@ public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
                     }
                     @Override
                     public void onNext(@NotNull AVObject avObject) {
-                        _this.notifyDataSetChanged();
+                        //_this.notifyDataSetChanged();
                     }
                     @Override
                     public void onError(@NotNull Throwable e) {
@@ -59,7 +59,7 @@ public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
                     }
                     @Override
                     public void onComplete() {
-
+                        _this.notifyDataSetChanged();
                     }
                 });
             }
@@ -78,7 +78,7 @@ public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
 
                     @Override
                     public void onNext(@NotNull AVObject avObject) {
-                        _this.notifyDataSetChanged();
+                        //_this.notifyDataSetChanged();
                     }
 
                     @Override
@@ -88,7 +88,7 @@ public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
 
                     @Override
                     public void onComplete() {
-
+                        _this.notifyDataSetChanged();
                     }
                 });
 
@@ -98,6 +98,9 @@ public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
         if(item.isConfirmed){
             helper.getView(R.id.layout).setBackgroundColor(mContext.getResources().getColor(R.color.bluegreen));
             helper.getView(R.id.button).setEnabled(false);
+        }else{
+            helper.getView(R.id.layout).setBackgroundColor(mContext.getResources().getColor(R.color.comment_divider));
+            helper.getView(R.id.button).setEnabled(true);
         }
 
     }
