@@ -24,12 +24,16 @@ import android.widget.TextView;
 import androidx.fragment.app.DialogFragment;
 
 import com.app.Models.LoginListener;
+import com.app.myapplication.Home.NavigationActivity;
 import com.app.myapplication.R;
 import com.app.myapplication.ShopActivity;
 
 import cn.leancloud.AVInstallation;
+import cn.leancloud.AVObject;
 import cn.leancloud.AVUser;
+import cn.leancloud.push.PushService;
 import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
@@ -116,6 +120,53 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 String InstallationID = AVInstallation.getCurrentInstallation().getInstallationId();
                 avUser.put("InstallationID", InstallationID);
                 avUser.saveInBackground();
+                PushService.setDefaultChannelId(this_, "1");
+                AVInstallation.getCurrentInstallation().saveInBackground().subscribe(new Observer<AVObject>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+                    @Override
+                    public void onNext(AVObject avObject) {
+                        // 关联 installationId 到用户表等操作。
+                        String installationId = AVInstallation.getCurrentInstallation().getInstallationId();
+                        AVObject user = AVUser.getCurrentUser();
+                        if(user != null) {
+                            user.put("InstallationID", installationId);
+                            user.saveInBackground().subscribe(new Observer<AVObject>() {
+                                @Override
+                                public void onSubscribe(@NonNull Disposable d) {
+
+                                }
+
+                                @Override
+                                public void onNext(@NonNull AVObject avObject) {
+                                    System.out.println("user InstallationID 保存成功");
+                                }
+
+                                @Override
+                                public void onError(@NonNull Throwable e) {
+
+                                }
+
+                                @Override
+                                public void onComplete() {
+
+                                }
+                            });
+                        }
+                        System.out.println("保存成功：" + installationId );
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        System.out.println("保存失败，错误信息：" + e.getMessage());
+                    }
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+                // 设置默认打开的 Activity
+                PushService.setDefaultPushCallback(this_, NavigationActivity.class);
+
 
                 AlertDialog alertDialog;
                 AlertDialog.Builder alertDialog_builder=new AlertDialog.Builder(this_);

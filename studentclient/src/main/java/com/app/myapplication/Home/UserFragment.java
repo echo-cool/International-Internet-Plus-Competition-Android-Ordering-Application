@@ -350,7 +350,7 @@ public class UserFragment extends Fragment {
         tempView=null;
         nAdapter.setExpandPosition(-1);
         nAdapter.setExpandNotificationBean(null);
-        loadNotificationList(AVUser.getCurrentUser() == null ? "60afa0a3dd770475f266d21f": AVUser.getCurrentUser().getObjectId());
+        loadNotificationList(AVUser.getCurrentUser() == null ? "": AVUser.getCurrentUser().getObjectId());
     }
 
     public double getAlpha(int i){
