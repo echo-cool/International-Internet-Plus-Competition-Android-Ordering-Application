@@ -106,6 +106,7 @@ public class UserFragment extends Fragment {
         super.onResume();
         getActivity().findViewById(R.id.temp_button).setVisibility(View.GONE);
         getActivity().findViewById(R.id.temp_button).setVisibility(View.INVISIBLE);
+        refresh();
         //getActivity().getWindow().setStatusBarColor(getActivity().getResources().getColor(R.color.user_page));
     }
 
