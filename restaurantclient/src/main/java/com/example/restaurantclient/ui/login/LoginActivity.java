@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -123,7 +124,32 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 //TODO:写登录请求
+                login(usernameEditText.getEditableText().toString(), passwordEditText.getEditableText().toString(), new LoginListener() {
+                    @Override
+                    public void LoginSuccess(AVUser avUser) {
+                        System.out.println("登陆成功！");
+                    }
+
+                    @Override
+                    public void LoginFailed(String reason) {
+
+                    }
+                });
             }
+        });
+    }
+    public void login(String username, String password, LoginListener listener){
+        AVUser.logIn(username, password).subscribe(new io.reactivex.Observer<AVUser>() {
+            public void onSubscribe(Disposable disposable) {}
+            public void onNext(AVUser user) {
+                // 登录成功
+                listener.LoginSuccess(user);
+            }
+            public void onError(Throwable throwable) {
+                // 登录失败（可能是密码错误）
+                listener.LoginFailed(throwable.toString());
+            }
+            public void onComplete() {}
         });
     }
 
