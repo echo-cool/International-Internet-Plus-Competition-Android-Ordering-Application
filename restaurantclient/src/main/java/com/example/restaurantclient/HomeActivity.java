@@ -16,6 +16,15 @@ import com.example.restaurantclient.ui.login.LoginActivity;
 import java.util.LinkedList;
 import java.util.List;
 
+import cn.leancloud.AVException;
+import cn.leancloud.AVObject;
+import cn.leancloud.AVQuery;
+import cn.leancloud.livequery.AVLiveQuery;
+import cn.leancloud.livequery.AVLiveQueryEventHandler;
+import cn.leancloud.livequery.AVLiveQuerySubscribeCallback;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
 public class HomeActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -32,11 +41,51 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setAdapter(orderAdapter);
 
         orderAdapter.setList(testUtil());
+
     }
 
     public void login(View view){
         Intent intent=new Intent(this, LoginActivity.class);
         startActivity(intent);
+    }
+    public void initLiveQuery(){
+        AVQuery<AVObject> query = new AVQuery<>("Order");
+        query.whereEqualTo("isEnded", false);
+        AVLiveQuery liveQuery = AVLiveQuery.initWithQuery(query);
+        liveQuery.setEventHandler(new AVLiveQueryEventHandler() {
+            @Override
+            public void onObjectCreated(AVObject newTodo) {
+                System.out.println(newTodo);
+            }
+
+            @Override
+            public void onObjectUpdated(AVObject avObject, List<String> updateKeyList) {
+
+            }
+
+            @Override
+            public void onObjectEnter(AVObject avObject, List<String> updateKeyList) {
+
+            }
+
+            @Override
+            public void onObjectLeave(AVObject avObject, List<String> updateKeyList) {
+
+            }
+
+            @Override
+            public void onObjectDeleted(String objectId) {
+
+            }
+        });
+        liveQuery.subscribeInBackground(new AVLiveQuerySubscribeCallback() {
+            @Override
+            public void done(AVException e) {
+                if (e == null) {
+                    // 订阅成功
+                }
+            }
+        });
     }
 
     public void load(){
@@ -45,6 +94,24 @@ public class HomeActivity extends AppCompatActivity {
         //地点：location\n
         //总价：price\n
         //内容：猪头x1，烧鸭饭x1，招牌鸡肉饭x1
+        AVQuery<AVObject> query = new AVQuery<>("Order");
+        query.whereEqualTo("isEnded", false);
+        query.include("Restaurant");
+        query.include("user");
+        query.findInBackground().subscribe(new Observer<List<AVObject>>() {
+            public void onSubscribe(Disposable disposable) {}
+            public void onNext(List<AVObject> data) {
+                for (AVObject res: data
+                     ) {
+                    String title = res.getObjectId();
+                    String info = res.getAVObject("user").getString("mobilePhoneNumber");
+                    String location = res.getString("Location");
+                    Number price = res.getNumber("TotalPrice");
+                }
+            }
+            public void onError(Throwable throwable) {}
+            public void onComplete() {}
+        });
     }
 
     public List<OrderBean> testUtil(){
