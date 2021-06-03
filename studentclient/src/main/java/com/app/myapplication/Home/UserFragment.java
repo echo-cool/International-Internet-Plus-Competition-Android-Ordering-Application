@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,8 +26,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.google.android.material.appbar.AppBarLayout;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -115,13 +119,60 @@ public class UserFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mContext=this.getActivity();
         final NestedScrollView nestedScrollView=getActivity().findViewById(R.id.scroll_2);
         loadUser();
+        swipeRefreshLayout=getActivity().findViewById(R.id.swipe_refresh);
         appBarLayout=getActivity().findViewById(R.id.appbar);
+        recyclerView=this.getActivity().findViewById(R.id.notification_list);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(mContext);
+        recyclerView.setLayoutManager(layoutManager);
+        //CardView cardView=getActivity().findViewById(R.id.refresh);
+
+
+//        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
+//        AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
+//        behavior.setDragCallback(new AppBarLayout.Behavior.DragCallback() {
+//            @Override
+//            public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
+//                return true;
+//            }
+//        });
+//
+//        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//                super.onScrollStateChanged(recyclerView, newState);
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+//                    int firstVisiblePosition = layoutManager.findFirstCompletelyVisibleItemPosition();
+//                    if (firstVisiblePosition == 0) {
+//                        appBarLayout.setExpanded(true, true);
+//                    }
+//                }
+//            }
+//        });
+
+
+
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 System.out.println("=========================="+verticalOffset);
+//                if (verticalOffset == 0) {
+//                    ((Activity)mContext).findViewById(R.id.loading).setVisibility(View.VISIBLE);
+//                    refresh();
+//                }
+
+//                if (verticalOffset >= 0) {
+//                    swipeRefreshLayout.setEnabled(true);
+//                } else {
+//                    swipeRefreshLayout.setEnabled(false);
+//                }
+                //((CoordinatorLayout.LayoutParams)cardView.getLayoutParams()).leftMargin=(-verticalOffset);
+
+
+
+
                 recyclerView.setAlpha((float) getAlpha(verticalOffset));
                 getActivity().findViewById(R.id.user_profile).setAlpha(1-(float) getAlpha(verticalOffset));
                 getActivity().findViewById(R.id.user_avatar).getLayoutParams().height=ViewUtils.dip2px(mContext,104-(-verticalOffset)/7-10);
@@ -139,11 +190,12 @@ public class UserFragment extends Fragment {
         });
 
 
-        mContext=this.getActivity();
-        recyclerView=this.getActivity().findViewById(R.id.notification_list);
+
+
+
         nAdapter =new NotificationAdapter(new LinkedList<>());
         //nAdapter.setHeaderView(new MarginView(mContext));
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+
         recyclerView.setAdapter(nAdapter);
         recyclerView.setItemAnimator(new NoAlphaAnimator());
         ((SimpleItemAnimator)recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
@@ -272,6 +324,7 @@ public class UserFragment extends Fragment {
             }
             public void onComplete() {
                 //swipeRefreshLayout.setRefreshing(false);
+                //((Activity)mContext).findViewById(R.id.loading).setVisibility(View.GONE);
             }
         });
 
