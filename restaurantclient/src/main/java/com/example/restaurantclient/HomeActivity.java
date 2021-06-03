@@ -207,7 +207,7 @@ public class HomeActivity extends AppCompatActivity {
         query.whereEqualTo("isEnded", false);
         AVObject user = AVObject.createWithoutData("_User", AVUser.getCurrentUser() == null ? "60afa0a3dd770475f266d21f": AVUser.getCurrentUser().getObjectId());
         query.whereEqualTo("user", user);
-        System.out.println(AVUser.getCurrentUser().getObjectId());
+        //System.out.println(AVUser.getCurrentUser().getObjectId());
         query.include("Restaurant");
         query.include("user");
         query.findInBackground().subscribe(new Observer<List<AVObject>>() {

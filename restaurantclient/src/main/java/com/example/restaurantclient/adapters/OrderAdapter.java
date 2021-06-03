@@ -13,9 +13,13 @@ import com.example.beans.OrderBean;
 import com.example.restaurantclient.R;
 import com.example.restaurantclient.views.OrderView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import cn.leancloud.AVObject;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
     List<OrderBean> list;
@@ -40,10 +44,24 @@ public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
                 //TODO:将数据库上该订单的isConfirmed设置为true,如果设置成功将item的isConfirm属性设置为true,同时调用_this.notifyDataSetChange(),同时向用户端推送骑手已取餐消息，在消息表上给用户写一条已取餐消息;
                 AVObject order = AVObject.createWithoutData("Order", item.id);
                 order.put("isConfirmed", true);
-                order.save();
-                if(order.getBoolean("isConfirmed")){
-                    _this.notifyDataSetChanged();
-                }
+                order.saveInBackground().subscribe(new Observer<AVObject>() {
+                    @Override
+                    public void onSubscribe(@NotNull Disposable d) {
+
+                    }
+                    @Override
+                    public void onNext(@NotNull AVObject avObject) {
+                        _this.notifyDataSetChanged();
+                    }
+                    @Override
+                    public void onError(@NotNull Throwable e) {
+
+                    }
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
             }
         });
         helper.getView(R.id.button3).setOnClickListener(new View.OnClickListener() {
@@ -52,11 +70,27 @@ public class OrderAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
                 //TODO:将数据库上该订单的isEnded设置为true,如果设置成功,从list中删除这个item并同时调用_this.notifyDataSetChange(),同时向用户端推送已送达消息，同时在消息表上给用户写一条订单结束消息;
                 AVObject order = AVObject.createWithoutData("Order", item.id);
                 order.put("isEnded", true);
-                order.save();
-                if(order.getBoolean("isEnded")){
-                    order.delete();
-                    _this.notifyDataSetChanged();
-                }
+                order.saveInBackground().subscribe(new Observer<AVObject>() {
+                    @Override
+                    public void onSubscribe(@NotNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NotNull AVObject avObject) {
+                        _this.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onError(@NotNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
 
 
             }
