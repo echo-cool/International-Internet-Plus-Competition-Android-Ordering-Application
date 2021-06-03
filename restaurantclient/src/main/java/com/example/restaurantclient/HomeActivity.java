@@ -63,6 +63,13 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+            }
+        });
+
 //        orderAdapter.setList(testUtil());
 
     }
