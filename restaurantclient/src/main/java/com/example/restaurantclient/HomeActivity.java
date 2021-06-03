@@ -205,6 +205,7 @@ public class HomeActivity extends AppCompatActivity {
         //内容：猪头x1，烧鸭饭x1，招牌鸡肉饭x1
         AVQuery<AVObject> query = new AVQuery<>("Order");
         query.whereEqualTo("isEnded", false);
+        query.orderByDescending("updatedAt");
         AVObject user = AVObject.createWithoutData("_User", AVUser.getCurrentUser() == null ? "60afa0a3dd770475f266d21f": AVUser.getCurrentUser().getObjectId());
         query.whereEqualTo("user", user);
         //System.out.println(AVUser.getCurrentUser().getObjectId());
@@ -214,17 +215,18 @@ public class HomeActivity extends AppCompatActivity {
             public void onSubscribe(Disposable disposable) {}
             public void onNext(List<AVObject> data) {
                 LinkedList<OrderBean> result = new LinkedList<>();
-                for (AVObject res: data
-                ) {
+                for (AVObject res: data) {
                     String title = res.getObjectId();
                     String info = res.getAVObject("user").getString("mobilePhoneNumber");
                     String location = res.getString("Location");
                     JSONObject foods = res.getJSONObject("foods");
                     Number price = res.getNumber("TotalPrice");
-                    OrderBean orderBean = new OrderBean(title,title,info,foods.toJSONString());
+                    OrderBean orderBean = new OrderBean(title,title,info, "总价：" + price.toString() + "\n收货地点：" + location + "\n订单详情：" + foods.toJSONString());
                     result.add(orderBean);
                 }
                 listener.success(result);
+                orderAdapter.setList(result);
+
             }
             public void onError(Throwable throwable) {
                 listener.failed(throwable.toString());
