@@ -8,6 +8,7 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,11 +43,14 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     private LinearLayout mName, mPsw;
 
+    private Context mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
+        mContext=this;
 
         mBtnLogin = (TextView) findViewById(R.id.main_btn_login);
         progress = findViewById(R.id.layout_progress);
@@ -64,15 +68,15 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             }
         });
         AVUser currentUser = AVUser.getCurrentUser();
-        if (currentUser != null) {
-            // 跳到首页
-            System.out.println("已经登陆成功。");
-            Intent intent = new Intent(this, ShopActivity.class);
-            startActivity(intent);
-        } else {
-            // 显示注册或登录页面
-            // pass
-        }
+//        if (currentUser != null) {
+//            // 跳到首页
+//            System.out.println("已经登陆成功。");
+//            Intent intent = new Intent(this, ShopActivity.class);
+//            startActivity(intent);
+//        } else {
+//            // 显示注册或登录页面
+//            // pass
+//        }
     }
     public void login(String username, String password, LoginListener listener){
         AVUser.logIn(username, password).subscribe(new Observer<AVUser>() {
@@ -85,7 +89,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 // 登录失败（可能是密码错误）
                 listener.LoginFailed(throwable.toString());
             }
-            public void onComplete() {}
+            public void onComplete() {
+                ((Activity)mContext).finish();
+            }
         });
     }
 
