@@ -7,6 +7,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
@@ -66,7 +67,7 @@ public class HomeActivity extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                initLiveQuery();
             }
         });
 
@@ -194,6 +195,7 @@ public class HomeActivity extends AppCompatActivity {
             public void done(AVException e) {
                 if (e == null) {
                     // 订阅成功
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             }
         });
@@ -201,6 +203,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void logOut(View view){
         AVUser.logOut();
+        initLiveQuery();
         this.onResume();
     }
 

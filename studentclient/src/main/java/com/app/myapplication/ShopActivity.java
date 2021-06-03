@@ -371,16 +371,17 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
         setContentView(R.layout.activity_shop);
         mContext=this;
         Intent intent=getIntent();
-        shopId=intent.getStringExtra("shopId");
-        shopName=intent.getStringExtra("shopName");
+
         merchantBean= (MerchantBean) intent.getSerializableExtra("shop");
-        System.out.println("++++++++++++++++++++++++++++++++"+merchantBean.merchantOBJ);
-        if(merchantBean==null) {
-            merchantBean = new MerchantBean(shopId, shopName);
-        }
-        if(shopId==null){
-            shopId="60aa42ef6d8bee18f6112967";
-        }
+        shopId=merchantBean.id;
+        shopName=merchantBean.mctName;
+        System.out.println("++++++++++++++++++++++++++++++++"+merchantBean.mctName);
+//        if(merchantBean==null) {
+//            merchantBean = new MerchantBean(shopId, shopName);
+//        }
+//        if(shopId==null){
+//            shopId="60aa42ef6d8bee18f6112967";
+//        }
         loadShopInformation();
         setViewPager();
         ((ShopCarView)findViewById(R.id.shopcar)).setOnClickListener(new ShopCarView.OnClickListener() {
