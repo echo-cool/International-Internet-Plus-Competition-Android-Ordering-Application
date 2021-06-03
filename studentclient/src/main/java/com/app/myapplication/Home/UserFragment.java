@@ -104,6 +104,7 @@ public class UserFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        loadUser();
         getActivity().findViewById(R.id.temp_button).setVisibility(View.GONE);
         getActivity().findViewById(R.id.temp_button).setVisibility(View.INVISIBLE);
         refresh();

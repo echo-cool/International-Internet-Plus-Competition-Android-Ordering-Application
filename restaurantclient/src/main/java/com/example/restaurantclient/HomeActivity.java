@@ -238,7 +238,7 @@ public class HomeActivity extends AppCompatActivity {
                 LinkedList<OrderBean> result = new LinkedList<>();
                 for (AVObject res: data) {
                     String title = res.getObjectId();
-                    String info = res.getAVObject("user").getString("username");
+                    String info = res.getString("username");
                     String location = res.getString("Location");
                     JSONObject foods = res.getJSONObject("foods");
                     Number price = res.getNumber("TotalPrice");
