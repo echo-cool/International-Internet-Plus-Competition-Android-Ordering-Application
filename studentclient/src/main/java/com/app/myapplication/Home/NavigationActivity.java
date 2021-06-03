@@ -20,11 +20,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import cn.leancloud.AVUser;
+
 public class NavigationActivity extends AppCompatActivity {
     List<Fragment> fragments = new ArrayList<Fragment>();
     Fragment user,home,forum,notification;
     ViewPager2 vp2;
     IBubbleNavigation bottomNavigation;
+
+
 
 
     @Override

@@ -132,6 +132,14 @@ public class UserFragment extends Fragment {
         //CardView cardView=getActivity().findViewById(R.id.refresh);
 
 
+
+        getActivity().findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AVUser.logOut();
+                onResume();
+            }
+        });
 //        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
 //        AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
 //        behavior.setDragCallback(new AppBarLayout.Behavior.DragCallback() {
