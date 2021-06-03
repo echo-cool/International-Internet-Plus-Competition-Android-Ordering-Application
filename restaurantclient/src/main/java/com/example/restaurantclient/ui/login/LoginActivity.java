@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -36,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
+    private Context mContext;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        mContext=this;
 
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
@@ -144,12 +147,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onNext(AVUser user) {
                 // 登录成功
                 listener.LoginSuccess(user);
+
             }
             public void onError(Throwable throwable) {
                 // 登录失败（可能是密码错误）
                 listener.LoginFailed(throwable.toString());
             }
-            public void onComplete() {}
+            public void onComplete() {((Activity)mContext).finish();}
         });
     }
 

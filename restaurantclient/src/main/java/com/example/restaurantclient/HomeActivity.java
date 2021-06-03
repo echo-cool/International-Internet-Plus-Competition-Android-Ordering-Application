@@ -8,6 +8,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.beans.OrderBean;
 import com.example.restaurantclient.adapters.OrderAdapter;
@@ -19,6 +20,7 @@ import java.util.List;
 import cn.leancloud.AVException;
 import cn.leancloud.AVObject;
 import cn.leancloud.AVQuery;
+import cn.leancloud.AVUser;
 import cn.leancloud.livequery.AVLiveQuery;
 import cn.leancloud.livequery.AVLiveQueryEventHandler;
 import cn.leancloud.livequery.AVLiveQuerySubscribeCallback;
@@ -88,6 +90,11 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    public void logOut(View view){
+        AVUser.logOut();
+        this.onResume();
+    }
+
     public void load(){
         //TODO：按时间顺序拉取所有该账号的isEnded=false的订单信息，成功后调用orderAdapter的setList函数，
         //title随便取，info写请求人手机号这种格式139xxxx1600，content格式大概如下
@@ -126,4 +133,13 @@ public class HomeActivity extends AppCompatActivity {
         return list;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(AVUser.getCurrentUser()==null){
+            ((TextView)findViewById(R.id.User_title)).setText("未登录");
+        }else{
+            ((TextView)findViewById(R.id.User_title)).setText("欢迎"+AVUser.getCurrentUser().getUsername());
+        }
+    }
 }
