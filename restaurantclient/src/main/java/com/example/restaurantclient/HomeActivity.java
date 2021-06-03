@@ -197,7 +197,7 @@ public class HomeActivity extends AppCompatActivity {
         this.onResume();
     }
 
-    public void load(){
+    public void load(RequestListener listener){
         //TODO：按时间顺序拉取所有该账号的isEnded=false的订单信息，成功后调用orderAdapter的setList函数，
         //title随便取，info写请求人手机号这种格式139xxxx1600，content格式大概如下
         //地点：location\n
@@ -215,7 +215,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onNext(List<AVObject> data) {
                 LinkedList<OrderBean> result = new LinkedList<>();
                 for (AVObject res: data
-                     ) {
+                ) {
                     String title = res.getObjectId();
                     String info = res.getAVObject("user").getString("mobilePhoneNumber");
                     String location = res.getString("Location");
