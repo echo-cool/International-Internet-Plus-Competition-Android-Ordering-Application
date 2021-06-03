@@ -242,7 +242,7 @@ public class HomeActivity extends AppCompatActivity {
                     String location = res.getString("Location");
                     JSONObject foods = res.getJSONObject("foods");
                     Number price = res.getNumber("TotalPrice");
-                    String finalcontent = "内容：";
+                    String finalcontent = "";
                     for (String i: foods.keySet()){
                         JSONObject s = foods.getJSONObject(i);
                         String temp = s.getString("name")+"x"+s.getIntValue("selectCount")+" ";
