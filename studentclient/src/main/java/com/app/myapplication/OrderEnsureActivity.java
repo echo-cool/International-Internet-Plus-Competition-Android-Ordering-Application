@@ -42,12 +42,11 @@ public class OrderEnsureActivity extends AppCompatActivity {
         Intent intent=getIntent();
         foodBeans= (ArrayList<FoodBean>) intent.getSerializableExtra("Foods");
         merchantBean= (MerchantBean) intent.getSerializableExtra("Shop");
-        this.merchantOBJ = AVObject.createWithoutData("Restaurant", merchantBean.id);
+        this.merchantOBJ = merchantBean.getMerchantOBJ();
         RecyclerView recyclerView=((RecyclerView)findViewById(R.id.simple_food_list));
         foodSimpleAdapter=new FoodSimpleAdapter(foodBeans);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(foodSimpleAdapter);
-
         ((TextView)findViewById(R.id.canteen_name)).setText(merchantBean.mctName);
         for(FoodBean foodBean:foodBeans){
             price+=foodBean.foodPrice*foodBean.selectCount;
@@ -76,6 +75,7 @@ public class OrderEnsureActivity extends AppCompatActivity {
         // 构建对象
         AVObject todo = new AVObject("Order");
         // 为属性赋值
+
         String location = (((EditText)findViewById(R.id.editTextLocation)).getEditableText().toString());
         todo.put("Location", location);
         todo.put("username", AVUser.getCurrentUser().getUsername());
@@ -83,6 +83,7 @@ public class OrderEnsureActivity extends AppCompatActivity {
         todo.put("Restaurant", this.merchantOBJ);
         todo.put("foods", foods);
         todo.put("TotalPrice", price);
+        todo.put("Owner",merchantOBJ.getAVObject("Owner"));
         // 将对象保存到云端
         todo.saveInBackground().subscribe(new Observer<AVObject>() {
             public void onSubscribe(Disposable disposable) {}

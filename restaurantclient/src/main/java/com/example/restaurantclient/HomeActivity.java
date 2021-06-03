@@ -36,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout;
     OrderAdapter orderAdapter;
     AVLiveQuery liveQuery;
+    RequestListener requestListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(orderAdapter);
         initLiveQuery();
-        load(new RequestListener() {
+        requestListener=new RequestListener() {
             @Override
             public void success(List data) {
                 orderAdapter.setList(data);
@@ -62,7 +63,8 @@ public class HomeActivity extends AppCompatActivity {
             public void failed(String reason) {
 
             }
-        });
+        };
+
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -83,7 +85,8 @@ public class HomeActivity extends AppCompatActivity {
         AVQuery<AVObject> query = new AVQuery<>("Order");
         query.whereEqualTo("isEnded", false);
         AVObject user = AVObject.createWithoutData("_User", AVUser.getCurrentUser() == null ? "60afa0a3dd770475f266d21f": AVUser.getCurrentUser().getObjectId());
-        query.whereEqualTo("user", user);
+        query.whereEqualTo("Owner",user);
+
         liveQuery = AVLiveQuery.initWithQuery(query);
         liveQuery.setEventHandler(new AVLiveQueryEventHandler() {
             @Override
@@ -195,7 +198,9 @@ public class HomeActivity extends AppCompatActivity {
             public void done(AVException e) {
                 if (e == null) {
                     // 订阅成功
-                    swipeRefreshLayout.setRefreshing(false);
+                    load(requestListener);
+                }else{
+                    e.printStackTrace();
                 }
             }
         });
@@ -217,10 +222,10 @@ public class HomeActivity extends AppCompatActivity {
         query.whereEqualTo("isEnded", false);
         query.orderByDescending("updatedAt");
         AVObject user = AVObject.createWithoutData("_User", AVUser.getCurrentUser() == null ? "60afa0a3dd770475f266d21f": AVUser.getCurrentUser().getObjectId());
-        query.whereEqualTo("user", user);
+
         //System.out.println(AVUser.getCurrentUser().getObjectId());
-        query.include("Restaurant");
-        query.include("user");
+        query.whereEqualTo("Owner",user);
+
         query.findInBackground().subscribe(new Observer<List<AVObject>>() {
             public void onSubscribe(Disposable disposable) {}
             public void onNext(List<AVObject> data) {
@@ -232,6 +237,8 @@ public class HomeActivity extends AppCompatActivity {
                     JSONObject foods = res.getJSONObject("foods");
                     Number price = res.getNumber("TotalPrice");
                     OrderBean orderBean = new OrderBean(title,title,info, "总价：" + price.toString() + "\n收货地点：" + location + "\n订单详情：" + foods.toJSONString());
+                    orderBean.isConfirmed=res.getBoolean("isConfirmed");
+                    orderBean.isEnded=res.getBoolean("isEnded");
                     result.add(orderBean);
                 }
                 listener.success(result);
@@ -240,8 +247,11 @@ public class HomeActivity extends AppCompatActivity {
             }
             public void onError(Throwable throwable) {
                 listener.failed(throwable.toString());
+                System.out.println("-----------------------------"+throwable.toString());
             }
-            public void onComplete() {}
+            public void onComplete() {
+                swipeRefreshLayout.setRefreshing(false);
+            }
         });
     }
 
