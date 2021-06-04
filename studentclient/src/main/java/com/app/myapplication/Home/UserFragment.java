@@ -159,7 +159,7 @@ public class UserFragment extends Fragment {
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                System.out.println("=========================="+verticalOffset);
+                //System.out.println("=========================="+verticalOffset);
 //                if (verticalOffset == 0) {
 //                    ((Activity)mContext).findViewById(R.id.loading).setVisibility(View.VISIBLE);
 //                    refresh();
@@ -312,7 +312,7 @@ public class UserFragment extends Fragment {
             public void onSubscribe(Disposable disposable) {}
             public void onNext(List<AVObject> list) {
                 // list 是包含满足条件的 All_notification 对象的数组
-                System.out.println("-----------------------------"+list.size());
+                //System.out.println("-----------------------------"+list.size());
                 List<NotificationBean> notificationList = new LinkedList<>();
                 // public NotificationBean(String title, String summary, String detail)
                 for(AVObject avObject : list){
