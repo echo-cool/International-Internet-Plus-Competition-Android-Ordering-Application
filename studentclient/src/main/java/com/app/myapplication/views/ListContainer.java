@@ -164,18 +164,18 @@ public class ListContainer extends LinearLayout {
 		if (n <= firstItem) {
 			//当要置顶的项在当前显示的第一个项的前面时
 			//recyclerView2.scrollToPosition(n);
-			recyclerView2.smoothScrollToPosition(n);
+			recyclerView2.scrollToPosition(n);
 		} else if (n <= lastItem) {
 			//当要置顶的项已经在屏幕上显示时
 			int top = recyclerView2.getChildAt(n - firstItem).getTop();
 //
-			recyclerView2.smoothScrollBy(0, top);
+			recyclerView2.scrollBy(0, top);
 //			recyclerView2.scrollBy(0, top);
 //			recyclerView2.smoothScrollToPosition(n);
 		} else {
 			//当要置顶的项在当前显示的最后一项的后面时
 //			recyclerView2.scrollToPosition(Math.min(0,n-3));
-			recyclerView2.smoothScrollToPosition(n);
+			recyclerView2.scrollToPosition(n);
 			//这里这个变量是用在RecyclerView滚动监听里面的
 			//move = true;
 		}
