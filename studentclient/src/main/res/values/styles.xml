@@ -40,4 +40,11 @@
         <item name="android:textColor">@color/colorSpecialDark</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="lgjTheme" parent="@android:style/Theme.NoTitleBar.Fullscreen">
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@null</item>
+        <item name="android:background">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 </resources>
