@@ -13,7 +13,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_order">点餐</string>
     <string name="title_comments">评论</string>
-    <string name="detail_header_behavior">detail_header_behavior</string>
+    <string name="detail_header_behavior">com.app.myapplication.behaviors.DetailHeaderBehavior</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_login">登录</string>
     <string name="title_sign_up">注册</string>
@@ -44,4 +44,9 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="selected">已选</string>
     <string name="clear">清空</string>
+    <string name="close">关闭</string>
+    <string name="scroll_behavior">@string/appbar_scrolling_view_behavior</string>
+    <string name="more">更多</string>
+    <string name="title_recommend">推荐</string>
+    <string name="like">❤</string>
 </resources>

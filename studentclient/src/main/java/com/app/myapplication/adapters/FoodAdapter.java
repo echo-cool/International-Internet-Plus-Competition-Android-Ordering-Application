@@ -46,6 +46,7 @@ public class FoodAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
         helper.setText(R.id.tv_summary,item.foodSummary);
         helper.setText(R.id.tv_price,"¥ "+item.foodPrice);
         helper.setText(R.id.tv_sale,"日销:"+item.foodSale);
+        helper.addOnClickListener(R.id.iv_food);
         //System.out.println("convert");
         if(item.foodImage==null){
             //broccoli.addPlaceholder(new PlaceholderParameter.Builder().setView(helper.getView(R.id.iv_food)).setDrawable(new BroccoliGradientDrawable(Color.parseColor("#DDDDDD"), Color.parseColor("#CCCCCC"), 0, 1000, new LinearInterpolator())).build());
