@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
         new Handler().postDelayed(()->{
             _this.startActivity(new Intent(this, NavigationActivity.class));
             _this.finish();
-        },3000);
+        },0);
     }
 
     private void setWindow(){

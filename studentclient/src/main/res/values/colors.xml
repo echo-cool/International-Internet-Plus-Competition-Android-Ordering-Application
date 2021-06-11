@@ -327,7 +327,7 @@
 
 
     <color name="home_page">#FCDD7C</color>
-    <color name="notification_page">#65c1dc</color>
-    <color name="forum_page">#7DC481</color>
+    <color name="notification_page">#7DC481</color>
+    <color name="forum_page">#65c1dc</color>
     <color name="user_page">#FFAAA7</color>
 </resources>

@@ -1,12 +1,16 @@
 package com.app.myapplication.Home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
+import com.app.myapplication.PostActivity;
 import com.app.myapplication.R;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -68,4 +72,32 @@ public class ForumFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_forum, container, false);
     }
+
+    @Override
+    public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        SearchView searchView = getActivity().findViewById(R.id.searchView);
+                searchView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // 弹出软键盘
+                        searchView.setIconified(false);
+                        // 切换 Fragment
+                        //getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new SearchViewFragment()).commitAllowingStateLoss();
+                    }
+                });
+
+        getActivity().findViewById(R.id.floatingActionButton5).setOnClickListener((View view)->{
+            click(view);
+        });
+    }
+
+
+
+    public void click(View view){
+        getActivity().startActivity(new Intent(getActivity(), PostActivity.class));
+    }
+
+
 }
