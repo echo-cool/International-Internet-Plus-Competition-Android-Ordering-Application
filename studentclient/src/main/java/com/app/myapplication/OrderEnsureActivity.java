@@ -28,6 +28,9 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 public class OrderEnsureActivity extends AppCompatActivity {
+
+    public static List<FoodBean> foodBeanList;
+
     private Context mContext;
     private ArrayList<FoodBean> foodBeans;
     private MerchantBean merchantBean;
@@ -37,11 +40,16 @@ public class OrderEnsureActivity extends AppCompatActivity {
     private AVObject merchantOBJ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("======================================0");
         super.onCreate(savedInstanceState);
+
         mContext=this;
         setContentView(R.layout.activity_order_ensure);
         Intent intent=getIntent();
-        foodBeans= (ArrayList<FoodBean>) intent.getSerializableExtra("Foods");
+        foodBeans=new ArrayList<>();
+        foodBeans.addAll(foodBeanList);
+        foodBeanList=null;
+        System.out.println("======================================1");
         merchantBean= (MerchantBean) intent.getSerializableExtra("Shop");
         this.merchantOBJ = merchantBean.getMerchantOBJ();
         RecyclerView recyclerView=((RecyclerView)findViewById(R.id.simple_food_list));
@@ -49,12 +57,15 @@ public class OrderEnsureActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(foodSimpleAdapter);
         ((TextView)findViewById(R.id.canteen_name)).setText(merchantBean.mctName);
+        System.out.println("======================================2");
         for(FoodBean foodBean:foodBeans){
             price+=foodBean.foodPrice*foodBean.selectCount;
             packet_price+=1;
         }
+        System.out.println("======================================3");
         ((TextView)findViewById(R.id.text_price)).setText("¥"+(price+packet_price));
         ((TextView)findViewById(R.id.text_packet_price)).setText("另需打包费用：¥"+(packet_price));
+        System.out.println("======================================4");
 
     }
 

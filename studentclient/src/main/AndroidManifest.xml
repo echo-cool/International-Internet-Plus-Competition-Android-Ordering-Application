@@ -29,7 +29,8 @@
         <activity android:name=".TestActivity">
 
         </activity>
-        <activity android:name=".OrderEnsureActivity" />
+        <activity android:name=".OrderEnsureActivity"
+            android:theme="@style/shop"/>
         <activity android:name=".merchant.MerchantActivity">
 
             <!-- <intent-filter> -->

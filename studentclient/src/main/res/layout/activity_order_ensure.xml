@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/detail_divider"
+    android:screenOrientation="portrait"
     tools:context=".OrderEnsureActivity">
 
     <androidx.appcompat.widget.Toolbar

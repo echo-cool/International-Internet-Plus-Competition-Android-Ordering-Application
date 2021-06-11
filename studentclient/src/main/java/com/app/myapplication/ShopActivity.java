@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.view.View;
 import android.view.Window;
@@ -400,11 +401,16 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
                 if(AVUser.getCurrentUser()!=null) {
                     Intent intent = new Intent(mContext, OrderEnsureActivity.class);
                     LinkedList<FoodBean> foodBeans = (LinkedList<FoodBean>) getOrderedFoodList();
-                    intent.putExtra("Foods", foodBeans);
-                    System.out.println("++++++++++++++++++++++++++++++++"+merchantBean.merchantOBJ);
+                    System.out.println("--------------------------------0");
+                    //intent.putExtra("Foods", foodBeans);
+                    OrderEnsureActivity.foodBeanList=foodBeans;
+                    //System.out.println("++++++++++++++++++++++++++++++++"+merchantBean.merchantOBJ);
                     intent.putExtra("Shop", merchantBean);
+                    System.out.println("--------------------------------1");
                     //saveOrder(foodBeans, merchantBean);
                     startActivity(intent);
+
+                    //System.out.println("--------------------------------2");
                 }else{
                     Intent intent=new Intent(mContext, LoginActivity.class);
                     startActivity(intent);
@@ -590,7 +596,7 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
             ((Activity)mContext).runOnUiThread(()->{
                 shopOrderFragment.getListContainer().foodAdapter.notifyDataSetChanged();
                 shopOrderFragment.getListContainer().typeAdapter.notifyDataSetChanged();
-                ((ShopCarView)findViewById(R.id.shopcar)).setPrice(0);
+                ((ShopCarView)findViewById(R.id.shopcar)).setPrice(0,0);
                 ViewUtils.collapse(findViewById(R.id.carpop));
                 //System.out.println("------------------------"+(System.currentTimeMillis()-i));
             });
