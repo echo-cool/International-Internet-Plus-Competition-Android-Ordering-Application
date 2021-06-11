@@ -15,11 +15,11 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginTop="25dp"
-        android:onClick="close"
         android:alpha="0"
         android:elevation="4dp"
+        android:onClick="close"
         android:scaleType="centerInside"
-        android:src="@drawable/icon_detail_back"/>
+        android:src="@drawable/icon_detail_back" />
 
     <TextView
         android:id="@+id/tv_close"
@@ -41,9 +41,5 @@
         app:layout_behavior="@string/scroll_behavior"/>
 
     <include layout="@layout/view_black"/>
-
-    <include layout="@layout/view_carpop"/>
-
-    <include layout="@layout/view_car"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

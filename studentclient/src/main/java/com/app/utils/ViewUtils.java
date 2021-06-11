@@ -64,7 +64,7 @@ public class ViewUtils {
 				if(interpolatedTime == 1){
 					v.setVisibility(View.GONE);
 				}else{
-					v.getLayoutParams().height =time* (initialHeight - (int)(initialHeight * interpolatedTime));
+					v.getLayoutParams().height = (initialHeight -(int)((initialHeight * interpolatedTime)));
 					v.requestLayout();
 				}
 			}

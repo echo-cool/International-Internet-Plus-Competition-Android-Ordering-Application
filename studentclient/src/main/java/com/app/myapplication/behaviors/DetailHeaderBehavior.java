@@ -32,7 +32,7 @@ public class DetailHeaderBehavior extends AppBarLayout.Behavior implements AppBa
     private int scaleOffset = -1, scaleWidth, initOffset, closeOffset, initWidth;
     private int pWidth, offSet;
     private MotionEvent mov;
-    private View detail_recyclerView, ic_close, car_fl;
+    private View detail_recyclerView, ic_close;
     private GestureDetector mGestureDetector;
     private ViewAnimator finishAnim, resetAnim, carAnim;
     private static final int TOP_CHILD_FLING_THRESHOLD = 3;
@@ -44,6 +44,7 @@ public class DetailHeaderBehavior extends AppBarLayout.Behavior implements AppBa
 
     public DetailHeaderBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
+        context.setTheme(R.style.shop);
         mContext = context;
         setDragCallback(new DragCallback() {
             @Override
@@ -65,8 +66,8 @@ public class DetailHeaderBehavior extends AppBarLayout.Behavior implements AppBa
         boolean handled = super.onLayoutChild(parent, abl, layoutDirection);
         if (toolbar == null) {
             detail_recyclerView = parent.findViewById(R.id.detail_recyclerView);
-            car_fl = parent.findViewById(R.id.cardView);
-            car_fl.setTranslationY(mContext.getResources().getDimension(R.dimen.shopcar_height));
+            //car_fl = parent.findViewById(R.id.cardView);
+            //car_fl.setTranslationY(mContext.getResources().getDimension(R.dimen.shopcar_height));
             tv_close = parent.findViewById(R.id.tv_close);
             ic_close = parent.findViewById(R.id.ic_close);
             toolbar = abl.findViewById(R.id.toolbar);
@@ -166,28 +167,42 @@ public class DetailHeaderBehavior extends AppBarLayout.Behavior implements AppBa
             return;
         }
         canDrag = dhv.getWidth() == pWidth;
-        if (canDrag && car_fl.getTranslationY() > 0 && animState != 1) {
+//        if (canDrag && car_fl.getTranslationY() > 0 && animState != 1) {
+//            if (carAnim != null && animState == 2) {
+//                carAnim.cancel();
+//            }
+//            animState = 1;
+//            carAnim = ViewAnimator.animate(car_fl).onStop(new AnimationListener.Stop() {
+//                @Override
+//                public void onStop() {
+//                    animState = 0;
+//                }
+//            }).translationY(car_fl.getTranslationY(), 0).duration(200).start();
+//        } else if (!canDrag && car_fl.getTranslationY() < car_fl.getHeight() && animState != 2) {
+//            if (carAnim != null && animState == 1) {
+//                carAnim.cancel();
+//            }
+//            animState = 2;
+//            carAnim = ViewAnimator.animate(car_fl).onStop(new AnimationListener.Stop() {
+//                @Override
+//                public void onStop() {
+//                    animState = 0;
+//                }
+//            }).translationY(car_fl.getTranslationY(), car_fl.getHeight()).duration(200).start();
+//        }
+
+        if (canDrag && animState != 1) {
             if (carAnim != null && animState == 2) {
                 carAnim.cancel();
             }
             animState = 1;
-            carAnim = ViewAnimator.animate(car_fl).onStop(new AnimationListener.Stop() {
-                @Override
-                public void onStop() {
-                    animState = 0;
-                }
-            }).translationY(car_fl.getTranslationY(), 0).duration(200).start();
-        } else if (!canDrag && car_fl.getTranslationY() < car_fl.getHeight() && animState != 2) {
+
+        } else if (!canDrag  && animState != 2) {
             if (carAnim != null && animState == 1) {
                 carAnim.cancel();
             }
             animState = 2;
-            carAnim = ViewAnimator.animate(car_fl).onStop(new AnimationListener.Stop() {
-                @Override
-                public void onStop() {
-                    animState = 0;
-                }
-            }).translationY(car_fl.getTranslationY(), car_fl.getHeight()).duration(200).start();
+
         }
     }
 
@@ -198,7 +213,7 @@ public class DetailHeaderBehavior extends AppBarLayout.Behavior implements AppBa
             return;
         }
         if (dhv.getTotalScrollRange() + verticalOffset < 100) {
-            toolbar.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorPrimary));
+            toolbar.setBackgroundColor(ContextCompat.getColor(mContext, R.color.shop));
         } else {
             toolbar.setBackgroundColor(ContextCompat.getColor(mContext, R.color.transparent));
         }
