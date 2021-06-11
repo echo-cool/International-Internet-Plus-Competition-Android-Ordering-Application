@@ -33,11 +33,16 @@ public class ShopCarView extends ConstraintLayout {
         });
     }
 
-    public void setPrice(double price){
-        if(price!=0)
-            ((TextView)findViewById(R.id.textView7)).setText(new DecimalFormat("0.0").format(price));
-        else
-            ((TextView)findViewById(R.id.textView7)).setText("0");
+    public void setPrice(double price,double packet_price){
+        if(price!=0) {
+            ((TextView) findViewById(R.id.textView7)).setText(new DecimalFormat("0.0").format(price));
+            ((TextView) findViewById(R.id.text_more)).setText("另需打包费用¥"+new DecimalFormat("0.0").format(packet_price));
+        }
+        else {
+            ((TextView) findViewById(R.id.textView7)).setText("0");
+            ((TextView) findViewById(R.id.text_more)).setText("");
+        }
+
     }
 
     public void setOnClickListener(OnClickListener onClickListener){

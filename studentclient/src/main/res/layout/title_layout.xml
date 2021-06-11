@@ -16,11 +16,11 @@
         android:id="@+id/go_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:text="@string/title_sign_up"
+        android:textColor="#ffffff"
         android:textSize="20sp"
-        android:text="Sign up"
 
         />
 

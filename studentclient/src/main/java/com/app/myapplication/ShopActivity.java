@@ -459,16 +459,19 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
                     new Thread(()->{
                         List<FoodBean> list=((ShopOrderFragment) fragments[0]).getListContainer().foodAdapter.getList();
                         double total_price=0;
+                        double packet_price=0;
                         boolean flag=false;
                         for(FoodBean i:list){
+                            packet_price+=i.selectCount;
                             total_price+=i.foodPrice*i.selectCount;
                             if(i.selectCount!=0)flag=true;
                         }
                         double finalTotal_price = total_price;
 
                         boolean finalFlag = flag;
+                        double finalPacket_price = packet_price;
                         ((Activity)mContext).runOnUiThread(()->{
-                                ((ShopCarView)((Activity) mContext).findViewById(R.id.shopcar)).setPrice(finalTotal_price);
+                                ((ShopCarView)((Activity) mContext).findViewById(R.id.shopcar)).setPrice(finalTotal_price, finalPacket_price);
 
                             //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+finalTotal_price);
                         });
