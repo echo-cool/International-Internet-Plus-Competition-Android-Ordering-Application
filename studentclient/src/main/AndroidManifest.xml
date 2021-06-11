@@ -57,6 +57,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DetailActivity"
+            android:theme="@style/NoTitleTranslucentTheme" />
     </application>
 
 </manifest>
