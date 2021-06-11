@@ -141,10 +141,17 @@ public class ListContainer extends LinearLayout {
 						}
 					});
 				}).start();
-
 			}
 		});
+	}
 
+	public List<FoodBean> getSelectedFood(){
+		List<FoodBean> foodBeans=new LinkedList<>();
+		for(FoodBean foodBean:foodAdapter.getList()){
+			if(foodBean.selectCount>0)
+				foodBeans.add(foodBean);
+		}
+		return foodBeans;
 	}
 
 	public interface OnOrderChange{
