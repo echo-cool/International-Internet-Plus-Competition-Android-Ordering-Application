@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 //import com.app.myapplication.DetailActivity;
 import com.app.beans.TypeBean;
+import com.app.myapplication.DetailActivity;
 import com.app.utils.BaseUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -116,6 +117,29 @@ public class ListContainer extends LinearLayout {
 				typeAdapter.moveToType(type);
 			}
 		});
+
+		recyclerView2.addOnItemTouchListener(new OnItemClickListener() {
+			@Override
+			public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+				super.onItemChildClick(adapter, view, position);
+				if (view.getId() == R.id.iv_food) {
+					Intent intent = new Intent(mContext, DetailActivity.class);
+					intent.putExtra("food", (FoodBean) adapter.getData().get(position));
+					intent.putExtra("position", position);
+
+					mContext.startActivity(intent);
+					((Activity) mContext).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+				}
+
+			}
+
+			@Override
+			public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+				//
+
+			}
+		});
+
 		foodAdapter.setOnCountChange(new FoodAdapter.OnCountChange() {
 			@Override
 			public void onChange(FoodBean item) {
@@ -141,10 +165,17 @@ public class ListContainer extends LinearLayout {
 						}
 					});
 				}).start();
-
 			}
 		});
+	}
 
+	public List<FoodBean> getSelectedFood(){
+		List<FoodBean> foodBeans=new LinkedList<>();
+		for(FoodBean foodBean:foodAdapter.getList()){
+			if(foodBean.selectCount>0)
+				foodBeans.add(foodBean);
+		}
+		return foodBeans;
 	}
 
 	public interface OnOrderChange{
@@ -164,18 +195,18 @@ public class ListContainer extends LinearLayout {
 		if (n <= firstItem) {
 			//当要置顶的项在当前显示的第一个项的前面时
 			//recyclerView2.scrollToPosition(n);
-			recyclerView2.smoothScrollToPosition(n);
+			recyclerView2.scrollToPosition(n);
 		} else if (n <= lastItem) {
 			//当要置顶的项已经在屏幕上显示时
 			int top = recyclerView2.getChildAt(n - firstItem).getTop();
 //
-			recyclerView2.smoothScrollBy(0, top);
+			recyclerView2.scrollBy(0, top);
 //			recyclerView2.scrollBy(0, top);
 //			recyclerView2.smoothScrollToPosition(n);
 		} else {
 			//当要置顶的项在当前显示的最后一项的后面时
 //			recyclerView2.scrollToPosition(Math.min(0,n-3));
-			recyclerView2.smoothScrollToPosition(n);
+			recyclerView2.scrollToPosition(n);
 			//这里这个变量是用在RecyclerView滚动监听里面的
 			//move = true;
 		}

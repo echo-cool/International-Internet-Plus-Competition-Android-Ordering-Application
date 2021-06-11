@@ -31,6 +31,9 @@ public class ShopCarView extends ConstraintLayout {
                     onClickListener.onSettleClick();
             }
         });
+        findViewById(R.id.floatingActionButton2).setOnClickListener((View view)->{
+            onClickListener.onShopCarClick();
+        });
     }
 
     public void setPrice(double price,double packet_price){
@@ -51,5 +54,7 @@ public class ShopCarView extends ConstraintLayout {
 
     public interface OnClickListener{
         void onSettleClick();
+
+        void onShopCarClick();
     }
 }
