@@ -1,0 +1,1080 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbarStyle="outsideInset"
+    tools:context=".ForumActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:background="@color/crimson"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="  热门板块"
+        app:titleTextColor="#FFFFFF" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView20"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="32dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="350dp"
+                    android:layout_height="200dp">
+
+                    <Button
+                        android:id="@+id/button2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="#00FFFFFF"
+                        android:text="查看详情 >"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#F44336"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/cardView10"
+                        app:layout_constraintTop_toTopOf="@+id/cardView10">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#F44336"
+                            android:text="热门"
+                            android:textColor="@color/design_default_color_background"
+                            android:textSize="10sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#5A5D5E"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/cardView5"
+                        app:layout_constraintTop_toTopOf="@+id/cardView5">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#5A5D5E"
+                            android:text="动物"
+                            android:textColor="@color/design_default_color_background"
+                            android:textSize="10sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/main_Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="我找到了上次偷外卖的大黄狗！\n正在第四教学楼自行车库旁边！\n 大家快去看看！"
+                        app:layout_constraintStart_toStartOf="@+id/textView24"
+                        app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        app:cardCornerRadius="13dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/imageView6"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:visibility="visible"
+                            app:layout_constraintCircleRadius="15dp"
+                            app:srcCompat="@drawable/user1" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#FF9800"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/cardView8"
+                        app:layout_constraintTop_toTopOf="@+id/cardView8">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#005A5D5E"
+                            android:text="校园"
+                            android:textColor="@color/design_default_color_background"
+                            android:textSize="10sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/textView24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="校宠出没！"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/cardView8"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView8" />
+
+                    <TextView
+                        android:id="@+id/textView25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="小王"
+                        app:layout_constraintEnd_toEndOf="@+id/cardView5"
+                        app:layout_constraintStart_toStartOf="@+id/cardView5"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView5" />
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@android:drawable/ic_menu_recent_history"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/main_Text" />
+
+                    <TextView
+                        android:id="@+id/textView20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:text="2021-06-05"
+                        app:layout_constraintStart_toEndOf="@+id/imageView7"
+                        app:layout_constraintTop_toBottomOf="@+id/main_Text" />
+
+                    <ImageView
+                        android:id="@+id/imageView11"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/ic_baseline_remove_red_eye_24"
+                        app:layout_constraintStart_toEndOf="@+id/textView20"
+                        app:layout_constraintTop_toTopOf="@+id/imageView7" />
+
+                    <TextView
+                        android:id="@+id/textView26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="768"
+                        app:layout_constraintStart_toEndOf="@+id/imageView11"
+                        app:layout_constraintTop_toTopOf="@+id/textView20" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="350dp"
+                    android:layout_height="200dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#F44336"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/cardView2"
+                        app:layout_constraintTop_toTopOf="@+id/cardView2">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#F44336"
+                            android:text="热门"
+                            android:textColor="@color/design_default_color_background"
+                            android:textSize="10sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#9C27B0"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/cardView24"
+                        app:layout_constraintTop_toTopOf="@+id/cardView24">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#004CAF50"
+                            android:text="实时"
+                            android:textColor="@color/design_default_color_background"
+                            android:textSize="10sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#4CAF50"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/cardView22"
+                        app:layout_constraintTop_toTopOf="@+id/cardView22">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#4CAF50"
+                            android:text="足球"
+                            android:textColor="@color/design_default_color_background"
+                            android:textSize="10sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/textView28"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="首战告捷，\n德米拉尔，因莫比莱，因西涅进球"
+                        app:layout_constraintStart_toStartOf="@+id/textView30"
+                        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        app:cardCornerRadius="13dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:visibility="visible"
+                            app:layout_constraintCircleRadius="15dp"
+                            app:srcCompat="@drawable/manqini" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/textView30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="意大利大胜土耳其"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/cardView24"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView24" />
+
+                    <TextView
+                        android:id="@+id/textView31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="曼奇尼"
+                        app:layout_constraintEnd_toEndOf="@+id/cardView22"
+                        app:layout_constraintStart_toStartOf="@+id/cardView22"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView22" />
+
+                    <ImageView
+                        android:id="@+id/imageView12"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@android:drawable/ic_menu_recent_history"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+                    <TextView
+                        android:id="@+id/textView29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:text="2021-06-12"
+                        app:layout_constraintStart_toEndOf="@+id/imageView12"
+                        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+                    <ImageView
+                        android:id="@+id/imageView11"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/ic_baseline_remove_red_eye_24"
+                        app:layout_constraintStart_toEndOf="@+id/textView29"
+                        app:layout_constraintTop_toTopOf="@+id/imageView12" />
+
+                    <TextView
+                        android:id="@+id/textView26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="164"
+                        app:layout_constraintStart_toEndOf="@+id/imageView11"
+                        app:layout_constraintTop_toTopOf="@+id/textView29" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="#00FFFFFF"
+                        android:text="查看详情 >"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="350dp"
+                    android:layout_height="200dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#FF9800"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/cardView22"
+                        app:layout_constraintTop_toTopOf="@+id/cardView22">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#005A5D5E"
+                            android:text="校园"
+                            android:textColor="@color/design_default_color_background"
+                            android:textSize="10sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#F44336"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/cardView10"
+                        app:layout_constraintTop_toTopOf="@+id/cardView10">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#F44336"
+                            android:text="热门"
+                            android:textColor="@color/design_default_color_background"
+                            android:textSize="10sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/textView28"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="今年题目也太难了吧\n只好来年再战了"
+                        app:layout_constraintStart_toStartOf="@+id/textView30"
+                        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        app:cardCornerRadius="13dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:visibility="visible"
+                            app:layout_constraintCircleRadius="15dp"
+                            app:srcCompat="@drawable/mayi" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/textView30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="四六级考试闭幕"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/cardView10"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView10" />
+
+                    <TextView
+                        android:id="@+id/textView31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="麻衣学姐"
+                        app:layout_constraintEnd_toEndOf="@+id/cardView22"
+                        app:layout_constraintStart_toStartOf="@+id/cardView22"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView22" />
+
+                    <ImageView
+                        android:id="@+id/imageView12"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@android:drawable/ic_menu_recent_history"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+                    <TextView
+                        android:id="@+id/textView29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:text="2021-06-12"
+                        app:layout_constraintStart_toEndOf="@+id/imageView12"
+                        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+                    <ImageView
+                        android:id="@+id/imageView11"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/ic_baseline_remove_red_eye_24"
+                        app:layout_constraintStart_toEndOf="@+id/textView29"
+                        app:layout_constraintTop_toTopOf="@+id/imageView12" />
+
+                    <TextView
+                        android:id="@+id/textView26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="250"
+                        app:layout_constraintStart_toEndOf="@+id/imageView11"
+                        app:layout_constraintTop_toTopOf="@+id/textView29" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="#00FFFFFF"
+                        android:text="查看详情 >"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="202dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="350dp"
+                    android:layout_height="200dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#03A9F4"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/cardView10"
+                        app:layout_constraintTop_toTopOf="@+id/cardView10">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#005A5D5E"
+                            android:text="科研"
+                            android:textColor="@color/design_default_color_background"
+                            android:textSize="10sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#FF9800"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/cardView22"
+                        app:layout_constraintTop_toTopOf="@+id/cardView22">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#005A5D5E"
+                            android:text="校园"
+                            android:textColor="@color/design_default_color_background"
+                            android:textSize="10sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#F44336"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/cardView18"
+                        app:layout_constraintTop_toTopOf="@+id/cardView18">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#F44336"
+                            android:text="热门"
+                            android:textColor="@color/design_default_color_background"
+                            android:textSize="10sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/textView28"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="刚成立一个科研小组但没什么经验\n请求大神指导"
+                        app:layout_constraintStart_toStartOf="@+id/textView30"
+                        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        app:cardCornerRadius="13dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:visibility="visible"
+                            app:layout_constraintCircleRadius="15dp"
+                            app:srcCompat="@drawable/xixi" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/textView30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="如何进行科研选题"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/cardView10"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView10" />
+
+                    <TextView
+                        android:id="@+id/textView31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="梅如西"
+                        app:layout_constraintEnd_toEndOf="@+id/cardView22"
+                        app:layout_constraintStart_toStartOf="@+id/cardView22"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView22" />
+
+                    <ImageView
+                        android:id="@+id/imageView12"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@android:drawable/ic_menu_recent_history"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+                    <TextView
+                        android:id="@+id/textView29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:text="2021-06-12"
+                        app:layout_constraintStart_toEndOf="@+id/imageView12"
+                        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+                    <ImageView
+                        android:id="@+id/imageView11"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/ic_baseline_remove_red_eye_24"
+                        app:layout_constraintStart_toEndOf="@+id/textView29"
+                        app:layout_constraintTop_toTopOf="@+id/imageView12" />
+
+                    <TextView
+                        android:id="@+id/textView26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="462"
+                        app:layout_constraintStart_toEndOf="@+id/imageView11"
+                        app:layout_constraintTop_toTopOf="@+id/textView29" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="#00FFFFFF"
+                        android:text="查看详情 >"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="350dp"
+                    android:layout_height="200dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#03A9F4"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/cardView10"
+                        app:layout_constraintTop_toTopOf="@+id/cardView10">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#005A5D5E"
+                            android:text="科研"
+                            android:textColor="@color/design_default_color_background"
+                            android:textSize="10sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#FF9800"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/cardView22"
+                        app:layout_constraintTop_toTopOf="@+id/cardView22">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#005A5D5E"
+                            android:text="校园"
+                            android:textColor="@color/design_default_color_background"
+                            android:textSize="10sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#F44336"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/cardView18"
+                        app:layout_constraintTop_toTopOf="@+id/cardView18">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#F44336"
+                            android:text="热门"
+                            android:textColor="@color/design_default_color_background"
+                            android:textSize="10sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/textView28"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="大家都选了什么题啊？\n 一起来讨论一下吧"
+                        app:layout_constraintStart_toStartOf="@+id/textView30"
+                        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        app:cardCornerRadius="13dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:visibility="visible"
+                            app:layout_constraintCircleRadius="15dp"
+                            app:srcCompat="@drawable/jiqimao" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/textView30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="2021年建模美赛"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/cardView10"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView10" />
+
+                    <TextView
+                        android:id="@+id/textView31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="机器猫"
+                        app:layout_constraintEnd_toEndOf="@+id/cardView22"
+                        app:layout_constraintStart_toStartOf="@+id/cardView22"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView22" />
+
+                    <ImageView
+                        android:id="@+id/imageView12"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@android:drawable/ic_menu_recent_history"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+                    <TextView
+                        android:id="@+id/textView29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:text="2021-03-12"
+                        app:layout_constraintStart_toEndOf="@+id/imageView12"
+                        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+                    <ImageView
+                        android:id="@+id/imageView11"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/ic_baseline_remove_red_eye_24"
+                        app:layout_constraintStart_toEndOf="@+id/textView29"
+                        app:layout_constraintTop_toTopOf="@+id/imageView12" />
+
+                    <TextView
+                        android:id="@+id/textView26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="1436"
+                        app:layout_constraintStart_toEndOf="@+id/imageView11"
+                        app:layout_constraintTop_toTopOf="@+id/textView29" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="#00FFFFFF"
+                        android:text="查看详情 >"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="350dp"
+                    android:layout_height="200dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#E91E63"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/cardView10"
+                        app:layout_constraintTop_toTopOf="@+id/cardView10">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#005A5E5D"
+                            android:text="恋爱"
+                            android:textColor="@color/design_default_color_background"
+                            android:textSize="10sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#FF9800"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/cardView22"
+                        app:layout_constraintTop_toTopOf="@+id/cardView22">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#005A5D5E"
+                            android:text="校园"
+                            android:textColor="@color/design_default_color_background"
+                            android:textSize="10sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:cardBackgroundColor="#F44336"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/cardView16"
+                        app:layout_constraintTop_toTopOf="@+id/cardView16">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#F44336"
+                            android:text="热门"
+                            android:textColor="@color/design_default_color_background"
+                            android:textSize="10sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/textView28"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="今天晚上19：50左右，\n骑着单车在东门遇到了他"
+                        app:layout_constraintStart_toStartOf="@+id/textView30"
+                        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        app:cardCornerRadius="13dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:visibility="visible"
+                            app:layout_constraintCircleRadius="15dp"
+                            app:srcCompat="@drawable/mao" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/textView30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="海底捞个xgg"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/cardView10"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView10" />
+
+                    <TextView
+                        android:id="@+id/textView31"
+                        android:layout_width="35dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="8dp"
+                        android:text="水木"
+                        app:layout_constraintEnd_toEndOf="@+id/cardView22"
+                        app:layout_constraintStart_toStartOf="@+id/cardView22"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView22" />
+
+                    <ImageView
+                        android:id="@+id/imageView12"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@android:drawable/ic_menu_recent_history"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+                    <TextView
+                        android:id="@+id/textView29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:text="2021-05-20"
+                        app:layout_constraintStart_toEndOf="@+id/imageView12"
+                        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+                    <ImageView
+                        android:id="@+id/imageView11"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/ic_baseline_remove_red_eye_24"
+                        app:layout_constraintStart_toEndOf="@+id/textView29"
+                        app:layout_constraintTop_toTopOf="@+id/imageView12" />
+
+                    <TextView
+                        android:id="@+id/textView26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="2762"
+                        app:layout_constraintStart_toEndOf="@+id/imageView11"
+                        app:layout_constraintTop_toTopOf="@+id/textView29" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="#00FFFFFF"
+                        android:text="查看详情 >"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
