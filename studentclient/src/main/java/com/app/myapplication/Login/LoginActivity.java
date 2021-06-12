@@ -165,28 +165,28 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     }
                 });
                 // 设置默认打开的 Activity
-                PushService.setDefaultPushCallback(this_, NavigationActivity.class);
-
-
-                AlertDialog alertDialog;
-                AlertDialog.Builder alertDialog_builder=new AlertDialog.Builder(this_);
-                alertDialog_builder.setTitle("登陆成功！");
-                alertDialog_builder.setMessage("是否进入点餐页面？");
-                alertDialog_builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(this_, ShopActivity.class);
-                        startActivity(intent);
-                    }
-                });
-                alertDialog_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                alertDialog=alertDialog_builder.create();
-                alertDialog.show();
+//                PushService.setDefaultPushCallback(this_, NavigationActivity.class);
+//
+//
+//                AlertDialog alertDialog;
+//                AlertDialog.Builder alertDialog_builder=new AlertDialog.Builder(this_);
+//                alertDialog_builder.setTitle("登陆成功！");
+//                alertDialog_builder.setMessage("是否进入点餐页面？");
+//                alertDialog_builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Intent intent = new Intent(this_, ShopActivity.class);
+//                        startActivity(intent);
+//                    }
+//                });
+//                alertDialog_builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                    }
+//                });
+//                alertDialog=alertDialog_builder.create();
+//                alertDialog.show();
 
             }
 

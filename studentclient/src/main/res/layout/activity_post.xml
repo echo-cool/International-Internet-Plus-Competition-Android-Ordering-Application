@@ -31,6 +31,7 @@
             android:gravity="top|left"
             android:hint="请发表你的看法"
             android:inputType="textMultiLine"
+            android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,6 +50,7 @@
         android:focusable="auto"
         android:hint="请输入标题"
         android:inputType="textPersonName"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

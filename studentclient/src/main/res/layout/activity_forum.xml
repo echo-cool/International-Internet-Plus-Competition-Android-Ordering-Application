@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/crimson"
         android:minHeight="?attr/actionBarSize"
@@ -44,14 +44,13 @@
                 android:layout_marginTop="32dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="350dp"
+                    android:layout_width="match_parent"
                     android:layout_height="200dp">
 
                     <Button
                         android:id="@+id/button2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
                         android:background="#00FFFFFF"
                         android:text="查看详情 >"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -222,7 +221,7 @@
                 android:layout_marginTop="16dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="350dp"
+                    android:layout_width="match_parent"
                     android:layout_height="200dp">
 
                     <androidx.cardview.widget.CardView
@@ -383,7 +382,6 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
                         android:background="#00FFFFFF"
                         android:text="查看详情 >"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -398,7 +396,7 @@
                 android:layout_marginTop="16dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="350dp"
+                    android:layout_width="match_parent"
                     android:layout_height="200dp">
 
                     <androidx.cardview.widget.CardView
@@ -536,7 +534,6 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
                         android:background="#00FFFFFF"
                         android:text="查看详情 >"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -552,7 +549,7 @@
                 android:layout_marginBottom="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="350dp"
+                    android:layout_width="match_parent"
                     android:layout_height="200dp">
 
                     <androidx.cardview.widget.CardView
@@ -713,7 +710,6 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
                         android:background="#00FFFFFF"
                         android:text="查看详情 >"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -729,7 +725,7 @@
                 android:layout_marginBottom="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="350dp"
+                    android:layout_width="match_parent"
                     android:layout_height="200dp">
 
                     <androidx.cardview.widget.CardView
@@ -906,7 +902,7 @@
                 android:layout_marginBottom="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="350dp"
+                    android:layout_width="match_parent"
                     android:layout_height="200dp">
 
                     <androidx.cardview.widget.CardView

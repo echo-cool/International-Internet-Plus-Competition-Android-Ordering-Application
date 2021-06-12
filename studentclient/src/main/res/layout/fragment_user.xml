@@ -89,9 +89,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@color/user_page"
+        android:background="#00FFAAA7"
         android:paddingTop="8dp"
-        android:text="退出登录"
+        android:visibility="visible"
         app:layout_anchor="@id/user_info"
         app:layout_anchorGravity="top|right" />
 

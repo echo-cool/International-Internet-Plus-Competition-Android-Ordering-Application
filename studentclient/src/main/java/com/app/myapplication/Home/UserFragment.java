@@ -108,9 +108,9 @@ public class UserFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        loadUser();
         getActivity().findViewById(R.id.temp_button).setVisibility(View.GONE);
         getActivity().findViewById(R.id.temp_button).setVisibility(View.INVISIBLE);
+        loadUser();
         refresh();
         //getActivity().getWindow().setStatusBarColor(getActivity().getResources().getColor(R.color.user_page));
     }
@@ -126,8 +126,9 @@ public class UserFragment extends Fragment {
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mContext=this.getActivity();
+
         final NestedScrollView nestedScrollView=getActivity().findViewById(R.id.scroll_2);
-        loadUser();
+        //loadUser();
         swipeRefreshLayout=getActivity().findViewById(R.id.swipe_refresh);
         appBarLayout=getActivity().findViewById(R.id.appbar);
         recyclerView=this.getActivity().findViewById(R.id.notification_list);
