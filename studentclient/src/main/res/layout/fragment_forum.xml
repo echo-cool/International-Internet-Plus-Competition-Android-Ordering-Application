@@ -171,7 +171,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="12dp"
                         android:text="2021-06-05"
                         app:layout_constraintStart_toEndOf="@+id/imageView7"
                         app:layout_constraintTop_toBottomOf="@+id/main_Text" />
@@ -189,7 +189,7 @@
                         android:id="@+id/textView26"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="8dp"
                         android:text="52"
                         app:layout_constraintStart_toEndOf="@+id/imageView11"
                         app:layout_constraintTop_toTopOf="@+id/textView20" />
@@ -434,7 +434,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="12dp"
                         android:text="2021-06-12"
                         app:layout_constraintStart_toEndOf="@+id/imageView12"
                         app:layout_constraintTop_toBottomOf="@+id/textView28" />
@@ -452,7 +452,7 @@
                         android:id="@+id/textView26"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="8dp"
                         android:text="3"
                         app:layout_constraintStart_toEndOf="@+id/imageView11"
                         app:layout_constraintTop_toTopOf="@+id/textView29" />
@@ -529,7 +529,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="葡萄牙，德国，法国，匈牙利\n组成死亡之组！"
+                        android:text="阿根廷智利冤家路窄"
                         app:layout_constraintStart_toStartOf="@+id/textView30"
                         app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
@@ -566,9 +566,9 @@
                         android:id="@+id/textView31"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="4dp"
                         android:layout_marginTop="8dp"
-                        android:text="木鸟"
+                        android:text="梅者如西"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/cardView22" />
 
@@ -587,7 +587,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="12dp"
                         android:text="2021-06-12"
                         app:layout_constraintStart_toEndOf="@+id/imageView12"
                         app:layout_constraintTop_toBottomOf="@+id/textView28" />
@@ -605,7 +605,7 @@
                         android:id="@+id/textView26"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="8dp"
                         android:text="3"
                         app:layout_constraintStart_toEndOf="@+id/imageView11"
                         app:layout_constraintTop_toTopOf="@+id/textView29" />
