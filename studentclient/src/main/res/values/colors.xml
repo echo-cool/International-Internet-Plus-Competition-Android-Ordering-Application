@@ -20,6 +20,8 @@
     <color name="comment_divider">#dddddd</color>
     <color name="comment_gray">#666666</color>
     <color name="comment_hint">#999999</color>
+    <color name="black_semi_transparent">#B2000000</color>
+    <color name="text">#FFFFFF</color>
 
     <!-- 蓝绿色 -->
     <color name="bluegreen">#65c1dc</color>

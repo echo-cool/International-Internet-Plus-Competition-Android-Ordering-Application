@@ -1,16 +1,10 @@
 package com.app.myapplication.adapters;
 
 
-import android.app.Activity;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.animation.LinearInterpolator;
 
 import androidx.annotation.Nullable;
 
-import com.app.myapplication.fragments.ShopOrderFragment;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.app.beans.FoodBean;
@@ -21,8 +15,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import me.samlss.broccoli.Broccoli;
-import me.samlss.broccoli.BroccoliGradientDrawable;
-import me.samlss.broccoli.PlaceholderParameter;
 
 public class FoodAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
     List<FoodBean> list;
@@ -41,8 +33,8 @@ public class FoodAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder helper, FoodBean item) {
-        helper.setText(R.id.tv_name,item.foodName);
-        helper.setText(R.id.tv_summary,item.foodSummary);
+        helper.setText(R.id.dv_name,item.foodName);
+        helper.setText(R.id.dv_pop,item.foodSummary);
         helper.setText(R.id.tv_price,"¥ "+item.foodPrice);
         helper.setText(R.id.tv_sale,"日销:"+item.foodSale);
         //System.out.println("convert");
@@ -50,8 +42,8 @@ public class FoodAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
             //broccoli.addPlaceholder(new PlaceholderParameter.Builder().setView(helper.getView(R.id.iv_food)).setDrawable(new BroccoliGradientDrawable(Color.parseColor("#DDDDDD"), Color.parseColor("#CCCCCC"), 0, 1000, new LinearInterpolator())).build());
 
         }else {
-            broccoli.removePlaceholder(helper.getView(R.id.iv_food));
-            helper.setImageBitmap(R.id.iv_food, BitmapFactory.decodeByteArray(item.foodImage, 0, item.foodImage.length));
+            broccoli.removePlaceholder(helper.getView(R.id.device_pic));
+            helper.setImageBitmap(R.id.device_pic, BitmapFactory.decodeByteArray(item.foodImage, 0, item.foodImage.length));
         }
         broccoli.show();
         //helper.setImageDrawable(R.id.iv_food,mContext.getDrawable(R.drawable.app_logo));

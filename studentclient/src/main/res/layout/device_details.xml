@@ -33,7 +33,7 @@
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/device_pic"
             android:maxLines="2"
-            android:text="food name"
+            android:text="device name"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -45,34 +45,8 @@
             android:layout_below="@id/dv_name"
             android:layout_alignLeft="@id/dv_name"
             android:maxLines="1"
-            android:text="food summary"
+            android:text="预计人数"
             android:textColor="@color/lightgray" />
-
-        <TextView
-            android:id="@+id/tv_sale"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/dv_pop"
-            android:layout_alignLeft="@id/dv_name" />
-
-        <TextView
-            android:id="@+id/tv_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_sale"
-            android:layout_alignLeft="@id/dv_name"
-            android:text="123"
-            android:textColor="@color/orangered"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <com.app.myapplication.views.AddWidget
-            android:id="@+id/addwidget"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/tv_price"
-            android:layout_alignParentRight="true"
-            app:sub_anim="true" />
 
     </RelativeLayout>
 
