@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/detail_divider"
@@ -35,7 +36,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="164dp"
                 android:layout_margin="8dp"
                 app:cardCornerRadius="16dp">
 
@@ -49,23 +50,32 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="24dp"
-                        android:text="配送至："
+                        android:text="预计取餐时间："
                         android:textSize="20sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <EditText
-                        android:id="@+id/editTextLocation"
-                        android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/textTime"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
-                        android:ems="10"
-                        android:hint="请输入校内地址"
-                        android:inputType="textPersonName"
-                        android:textSize="16sp"
+                        android:drawableRight="@android:drawable/ic_menu_edit"
+                        android:onClick="chooseTime"
+                        android:text="TextView"
+                        android:textSize="20sp"
                         app:layout_constraintBaseline_toBaselineOf="@+id/text_content"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/text_content" />
+
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="请及时取餐"
+                        android:textColor="@color/darkorange"
+                        app:layout_constraintStart_toStartOf="@+id/text_content"
+                        app:layout_constraintTop_toBottomOf="@+id/text_content" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 

@@ -18,7 +18,6 @@
             android:layout_marginTop="32dp"
             android:layout_marginBottom="32dp"
             android:background="@drawable/ic_user"
-            android:backgroundTint="@color/floralwhite"
             android:src="@drawable/image_circle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

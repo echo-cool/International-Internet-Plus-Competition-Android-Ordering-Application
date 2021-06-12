@@ -26,8 +26,11 @@
 
         <service android:name="cn.leancloud.push.PushService" />
 
-        <activity android:name=".TestActivity" />
-        <activity android:name=".OrderEnsureActivity" />
+        <activity android:name=".TestActivity">
+
+        </activity>
+        <activity android:name=".OrderEnsureActivity"
+            android:theme="@style/shop"/>
         <activity android:name=".merchant.MerchantActivity">
 
             <!-- <intent-filter> -->
@@ -53,6 +56,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DetailActivity"
+            android:theme="@style/NoTitleTranslucentTheme" />
     </application>
 
 </manifest>
