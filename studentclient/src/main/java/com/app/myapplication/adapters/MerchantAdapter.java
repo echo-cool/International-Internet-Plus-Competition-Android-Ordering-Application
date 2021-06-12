@@ -13,7 +13,7 @@ public class MerchantAdapter extends BaseQuickAdapter<MerchantBean, BaseViewHold
     List<MerchantBean> list;
 
     public MerchantAdapter(@Nullable List<MerchantBean> data) {
-        super(R.layout.device_details,data);
+        super(R.layout.item_merchant,data);
         list = data;
     }
 

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/devices_main"
+    android:id="@+id/food_main"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
@@ -21,7 +21,7 @@
 
 
         <ImageView
-            android:id="@+id/device_pic"
+            android:id="@+id/iv_food"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:scaleType="centerCrop"
@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/dv_name"
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -38,18 +38,18 @@
             android:text="food name"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintLeft_toRightOf="@id/device_pic"
+            app:layout_constraintLeft_toRightOf="@id/iv_food"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/dv_name"
+            android:layout_alignLeft="@id/tv_name"
             android:layout_marginEnd="16dp"
             android:text="123"
             android:textSize="14sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/dv_name"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_name"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:text="x0"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/dv_name" />
+            app:layout_constraintStart_toStartOf="@+id/tv_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
