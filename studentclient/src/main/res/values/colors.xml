@@ -330,4 +330,5 @@
     <color name="notification_page">#7DC481</color>
     <color name="forum_page">#65c1dc</color>
     <color name="user_page">#FFAAA7</color>
+    <color name="shop">#FF9800</color>
 </resources>

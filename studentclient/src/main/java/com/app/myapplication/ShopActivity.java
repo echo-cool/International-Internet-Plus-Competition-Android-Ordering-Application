@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -13,6 +16,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.view.View;
 import android.view.Window;
@@ -23,14 +27,18 @@ import android.widget.TextView;
 import com.app.Models.Cuisine;
 import com.app.beans.FoodBean;
 import com.app.beans.MerchantBean;
+import com.app.beans.TypeBean;
 import com.app.myapplication.Login.LoginActivity;
+import com.app.myapplication.adapters.CarAdapter;
 import com.app.myapplication.fragments.ShopCommentsFragment;
 import com.app.myapplication.fragments.ShopOrderFragment;
 import com.app.myapplication.fragments.TestShopOrderFragment;
 //import com.app.myapplication.views.ShopCarView;
 //import com.app.myapplication.views.ShopCarView;
+import com.app.myapplication.views.AddWidget;
 import com.app.myapplication.views.ListContainer;
 import com.app.myapplication.views.ShopCarView;
+import com.app.utils.ViewUtils;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -362,6 +370,9 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
     private Context mContext;
     private MerchantBean merchantBean;
 
+    private CarAdapter carAdapter;
+
+
 
 
     @Override
@@ -390,21 +401,51 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
                 if(AVUser.getCurrentUser()!=null) {
                     Intent intent = new Intent(mContext, OrderEnsureActivity.class);
                     LinkedList<FoodBean> foodBeans = (LinkedList<FoodBean>) getOrderedFoodList();
-                    intent.putExtra("Foods", foodBeans);
-                    System.out.println("++++++++++++++++++++++++++++++++"+merchantBean.merchantOBJ);
+                    System.out.println("--------------------------------0");
+                    //intent.putExtra("Foods", foodBeans);
+                    OrderEnsureActivity.foodBeanList=foodBeans;
+                    //System.out.println("++++++++++++++++++++++++++++++++"+merchantBean.merchantOBJ);
                     intent.putExtra("Shop", merchantBean);
+                    System.out.println("--------------------------------1");
                     //saveOrder(foodBeans, merchantBean);
                     startActivity(intent);
+
+                    //System.out.println("--------------------------------2");
                 }else{
                     Intent intent=new Intent(mContext, LoginActivity.class);
                     startActivity(intent);
                 }
             }
+
+            @Override
+            public void onShopCarClick() {
+                //findViewById(R.id.carpop).setVisibility(View.VISIBLE);
+                if(findViewById(R.id.carpop).getVisibility()==View.GONE) {
+                    carAdapter.setFoodAdapter(shopOrderFragment.getListContainer().foodAdapter);
+                    carAdapter.setTypeAdapter(shopOrderFragment.getListContainer().typeAdapter);
+                    new Thread(() -> {
+                        carAdapter.setList(shopOrderFragment.getListContainer().getSelectedFood());
+                        ((Activity) mContext).runOnUiThread(() -> {
+                            carAdapter.notifyDataSetChanged();
+                            if(carAdapter.getList().size()!=0)
+                                ViewUtils.expand(findViewById(R.id.carpop));
+                        });
+                    }).start();
+                }else{
+                    ViewUtils.collapse(findViewById(R.id.carpop));
+                }
+            }
         });
 //        setContentView(R.layout.shop_order_fragment);
 //        ((ListContainer)findViewById(R.id.listcontainer)).load(BaseUtils.getDatas(this),BaseUtils.getTypes());
-
+        findViewById(R.id.text_clear).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clearCar(view);
+            }
+        });
     }
+
 
 
     private List<FoodBean> getOrderedFoodList(){
@@ -416,6 +457,20 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
         }
         return orderedList;
     }
+
+    private void initShopCar() {
+        //behavior = BottomSheetBehavior.from(findViewById(R.id.car_container));
+        //shopCarView = (ShopCarView) findViewById(R.id.car_mainfl);
+        View blackView = findViewById(R.id.blackview);
+        //shopCarView.setBehavior(behavior, blackView);
+        RecyclerView carRecView = (RecyclerView) findViewById(R.id.car_recyclerview);
+//		carRecView.setNestedScrollingEnabled(false);
+        carRecView.setLayoutManager(new LinearLayoutManager(mContext));
+        ((DefaultItemAnimator) carRecView.getItemAnimator()).setSupportsChangeAnimations(false);
+        carAdapter = new CarAdapter(new ArrayList<FoodBean>(), null);
+        carAdapter.bindToRecyclerView(carRecView);
+    }
+
 
     private void setWindow(){
         Window window = getWindow();
@@ -432,6 +487,7 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
         ViewPager2 viewPager2=findViewById(R.id.pager);
         shopOrderFragment=new ShopOrderFragment(shopId);
         shopCommentsFragment=new ShopCommentsFragment();
+        initShopCar();
         final Fragment[] fragments={shopOrderFragment,shopCommentsFragment};
         final String[] strings={getString(R.string.title_order),getString(R.string.title_comments)};
         viewPager2.setAdapter(new FragmentStateAdapter(this) {
@@ -459,16 +515,19 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
                     new Thread(()->{
                         List<FoodBean> list=((ShopOrderFragment) fragments[0]).getListContainer().foodAdapter.getList();
                         double total_price=0;
+                        double packet_price=0;
                         boolean flag=false;
                         for(FoodBean i:list){
+                            packet_price+=i.selectCount;
                             total_price+=i.foodPrice*i.selectCount;
                             if(i.selectCount!=0)flag=true;
                         }
                         double finalTotal_price = total_price;
 
                         boolean finalFlag = flag;
+                        double finalPacket_price = packet_price;
                         ((Activity)mContext).runOnUiThread(()->{
-                                ((ShopCarView)((Activity) mContext).findViewById(R.id.shopcar)).setPrice(finalTotal_price);
+                                ((ShopCarView)((Activity) mContext).findViewById(R.id.shopcar)).setPrice(finalTotal_price, finalPacket_price);
 
                             //System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+finalTotal_price);
                         });
@@ -522,5 +581,25 @@ public class ShopActivity extends AppCompatActivity implements TestShopOrderFrag
             CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.shop_collaspsing_toolbar);
             collapsingToolbarLayout.setTitle(shopName);
         }
+    }
+
+    public void clearCar(View view){
+
+        new Thread(()->{
+            final long i=System.currentTimeMillis();
+            for(FoodBean foodBean:carAdapter.getList()){
+                foodBean.selectCount=0;
+            }
+            for(TypeBean typeBean:shopOrderFragment.getListContainer().typeAdapter.getList()){
+                typeBean.count=0;
+            }
+            ((Activity)mContext).runOnUiThread(()->{
+                shopOrderFragment.getListContainer().foodAdapter.notifyDataSetChanged();
+                shopOrderFragment.getListContainer().typeAdapter.notifyDataSetChanged();
+                ((ShopCarView)findViewById(R.id.shopcar)).setPrice(0,0);
+                ViewUtils.collapse(findViewById(R.id.carpop));
+                //System.out.println("------------------------"+(System.currentTimeMillis()-i));
+            });
+        }).start();
     }
 }
