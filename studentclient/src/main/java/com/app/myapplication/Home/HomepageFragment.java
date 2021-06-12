@@ -106,6 +106,13 @@ public class HomepageFragment extends Fragment {
                 getActivity().startActivity(intent);
             }
         });
+        getActivity().findViewById(R.id.card_traffic).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), StudentFlowActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
         mSearchView=((FloatingSearchView)getActivity().findViewById(R.id.floating_search_view));
 //        mSearchView.setOnBindSuggestionCallback(new SearchSuggestionsAdapter.OnBindSuggestionCallback() {
 //            @Override

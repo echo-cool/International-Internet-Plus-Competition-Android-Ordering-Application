@@ -30,7 +30,8 @@
 
         <activity android:name=".OrderEnsureActivity"
             android:theme="@style/shop"/>
-        <activity android:name=".merchant.MerchantActivity">
+        <activity android:name=".merchant.MerchantActivity"
+            android:theme="@style/shop">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
