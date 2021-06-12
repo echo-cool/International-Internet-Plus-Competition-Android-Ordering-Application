@@ -333,4 +333,20 @@
     <color name="forum_page">#65c1dc</color>
     <color name="user_page">#FFAAA7</color>
     <color name="shop">#FF9800</color>
+
+
+    <color name="color_nocolor">#00000000</color>
+    <color name="color_theme_bg">#f2f2f2</color>
+    <color name="color_title_bar">#3853e8</color>
+    <color name="color_button">#3853e8</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_3853e8">#3853e8</color>
+    <color name="color_f2f2f2">#f2f2f2</color>
+    <color name="color_black">#000000</color>
+    <color name="color_black_40">#66000000</color>
+    <color name="color_43496A">#43496A</color>
+    <color name="color_c5c8d1">#C5C8D1</color>
+    <color name="color_theme_blue">#0088FF</color>
 </resources>

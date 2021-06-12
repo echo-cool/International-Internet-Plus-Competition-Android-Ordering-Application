@@ -231,8 +231,8 @@
                         android:layout_marginStart="16dp"
                         app:cardBackgroundColor="#F44336"
                         app:cardCornerRadius="10dp"
-                        app:layout_constraintStart_toEndOf="@+id/cardView2"
-                        app:layout_constraintTop_toTopOf="@+id/cardView2">
+                        app:layout_constraintStart_toEndOf="@+id/card_schedule"
+                        app:layout_constraintTop_toTopOf="@+id/card_schedule">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -248,7 +248,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/cardView2"
+                        android:id="@+id/card_schedule"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
