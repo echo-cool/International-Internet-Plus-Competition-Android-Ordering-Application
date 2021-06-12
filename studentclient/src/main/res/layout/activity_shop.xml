@@ -109,11 +109,20 @@
         </LinearLayout>
     </com.app.myapplication.views.StickyScrollView>
 
+    <include
+        android:id="@+id/carpop"
+        layout="@layout/view_carpop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:visibility="gone" />
+
     <com.app.myapplication.views.ShopCarView
         android:id="@+id/shopcar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
+        android:layout_gravity="bottom"
+        android:elevation="10dp">
 
     </com.app.myapplication.views.ShopCarView>
 

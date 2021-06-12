@@ -7,12 +7,16 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.beans.NotificationBean;
@@ -104,9 +108,9 @@ public class UserFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        loadUser();
         getActivity().findViewById(R.id.temp_button).setVisibility(View.GONE);
         getActivity().findViewById(R.id.temp_button).setVisibility(View.INVISIBLE);
+        loadUser();
         refresh();
         //getActivity().getWindow().setStatusBarColor(getActivity().getResources().getColor(R.color.user_page));
     }
@@ -122,8 +126,9 @@ public class UserFragment extends Fragment {
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mContext=this.getActivity();
+
         final NestedScrollView nestedScrollView=getActivity().findViewById(R.id.scroll_2);
-        loadUser();
+        //loadUser();
         swipeRefreshLayout=getActivity().findViewById(R.id.swipe_refresh);
         appBarLayout=getActivity().findViewById(R.id.appbar);
         recyclerView=this.getActivity().findViewById(R.id.notification_list);
@@ -377,6 +382,17 @@ public class UserFragment extends Fragment {
         if(AVUser.getCurrentUser()!=null){
             ((TextView)getActivity().findViewById(R.id.user_username)).setText(AVUser.getCurrentUser().getUsername());
             ((TextView)getActivity().findViewById(R.id.user_profile)).setText(AVUser.getCurrentUser().getEmail());
+            if(AVUser.getCurrentUser().getAVFile("avatar")!=null){
+                new Thread(()->{
+                    byte[] data=AVUser.getCurrentUser().getAVFile("avatar").getData();
+                    getActivity().runOnUiThread(()->{
+                        ((ImageView)getActivity().findViewById(R.id.user_avatar)).setBackgroundDrawable(new BitmapDrawable(BitmapFactory.decodeByteArray(data,0, data.length)));
+                    });
+
+                }).start();
+
+
+            }
         }else{
             ((TextView)getActivity().findViewById(R.id.user_username)).setText("未登录");
             ((TextView)getActivity().findViewById(R.id.user_profile)).setText("点击登录");

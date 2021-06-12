@@ -1,8 +1,18 @@
 package com.app.utils;
 
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
+
+import androidx.core.view.ViewCompat;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
@@ -16,6 +26,65 @@ import jp.wasabeef.fresco.processors.BlurPostprocessor;
 
 public class ViewUtils {
 	private static long lastClickTime;
+
+
+	public static void expand(final View v) {
+		int time=2;
+		int matchParentMeasureSpec = View.MeasureSpec.makeMeasureSpec(((View) v.getParent()).getWidth(), View.MeasureSpec.EXACTLY);
+		int wrapContentMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+		v.measure(matchParentMeasureSpec, wrapContentMeasureSpec);
+		final int targetHeight = v.getMeasuredHeight();
+
+		// Older versions of android (pre API 21) cancel animations for views with a height of 0.
+		v.getLayoutParams().height = 1;
+		v.setVisibility(View.VISIBLE);
+		Animation a = new Animation()
+		{
+			@Override
+			protected void applyTransformation(float interpolatedTime, Transformation t) {
+				v.getLayoutParams().height = time*interpolatedTime == 1
+						? ActionBar.LayoutParams.WRAP_CONTENT
+						: (int)(targetHeight * interpolatedTime);
+				v.requestLayout();
+			}
+
+			@Override
+			public boolean willChangeBounds() {
+				return true;
+			}
+		};
+
+		// Expansion speed of 1dp/ms
+		a.setDuration((int)(time*targetHeight/ v.getContext().getResources().getDisplayMetrics().density));
+		v.startAnimation(a);
+	}
+
+	public static void collapse(final View v) {
+		final int initialHeight = v.getMeasuredHeight();
+
+		int time=2;
+		Animation a = new Animation()
+		{
+			@Override
+			protected void applyTransformation(float interpolatedTime, Transformation t) {
+				if(interpolatedTime == 1){
+					v.setVisibility(View.GONE);
+				}else{
+					v.getLayoutParams().height = (initialHeight -(int)((initialHeight * interpolatedTime)));
+					v.requestLayout();
+				}
+			}
+
+			@Override
+			public boolean willChangeBounds() {
+				return true;
+			}
+		};
+
+		// Collapse speed of 1dp/ms
+		a.setDuration((int)(time*initialHeight / v.getContext().getResources().getDisplayMetrics().density));
+		v.startAnimation(a);
+	}
 
 	public static void getFrescoController(Context context, SimpleDraweeView imgIv, String uri, int width, int height) {
 		if (uri != null) {
@@ -80,5 +149,23 @@ public class ViewUtils {
 		return false;
 	}
 
+	public static void setStatusBarColor(Activity activity, int statusColor) {
+		Window window = activity.getWindow();
+		//取消状态栏透明
+		window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+		//添加Flag把状态栏设为可绘制模式
+		window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+		//设置状态栏颜色
+		window.setStatusBarColor(statusColor);
+		//设置系统状态栏处于可见状态
+		window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+		//让view不根据系统窗口来调整自己的布局
+		ViewGroup mContentView = (ViewGroup) window.findViewById(Window.ID_ANDROID_CONTENT);
+		View mChildView = mContentView.getChildAt(0);
+		if (mChildView != null) {
+			ViewCompat.setFitsSystemWindows(mChildView, false);
+			ViewCompat.requestApplyInsets(mChildView);
+		}
+	}
 
 }

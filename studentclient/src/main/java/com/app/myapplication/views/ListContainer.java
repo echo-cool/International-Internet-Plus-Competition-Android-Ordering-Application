@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 //import com.app.myapplication.DetailActivity;
 import com.app.beans.TypeBean;
+import com.app.myapplication.DetailActivity;
 import com.app.utils.BaseUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -116,6 +117,29 @@ public class ListContainer extends LinearLayout {
 				typeAdapter.moveToType(type);
 			}
 		});
+
+		recyclerView2.addOnItemTouchListener(new OnItemClickListener() {
+			@Override
+			public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+				super.onItemChildClick(adapter, view, position);
+				if (view.getId() == R.id.iv_food) {
+					Intent intent = new Intent(mContext, DetailActivity.class);
+					intent.putExtra("food", (FoodBean) adapter.getData().get(position));
+					intent.putExtra("position", position);
+
+					mContext.startActivity(intent);
+					((Activity) mContext).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+				}
+
+			}
+
+			@Override
+			public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+				//
+
+			}
+		});
+
 		foodAdapter.setOnCountChange(new FoodAdapter.OnCountChange() {
 			@Override
 			public void onChange(FoodBean item) {
@@ -141,10 +165,17 @@ public class ListContainer extends LinearLayout {
 						}
 					});
 				}).start();
-
 			}
 		});
+	}
 
+	public List<FoodBean> getSelectedFood(){
+		List<FoodBean> foodBeans=new LinkedList<>();
+		for(FoodBean foodBean:foodAdapter.getList()){
+			if(foodBean.selectCount>0)
+				foodBeans.add(foodBean);
+		}
+		return foodBeans;
 	}
 
 	public interface OnOrderChange{

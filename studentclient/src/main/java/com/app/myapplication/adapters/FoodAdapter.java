@@ -21,6 +21,7 @@ public class FoodAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
     OnCountChange onCountChange;
     FoodAdapter self;
     Broccoli broccoli;
+    AddWidget.OnAddWidgetClick addWidgetClick;
 
 
     public FoodAdapter(@Nullable  List<FoodBean> data) {
@@ -37,6 +38,7 @@ public class FoodAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
         helper.setText(R.id.dv_pop,item.foodSummary);
         helper.setText(R.id.tv_price,"¥ "+item.foodPrice);
         helper.setText(R.id.tv_sale,"日销:"+item.foodSale);
+        helper.addOnClickListener(R.id.iv_food);
         //System.out.println("convert");
         if(item.foodImage==null){
             //broccoli.addPlaceholder(new PlaceholderParameter.Builder().setView(helper.getView(R.id.iv_food)).setDrawable(new BroccoliGradientDrawable(Color.parseColor("#DDDDDD"), Color.parseColor("#CCCCCC"), 0, 1000, new LinearInterpolator())).build());
@@ -50,7 +52,7 @@ public class FoodAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
         AddWidget addWidget=((AddWidget)helper.getView(R.id.addwidget));
         addWidget.bindFoodBean(item);
         addWidget.setCount(item.selectCount);
-        ((AddWidget)helper.getView(R.id.addwidget)).setOnAddWidgetClick(new AddWidget.OnAddWidgetClick() {
+        addWidgetClick=new AddWidget.OnAddWidgetClick() {
             @Override
             public void onClick() {
                 self.notifyDataSetChanged();
@@ -59,7 +61,8 @@ public class FoodAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
 
                 }catch (NullPointerException ignore){}
             }
-        });
+        };
+        ((AddWidget)helper.getView(R.id.addwidget)).setOnAddWidgetClick(addWidgetClick);
     }
 
     public List<FoodBean> getList() {
@@ -80,5 +83,9 @@ public class FoodAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
 
     public interface OnCountChange{
         void onChange(FoodBean item);
+    }
+
+    public AddWidget.OnAddWidgetClick getAddWidgetClick() {
+        return addWidgetClick;
     }
 }
