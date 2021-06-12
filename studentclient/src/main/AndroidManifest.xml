@@ -18,14 +18,15 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".PostActivity"></activity>
+        <activity android:name=".ForumActivity"></activity>
+        <activity android:name=".PostActivity" />
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
 
         <service android:name="cn.leancloud.push.PushService" />
 
-        <activity android:name=".TestActivity"></activity>
+        <activity android:name=".TestActivity" />
         <activity android:name=".OrderEnsureActivity" />
         <activity android:name=".merchant.MerchantActivity">
 
@@ -38,7 +39,7 @@
         <activity android:name=".Login.LoginActivity" />
         <activity
             android:name=".Home.NavigationActivity"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask" />
         <activity
             android:name=".ShopActivity"
             android:theme="@style/shop" /> <!-- <intent-filter> -->

@@ -148,12 +148,12 @@
 
                     <TextView
                         android:id="@+id/textView25"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
+                        android:layout_width="30dp"
+                        android:layout_height="16dp"
                         android:layout_marginTop="8dp"
                         android:text="小王"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/cardView5"
+                        app:layout_constraintStart_toStartOf="@+id/cardView5"
                         app:layout_constraintTop_toBottomOf="@+id/cardView5" />
 
                     <ImageView
@@ -195,6 +195,7 @@
                         app:layout_constraintTop_toTopOf="@+id/textView20" />
 
                     <Button
+                        android:id="@+id/botton1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -413,10 +414,10 @@
                         android:id="@+id/textView31"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:text="木鸟"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/cardView22"
+                        app:layout_constraintStart_toStartOf="@+id/cardView22"
                         app:layout_constraintTop_toBottomOf="@+id/cardView22" />
 
                     <ImageView
@@ -566,10 +567,10 @@
                         android:id="@+id/textView31"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
                         android:layout_marginTop="8dp"
-                        android:text="梅者如西"
-                        app:layout_constraintStart_toStartOf="parent"
+                        android:text="梅如西"
+                        app:layout_constraintEnd_toEndOf="@+id/cardView22"
+                        app:layout_constraintStart_toStartOf="@+id/cardView22"
                         app:layout_constraintTop_toBottomOf="@+id/cardView22" />
 
                     <ImageView

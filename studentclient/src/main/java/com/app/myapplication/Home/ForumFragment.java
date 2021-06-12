@@ -1,16 +1,21 @@
 package com.app.myapplication.Home;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.SearchView;
 
+import com.app.myapplication.ForumActivity;
 import com.app.myapplication.PostActivity;
 import com.app.myapplication.R;
 
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -89,15 +94,20 @@ public class ForumFragment extends Fragment {
                 });
 
         getActivity().findViewById(R.id.floatingActionButton5).setOnClickListener((View view)->{
-            click(view);
+            click1(view);
+        });
+        getActivity().findViewById(R.id.botton1).setOnClickListener((View view)->{
+            click2(view);
         });
     }
 
 
 
-    public void click(View view){
+    public void click1(View view){
         getActivity().startActivity(new Intent(getActivity(), PostActivity.class));
     }
 
-
+    public void click2(View view){
+        getActivity().startActivity(new Intent(getActivity(), ForumActivity.class));
+    }
 }
