@@ -28,6 +28,7 @@ public class DetailAdapter extends BaseQuickAdapter<FoodBean, BaseViewHolder> {
 				.setText(R.id.textView7, item.foodSale)
 				.setText(R.id.textView8, ""+item.foodPrice)
 				.setImageBitmap(R.id.imageView2, BitmapFactory.decodeByteArray(item.foodImage,0,item.foodImage.length))
+				.setText(R.id.foodSummary,item.foodSummary)
 		;
 		AddWidget addWidget = helper.getView(R.id.detail_addwidget);
 		//addWidget.setData(onAddClick,item);

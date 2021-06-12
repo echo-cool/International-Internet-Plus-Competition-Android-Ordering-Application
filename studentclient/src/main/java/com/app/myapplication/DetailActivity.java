@@ -91,6 +91,7 @@ public class DetailActivity extends BaseActivity implements AddWidget.OnAddWidge
 		detail_name.setText(foodBean.foodName);
 		TextView detail_sale = (TextView) findViewById(R.id.detail_sale);
 		detail_sale.setText("日销:"+foodBean.foodSale + " 喜爱:95%");
+		((TextView)findViewById(R.id.foodSummary)).setText(foodBean.foodSummary);
 		TextView detail_price = (TextView) findViewById(R.id.detail_price);
 		detail_price.setText("¥"+foodBean.foodPrice);
 		detail_add = (AddWidget) findViewById(R.id.detail_add);
