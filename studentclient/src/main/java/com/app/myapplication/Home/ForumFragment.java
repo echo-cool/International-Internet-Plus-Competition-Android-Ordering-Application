@@ -1,12 +1,21 @@
 package com.app.myapplication.Home;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.SearchView;
 
+import com.app.myapplication.ForumActivity;
+import com.app.myapplication.PostActivity;
 import com.app.myapplication.R;
 
+import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -67,5 +76,38 @@ public class ForumFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_forum, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        SearchView searchView = getActivity().findViewById(R.id.searchView);
+                searchView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // 弹出软键盘
+                        searchView.setIconified(false);
+                        // 切换 Fragment
+                        //getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new SearchViewFragment()).commitAllowingStateLoss();
+                    }
+                });
+
+        getActivity().findViewById(R.id.floatingActionButton5).setOnClickListener((View view)->{
+            click1(view);
+        });
+        getActivity().findViewById(R.id.botton1).setOnClickListener((View view)->{
+            click2(view);
+        });
+    }
+
+
+
+    public void click1(View view){
+        getActivity().startActivity(new Intent(getActivity(), PostActivity.class));
+    }
+
+    public void click2(View view){
+        getActivity().startActivity(new Intent(getActivity(), ForumActivity.class));
     }
 }
