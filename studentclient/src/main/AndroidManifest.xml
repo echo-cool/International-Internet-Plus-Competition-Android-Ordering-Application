@@ -16,8 +16,9 @@
         <activity android:name=".Home.SelectActivity">
 
         </activity>
-        <activity android:name=".Home.StudentFlowActivity"/>
+        <activity android:name=".Home.StudentFlowActivity">
 
+        </activity>
         <activity android:name=".ForumActivity"></activity>
         <activity android:name=".PostActivity" />
         <activity
