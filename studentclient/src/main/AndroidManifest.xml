@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.app.myapplication">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="com.app.App"
         android:allowBackup="true"
@@ -13,26 +19,22 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Home.SelectActivity">
-
-        </activity>
-        <activity android:name=".Home.StudentFlowActivity">
-
-        </activity>
-        <activity android:name=".ForumActivity"></activity>
+        <activity android:name=".ScheduleActivity"
+            android:theme="@style/schedule"></activity>
+        <activity android:name=".Home.SelectActivity"></activity>
+        <activity android:name=".Home.StudentFlowActivity" />
+        <activity android:name=".ForumActivity" />
         <activity android:name=".PostActivity" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
-
-
-
         <activity android:name=".TestActivity" />
-
-        <activity android:name=".OrderEnsureActivity"
-            android:theme="@style/shop"/>
-        <activity android:name=".merchant.MerchantActivity"
-            android:theme="@style/shop">
+        <activity
+            android:name=".OrderEnsureActivity"
+            android:theme="@style/shop" />
+        <activity
+            android:name=".merchant.MerchantActivity"
+            android:theme="@style/shop_2">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -60,12 +62,6 @@
         <activity
             android:name=".DetailActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
-
     </application>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

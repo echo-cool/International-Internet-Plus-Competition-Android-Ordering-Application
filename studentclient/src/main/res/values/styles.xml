@@ -33,6 +33,21 @@
         <item name="colorPrimaryDark">#FF9800</item>
         <item name="colorAccent">#F44336</item>
     </style>
+    <style name="shop_2" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+
+        <!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+        <item name="colorPrimary">#FF9800</item>
+        <item name="colorPrimaryDark">#FF9800</item>
+        <item name="colorAccent">#F44336</item>
+    </style>
+    <style name="schedule" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+        <item name="colorPrimary">#03A9F4</item>
+        <item name="colorPrimaryDark">#03A9F4</item>
+        <item name="colorAccent">#F44336</item>
+    </style>
     <style name="tv_price">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

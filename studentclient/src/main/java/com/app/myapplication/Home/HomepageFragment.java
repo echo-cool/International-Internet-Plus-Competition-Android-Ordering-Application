@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.app.beans.MerchantBean;
 import com.app.myapplication.R;
+import com.app.myapplication.ScheduleActivity;
 import com.app.myapplication.data.ColorSuggestion;
 import com.app.myapplication.data.ColorWrapper;
 import com.app.myapplication.data.DataHelper;
@@ -110,6 +111,13 @@ public class HomepageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getActivity(), StudentFlowActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+        getActivity().findViewById(R.id.card_schedule).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), ScheduleActivity.class);
                 getActivity().startActivity(intent);
             }
         });
