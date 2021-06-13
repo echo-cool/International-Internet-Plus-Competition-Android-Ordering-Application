@@ -2,11 +2,9 @@ package com.app.myapplication.views;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.PopupMenu;
+import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 
@@ -37,5 +35,18 @@ public class PopSelect extends PopupWindow {
         this.setOutsideTouchable(true);
         this.update();
 
+        Button selfStudy = conentView.findViewById(R.id.selfstudy_btn);
+        View spotMarkerView = context.findViewById(R.id.fourth_building_point);
+        View third = context.findViewById(R.id.third_building_point);
+        View lb = context.findViewById(R.id.library_point);
+        selfStudy.setOnClickListener(new View.OnClickListener() {
+            //                    @Override
+            public void onClick(View v) {
+                        spotMarkerView.setVisibility(View.VISIBLE);
+                        third.setVisibility(View.VISIBLE);
+                        lb.setVisibility(View.VISIBLE);
+                        PopSelect.this.dismiss();
+            }
+        });
     }
 }
