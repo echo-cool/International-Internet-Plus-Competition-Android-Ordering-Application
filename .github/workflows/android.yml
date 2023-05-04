@@ -33,5 +33,7 @@ jobs:
         prerelease: false
         title: Latest Compiled APK
         files: |
-          app/build/outputs/apk/debug/app-debug.apk
-          app/build/outputs/apk/release/app-release-unsigned.apk
+          restaurantclient/build/outputs/apk/debug/restaurantclient-debug.apk
+          estaurantclient/build/outputs/apk/release/restaurantclient-release-unsigned.apk
+          studentclient/build/outputs/apk/debug/studentclient-debug.apk
+          studentclient/build/outputs/apk/release/studentclient-release-unsigned.apk
